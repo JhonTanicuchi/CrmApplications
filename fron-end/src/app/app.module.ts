@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { PermisoComponent } from './permiso/permiso.component';
 import { MenuComponent } from './compartidos/menu/menu.component';
 
+//primeng
+
+import {MenubarModule} from 'primeng/menubar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +17,9 @@ import { MenuComponent } from './compartidos/menu/menu.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MenubarModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
