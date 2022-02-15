@@ -1,0 +1,66 @@
+<div class="row bg-light bg-gradient m-auto">
+  <div class="col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <h1 class="text-center fw-bold p-3">Seguimiento</h1>
+  </div>
+  <div class="col-12 col-sm-8 col-md-8 col-xl-8 border-end border-top">
+    <h4 class="text-center text-muted my-2">Listado de los últimos seguimentos</h4>
+    <li class="border rounded list-group-item list-group-item-action bg-white text-center my-1">
+      <div class="d-flex flex-row bd-highlight flex-wrap justify-content-around">
+        <div class="p-2 bd-highlight">ID</div>
+        <div class="p-2 bd-highlight">Nombre</div>
+        <div class="p-2 bd-highlight">Descripción</div>
+        <div class="p-2 bd-highlight">Fecha</div>
+        <div class="p-2 bd-highlight">Creador por:</div>
+      </div>
+    </li>
+    <li *ngFor="let num of listSeguiminetos" class="border rounded list-group-item list-group-item-action bg-light my-1 text-center">
+      <div class="d-flex flex-row bd-highlight flex-wrap justify-content-around">
+        <div class="p-2 bd-highlight">{{num}}</div>
+        <div class="p-2 bd-highlight">fgfd</div>
+        <div class="p-2 bd-highlight">gfgf</div>
+        <div class="p-2 bd-highlight">gfg</div>
+        <div class="p-2 bd-highlight">fgf</div>
+      </div>
+    </li>
+  </div>
+  <div class="col-12 col-sm-4 col-md-4 col-xl-4 border-top ">
+    <div class="d-flex bd-highlight">
+      <div class="p-2 flex-grow-1 bd-highlight">
+        <h4 class="text-center text-muted my-2">Información</h4>
+      </div>
+      <div (click)="isSeguimiento = !isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-primary">Añadir</button>
+      </div>
+      <div *ngIf="isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-info">Editar</button>
+      </div>
+      <div *ngIf="isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-danger">Eliminar</button>
+      </div>
+    </div>
+    <ng-container *ngIf="isSeguimiento; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate>
+      <div class="card text-center my-2">
+        <div class="card-header">
+          Featured
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #elseTemplate>
+      <div class="card text-center my-2">
+        <div class="card-body">
+          <h5 class="card-title">No hay un seguimiento seleccionado.</h5>
+          <p class="card-text">Porfavor seleccione el seguimiento que deséa tener información.</p>
+        </div>
+      </div>
+    </ng-template>
+
+
+  </div>
+
+</div>

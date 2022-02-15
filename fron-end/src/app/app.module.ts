@@ -9,11 +9,13 @@ import { MenuComponent } from './compartidos/menu/menu.component';
 //primeng
 
 import {MenubarModule} from 'primeng/menubar';
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 @NgModule({
   declarations: [
     AppComponent,
     PermisoComponent,
-    MenuComponent
+    MenuComponent,
+    SeguimientoComponent
   ],
   imports: [
     BrowserModule,

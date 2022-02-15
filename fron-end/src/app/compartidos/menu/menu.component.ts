@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
 
 @Component({
@@ -10,7 +11,9 @@ export class MenuComponent implements OnInit {
 
   items: MenuItem[];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.items = [
@@ -106,35 +109,11 @@ export class MenuComponent implements OnInit {
           ]
       },
       {
-          label:'Events',
+          label:'Seguimientos',
           icon:'pi pi-fw pi-calendar',
-          items:[
-              {
-                  label:'Edit',
-                  icon:'pi pi-fw pi-pencil',
-                  items:[
-                  {
-                      label:'Save',
-                      icon:'pi pi-fw pi-calendar-plus'
-                  },
-                  {
-                      label:'Delete',
-                      icon:'pi pi-fw pi-calendar-minus'
-                  },
-
-                  ]
-              },
-              {
-                  label:'Archieve',
-                  icon:'pi pi-fw pi-calendar-times',
-                  items:[
-                  {
-                      label:'Remove',
-                      icon:'pi pi-fw pi-calendar-minus'
-                  }
-                  ]
-              }
-          ]
+          command: ()=>{
+            this.router.navigate(['/seguimiento'])
+          }
       },
       {
           label:'Quit',
