@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PermisoComponent } from './permiso/permiso.component';
 import { MenuComponent } from './compartidos/menu/menu.component';
-
 //primeng
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {ConfirmationService} from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+
 
 import {MenubarModule} from 'primeng/menubar';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,11 +25,17 @@ import { SeguimientoComponent } from './seguimiento/seguimiento.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MenubarModule,
+    DialogModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ConfirmPopupModule
 
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

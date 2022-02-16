@@ -9,17 +9,13 @@
         <div class="p-2 bd-highlight">ID</div>
         <div class="p-2 bd-highlight">Nombre</div>
         <div class="p-2 bd-highlight">Descripción</div>
-        <div class="p-2 bd-highlight">Fecha</div>
-        <div class="p-2 bd-highlight">Creador por:</div>
       </div>
     </li>
-    <li *ngFor="let num of listSeguiminetos" class="border rounded list-group-item list-group-item-action bg-light my-1 text-center">
+    <li *ngFor="let seguimiento of listSeguimientos" (click)="buscarSeguimiento(seguimiento.seguimientoId)" class="border rounded list-group-item list-group-item-action bg-light my-1 text-center">
       <div class="d-flex flex-row bd-highlight flex-wrap justify-content-around">
-        <div class="p-2 bd-highlight">{{num}}</div>
-        <div class="p-2 bd-highlight">fgfd</div>
-        <div class="p-2 bd-highlight">gfgf</div>
-        <div class="p-2 bd-highlight">gfg</div>
-        <div class="p-2 bd-highlight">fgf</div>
+        <div class="p-2 bd-highlight">{{seguimiento.seguimientoId}}</div>
+        <div class="p-2 bd-highlight">{{seguimiento.nombre}}</div>
+        <div class="p-2 bd-highlight">{{seguimiento.descripcion}}</div>
       </div>
     </li>
   </div>
@@ -28,26 +24,26 @@
       <div class="p-2 flex-grow-1 bd-highlight">
         <h4 class="text-center text-muted my-2">Información</h4>
       </div>
-      <div (click)="isSeguimiento = !isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-primary">Añadir</button>
+      <div (click)="displayNuevo = !displayNuevo" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-primary">Añadir</button>
       </div>
-      <div *ngIf="isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-info">Editar</button>
+      <div *ngIf="isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-info" (click)="mostrarModalEditar()">Editar</button>
       </div>
-      <div *ngIf="isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-danger">Eliminar</button>
+      <div *ngIf="isSeguimiento" class="p-2 bd-highlight"><button type="button" class="btn btn-outline-danger" (click)="eliminarSeguimiento($event)">Eliminar</button>
       </div>
     </div>
     <ng-container *ngIf="isSeguimiento; then thenTemplate; else elseTemplate"></ng-container>
     <ng-template #thenTemplate>
-      <div class="card text-center my-2">
-        <div class="card-header">
-          Featured
+      <div class="card  my-2">
+        <div class="card-header text-center">
+          Seguimiento Información:
         </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="card-body  text-justify">
+          <h5 class="card-title">Nommbre: {{seguimientoActual.nombre}}</h5>
+          <p class="card-text">Descripción: {{seguimientoActual.descripcion}}</p>
+          <span>Creado por: {{seguimientoActual.creadoPor}}</span>
         </div>
-        <div class="card-footer text-muted">
-          2 days ago
+        <div class="card-footer text-muted text-center">
+          {{seguimientoActual.fechaCreacion | date}}
         </div>
       </div>
     </ng-template>
@@ -64,3 +60,80 @@
   </div>
 
 </div>
+
+<p-dialog header="Nuevo" [modal]="true" [(visible)]="displayNuevo" [breakpoints]="breakpointsModal" [style]="tamanioModal" (onHide)="limpiar()">
+  <form [formGroup]="formSeguimiento" (ngSubmit)="guardarSeguimiento()">
+    <div class="row m-auto p-2">
+      <div class="col-12">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingNombre" formControlName="nombre" placeholder="nombre">
+          <label for="floatingNombre">Nombre</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="floatingFecha" formControlName="fechaCreacion" placeholder="">
+          <label for="floatingFecha">Fecha</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelect" formControlName="creadoPor" >
+            <option [value]="null" selected>Seleccionar</option>
+            <option *ngFor="let creador of listCreadores" [value]="creador">{{creador}}</option>
+          </select>
+          <label for="floatingSelect">Creado por:</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="ingresar descripción" formControlName="descripcion" id="floatingDescripcion" style="height: 100px"></textarea>
+          <label for="floatingDescripcion">Descripción</label>
+        </div>
+      </div>
+      <div class="d-grid gap-2 my-2">
+        <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog header="Editar" [modal]="true" [(visible)]="displayEditar" [breakpoints]="breakpointsModal" [style]="tamanioModal" (onHide)="limpiar()">
+  <form [formGroup]="formSeguimiento" (ngSubmit)="actualizarSeguimiento()">
+    <div class="row m-auto p-2">
+      <div class="col-12">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingNombre" formControlName="nombre" placeholder="nombre">
+          <label for="floatingNombre">Nombre</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="floatingFecha" formControlName="fechaCreacion" placeholder="">
+          <label for="floatingFecha">Fecha</label>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelect" formControlName="creadoPor" >
+            <option [value]="null" selected>Seleccionar</option>
+            <option *ngFor="let creador of listCreadores" [value]="creador">{{creador}}</option>
+          </select>
+          <label for="floatingSelect">Creado por:</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="ingresar descripción" formControlName="descripcion" id="floatingDescripcion" style="height: 100px"></textarea>
+          <label for="floatingDescripcion">Descripción</label>
+        </div>
+      </div>
+      <div class="d-grid gap-2 my-2">
+        <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+
+<p-confirmPopup></p-confirmPopup>
