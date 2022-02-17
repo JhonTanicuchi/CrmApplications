@@ -76,7 +76,6 @@ export class SeguimientoComponent implements OnInit {
       .subscribe(res=>{
         this.isSeguimiento = true;
         this.seguimientoActual = res;
-        console.log('byId',res)
       })
   }
 
@@ -87,7 +86,6 @@ export class SeguimientoComponent implements OnInit {
 
   actualizarSeguimiento(){
     if(this.formSeguimiento.valid){
-      debugger
       const seguimiento: Seguimiento = {
         seguimientoId: this.seguimientoId,
         estado:true,
@@ -95,6 +93,7 @@ export class SeguimientoComponent implements OnInit {
       }
       this.apiService.updateSeguimiento(seguimiento)
         .subscribe(res=>{
+          this.seguimientoActual = res;
           this.displayEditar = false;
           this.listarSeguimientos();
         })
@@ -109,7 +108,7 @@ export class SeguimientoComponent implements OnInit {
   eliminarSeguimiento(event: Event){
     this.confirmationService.confirm({
       target: event.target,
-      message: '¿Etás seguro de eliminar este seguimiento?',
+      message: '¿Estás seguro de eliminar este seguimiento?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
          this.apiService.deleteSeguimiento(this.seguimientoId)
