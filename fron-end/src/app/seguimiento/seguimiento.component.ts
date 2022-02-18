@@ -72,7 +72,7 @@ export class SeguimientoComponent implements OnInit {
         .subscribe(res => {
           this.displayNuevo = false;
           this.blocked = false;
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Seguimiento guardado correctamente', life: 5000 });
+          this.messageService.add({ severity: 'success', summary: 'Mensaje', detail: 'Seguimiento guardado correctamente', life: 5000 });
           this.listarSeguimientos();
         }, err => {
           this.blocked = false;
@@ -114,7 +114,7 @@ export class SeguimientoComponent implements OnInit {
           this.seguimientoActual = res;
           this.displayEditar = false;
           this.listarSeguimientos();
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Seguimiento actualizado correctamente', life: 5000 });
+          this.messageService.add({ severity: 'info', summary: 'Información', detail: 'Seguimiento actualizado correctamente', life: 5000 });
         }, err => {
           this.blocked = false;
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo un error intente más tarde', life:5000});
@@ -139,7 +139,7 @@ export class SeguimientoComponent implements OnInit {
           .subscribe(res => {
             this.blocked = false;
             this.listarSeguimientos();
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Seguimiento eliminado correctamente', life: 5000 });
+            this.messageService.add({ severity: 'success', summary: 'Mensaje', detail: 'Seguimiento eliminado correctamente', life: 5000 });
           }, err => {
             this.blocked = false;
             this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo un error intente más tarde', life:5000});
