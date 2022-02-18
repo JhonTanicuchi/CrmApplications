@@ -12,10 +12,7 @@ const routes: Routes = [
   {path:'campania',component: CampaniaComponent},
   {path: 'permiso',component: PermisoComponent},
   {path: 'rol', component: RolComponent},
-<<<<<<< HEAD
-=======
   {path: 'usuario', component: UsuarioComponent},
->>>>>>> develop
 ];
 
 @NgModule({
