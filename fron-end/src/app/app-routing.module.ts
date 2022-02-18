@@ -7,7 +7,7 @@ import { RolComponent } from './rol/rol.component';
 const routes: Routes = [
   {path:'campania',component: CampaniaComponent},
   {path: 'permiso',component: PermisoComponent},
-  {path: 'rol', component: RolComponent}
+  {path: 'rol', component: RolComponent},
 ];
 
 @NgModule({
