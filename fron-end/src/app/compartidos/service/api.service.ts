@@ -1,8 +1,11 @@
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Persona } from './../models/persona';
 import { Seguimiento } from './../models/seguimiento';
-import { environment } from './../../../environments/environment';
+import { HtmlParser } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PersonaComponent } from 'src/app/persona/persona.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +19,7 @@ export class ApiService {
   }
 
   urlSeguimiento = this.url + '/seguimiento';
+  urlPersona = this.url + '/persona';
 
   constructor(private http: HttpClient) { }
 
@@ -37,6 +41,27 @@ export class ApiService {
 
   public deleteSeguimiento(idSeguimiento: number):Observable<Seguimiento>{
     return this.http.put<Seguimiento>(this.urlSeguimiento+'/delete/'+idSeguimiento,null,this.httpOptions);
+  }
+
+//crear
+  public createPersona(persona: Persona): Observable<Persona> {
+    return this.http.post<Persona>(this.urlPersona + '/save', persona, this.httpOptions);
+  }
+//listar
+  public findAll (): Observable<Persona[]>{
+    return this.http.get <Persona[]>(this.urlPersona + '/allPersonas' ,this.httpOptions);
+  }
+//buscar
+  public buscarId (personaId :number): Observable<Persona>{
+    return this.http.get <Persona>(this.urlPersona + '/findId/'+personaId,this.httpOptions);
+  }
+//actualizar
+  public updatePersona (persona:Persona): Observable<Persona>{
+    return this.http.put <Persona>(this.urlPersona + '/updatePersona',persona,this.httpOptions);
+  }
+//delete
+  public deletePersona(personaId :number): Observable<Persona>{
+    return this.http.delete <Persona>(this.urlPersona + '/delete/'+personaId,this.httpOptions);
   }
 
 }

@@ -1,3 +1,4 @@
+import { PersonaComponent } from 'src/app/persona/persona.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -19,11 +20,13 @@ import {MenubarModule} from 'primeng/menubar';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
+
   declarations: [
     AppComponent,
     PermisoComponent,
     MenuComponent,
-    SeguimientoComponent
+    SeguimientoComponent,
+    PersonaComponent
   ],
   imports: [
     BrowserModule,
