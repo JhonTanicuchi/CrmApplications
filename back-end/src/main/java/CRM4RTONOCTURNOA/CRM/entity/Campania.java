@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import lombok.Data;
 
 @Data
-@Table("campania_publicitaria")
+@Table("campania_publicitaria\".\"campania_publicitaria")
 public class Campania {
 
     @Id
