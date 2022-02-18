@@ -1,1 +1,54 @@
-<p>permiso works!</p>
+<div>
+    <h1 class="text-center my-2 shadow-lg">
+        Administración de
+      <span class="text-primary font-bold">PERMISOS</span>
+      </h1>
+  </div>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-6 gap-4 text-xs text-center">
+  
+    <div class="border rounded-sm shadow-lg">
+      <p class="bg-neutral text-neutral-content rounded-sm" >Listado de permisos</p>
+      <div >
+        <ul class="menu" >
+          <li class="hover:bg-accent active"
+          *ngFor="let permiso of listadoPermisos"
+          (click)="seleccionarPermiso(permiso)"
+          [class.active]="permiso==permisoActual"
+          >
+          <a>{{permiso.nombrePermiso}}</a>
+  
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+  
+    <div class="col-span-4 shadow-lg" >
+      <div class="card">
+        <div class="card card-title">PERMISOS</div>
+        <div class="grid grid-cols-2 card-body form-control gap-2">
+  
+          <label class="label" for="nombrePermiso">Nombre Permiso:</label>
+          <input class="input input-primary" type="text" name="nombrePermiso" id="" [(ngModel)]="permisoActual.nombrePermiso">
+          <label class="label" for="estado">estado</label>
+          <input class="input input-primary" type="number" name="estado" id="" value="1" [(ngModel)]="permisoActual.estado">
+  
+         
+  
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" (click)="save(permisoActual)" >Guardar</button>
+          <button class="btn btn-danger" (click)="deleteById(permisoActual.permisoId)" >Eliminar</button>
+        </div>
+      </div>
+  
+    </div>
+  
+  
+    <div class="shadow-lg">Info</div>
+  
+  </div>
+  
+  
+  
