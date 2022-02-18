@@ -1,4 +1,4 @@
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Seguimiento } from './../compartidos/models/seguimiento';
 import { ApiService } from './../compartidos/service/api.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SeguimientoComponent implements OnInit {
 
+  blocked: boolean = true;
   seguimientoId: number;
   isSeguimiento: boolean = false;
 
@@ -25,102 +26,131 @@ export class SeguimientoComponent implements OnInit {
 
   formSeguimiento: FormGroup;
 
-  breakpointsModal = {'960px': '75vw', '640px': '100vw'};
-  tamanioModal = {width: '40vw'};
+  breakpointsModal = { '960px': '75vw', '640px': '100vw' };
+  tamanioModal = { width: '40vw' };
 
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
     this.listarSeguimientos();
 
-    this.listCreadores = ['Ricardo Yaguachi','Kevin Pillago']
+    this.listCreadores = ['Ricardo Yaguachi', 'Kevin Pillago']
 
     this.formSeguimiento = this.formBuilder.group({
-      nombre: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(100)]],
-      descripcion: [null,[Validators.required,Validators.minLength(5),Validators.maxLength(200)]],
-      fechaCreacion: [null,[Validators.required]],
-      creadoPor:[null,[Validators.required,Validators.minLength(10)]]
+      nombre: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      descripcion: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+      fechaCreacion: [null, [Validators.required]],
+      creadoPor: [null, [Validators.required, Validators.minLength(10)]]
     })
   }
 
-  listarSeguimientos():void{
+  listarSeguimientos(): void {
     this.apiService.listarSeguimientos()
-      .subscribe(res=>{
+      .subscribe(res => {
         this.listSeguimientos = res;
+        this.blocked = false;
+      }, err => {
+        this.blocked = false;
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo un error intente más tarde', life:5000});
+        console.log(err);
       })
   }
 
-  guardarSeguimiento():void{
-    console.log('fomr',this.formSeguimiento.value);
-    if(this.formSeguimiento.valid){
+  guardarSeguimiento(): void {
+    this.blocked = true;
+    if (this.formSeguimiento.valid) {
       const seguimiento: Seguimiento = {
-        estado:true,
+        estado: true,
         ...this.formSeguimiento.value
       }
       this.apiService.createSeguimiento(seguimiento)
-        .subscribe(res=>{
+        .subscribe(res => {
           this.displayNuevo = false;
+          this.blocked = false;
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Seguimiento guardado correctamente', life: 5000 });
           this.listarSeguimientos();
+        }, err => {
+          this.blocked = false;
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo un error intente más tarde', life:5000});
+          console.log(err);
         })
     }
 
   }
 
-  buscarSeguimiento(idSeguimiento: number):void{
+  buscarSeguimiento(idSeguimiento: number): void {
     this.seguimientoId = idSeguimiento;
     this.apiService.getSeguimientoById(idSeguimiento)
-      .subscribe(res=>{
+      .subscribe(res => {
         this.isSeguimiento = true;
         this.seguimientoActual = res;
+      }, err => {
+        this.blocked = false;
+        console.log(err);
       })
   }
 
-  mostrarModalEditar(){
+  mostrarModalEditar() {
     this.displayEditar = true;
-    this.formSeguimiento.patchValue({...this.seguimientoActual});
+    this.formSeguimiento.patchValue({ ...this.seguimientoActual });
   }
 
-  actualizarSeguimiento(){
-    if(this.formSeguimiento.valid){
+  actualizarSeguimiento() {
+    this.blocked = true;
+    if (this.formSeguimiento.valid) {
       const seguimiento: Seguimiento = {
         seguimientoId: this.seguimientoId,
-        estado:true,
+        estado: true,
         ...this.formSeguimiento.value
       }
       this.apiService.updateSeguimiento(seguimiento)
-        .subscribe(res=>{
+        .subscribe(res => {
+          this.blocked = false;
           this.seguimientoActual = res;
           this.displayEditar = false;
           this.listarSeguimientos();
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Seguimiento actualizado correctamente', life: 5000 });
+        }, err => {
+          this.blocked = false;
+          this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo un error intente más tarde', life:5000});
+          console.log(err);
         })
     }
   }
 
-  limpiar(){
+  limpiar() {
     this.seguimientoId = 0;
     this.formSeguimiento.reset();
   }
 
-  eliminarSeguimiento(event: Event){
+  eliminarSeguimiento(event: Event) {
     this.confirmationService.confirm({
       target: event.target,
       message: '¿Estás seguro de eliminar este seguimiento?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-         this.apiService.deleteSeguimiento(this.seguimientoId)
-          .subscribe(res=>{
+        this.blocked = true;
+        this.apiService.deleteSeguimiento(this.seguimientoId)
+          .subscribe(res => {
+            this.blocked = false;
             this.listarSeguimientos();
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Seguimiento eliminado correctamente', life: 5000 });
+          }, err => {
+            this.blocked = false;
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo un error intente más tarde', life:5000});
+            console.log(err);
           })
       },
       reject: () => {
-          //reject action
-          this.seguimientoId = 0;
+        //reject action
+        this.seguimientoId = 0;
       }
-  });
+    });
   }
 
 }

@@ -10,8 +10,10 @@ import { MenuComponent } from './compartidos/menu/menu.component';
 //primeng
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
+import {MessageService} from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
-
+import {BlockUIModule} from 'primeng/blockui';
+import {ToastModule} from 'primeng/toast';
 
 import {MenubarModule} from 'primeng/menubar';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
@@ -32,10 +34,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ConfirmPopupModule
-
+    ConfirmPopupModule,
+    BlockUIModule,
+    ToastModule
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
