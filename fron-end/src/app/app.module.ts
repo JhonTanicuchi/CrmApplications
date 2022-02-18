@@ -8,6 +8,7 @@ import { MenuComponent } from './compartidos/menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CampaniaComponent } from './campania/campania.component';
+import { RolComponent } from './rol/rol.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { CampaniaComponent } from './campania/campania.component';
     PermisoComponent,
     MenuComponent,
     CampaniaComponent,
+    RolComponent,
   ],
   imports: [
     BrowserModule,
