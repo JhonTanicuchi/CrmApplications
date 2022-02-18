@@ -9,16 +9,28 @@ import { MenuComponent } from './compartidos/menu/menu.component';
 //primeng
 
 import {MenubarModule} from 'primeng/menubar';
+import { PersonaComponent } from './persona/persona.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
+
   declarations: [
     AppComponent,
     PermisoComponent,
-    MenuComponent
+    MenuComponent,
+    PersonaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MenubarModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    DialogModule
 
   ],
   providers: [],
