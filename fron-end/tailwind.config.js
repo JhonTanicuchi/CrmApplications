@@ -1,5 +1,5 @@
 module.exports = {
-  content: 
+  content:
   [
     "./src/*/*.{html,ts}",
     "./src/**/*.{html,ts}",
@@ -7,8 +7,9 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: 
+  plugins:
   [
     require('daisyui'),
+    require('tailwind-scrollbar-hide')
   ],
 }

@@ -4,7 +4,7 @@
 
     <div class="col-span-4 " >
       <div class="card">
-        <div class="card card-title">Crear Usuario</div>
+        <div class="card card-title">Usuario</div>
         <div class="grid grid-cols-2 card-body form-control gap-2">
 
           <label class="label" for="Username">Username:</label>
@@ -13,8 +13,8 @@
           <label class="label" for="Contraseña">Contraseña:</label>
           <input class="input input-primary" type="text" name="Contraseña" id="" [(ngModel)]="usuarioActual.password" >
 
-          <label class="label" for="Roll">Roll:</label>
-          <input class="input input-primary" type="text" name="Roll" id="" [(ngModel)]="usuarioActual.rollId">
+          <label class="label" for="Rol">Rol:</label>
+          <input class="input input-primary" type="text" name="Rol" id="" [(ngModel)]="usuarioActual.rolId">
 
           <label class="label" for="Permisos">Permisos:</label>
           <input class="input input-primary" type="text" name="Permisos" id="" [(ngModel)]="usuarioActual.permisoId" >
@@ -49,16 +49,25 @@
       </div>
       <div class="stat-title">Usuarios Totales</div>
       <div class="stat-value text-primary">{{listadoUsuarios.length}}</div>
-      <div class="stat-desc"></div>
+      <div class="stat-desc">Usuarios registrados</div>
     </div>
 
     <div class="stat">
-      <div class="stat-figure text-secondary">
-        <div class="avatar online">
-          <div class="w-16 rounded-full">
-            <img src="https://api.lorem.space/image/face?w=128&h=128">
-          </div>
-        </div>
+      <div class="stat-figure text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      </div>
+      <div class="stat-title">Empleados</div>
+      <div class="stat-value text-primary">0</div>
+      <div class="stat-desc">Empleados registrados</div>
+    </div>
+
+    <div class="stat ">
+      <div class="stat-figure  text-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
       </div>
       <div class="stat-value">{{UsuariosActivos()}}</div>
       <div class="stat-title">Activos</div>
@@ -70,14 +79,12 @@
 
 
 
-<div  class="relative p-20">
+<div  class="relative p-20 pb-0">
   <label (click)="limpiarForm()" for="my-modal" class="mr-20 absolute right-0 top-0 btn modal-button btn-circle bg-primary border-primary ">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
     </svg>
   </label>
-
-
 
   <div class="overflow-x-auto w-full">
     <table class="table w-full">
