@@ -7,9 +7,7 @@ import { PermisoComponent } from './permiso/permiso.component';
 import { MenuComponent } from './compartidos/menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CampaniaComponent } from './campania/campania.component';
-import { RolComponent } from './rol/rol.component';
-import { UsuarioComponent } from './usuario/usuario.component';
+
 import { HomeComponent } from './home/home.component';
 
 
@@ -18,10 +16,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     PermisoComponent,
     MenuComponent,
-    CampaniaComponent,
-    RolComponent,
     HomeComponent,
-    UsuarioComponent,
   ],
   imports: [
     BrowserModule,
