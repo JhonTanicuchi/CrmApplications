@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PermisoComponent } from './permiso/permiso.component';
-import { MenuComponent } from './compartidos/menu/menu.component';
 //primeng
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
@@ -19,14 +17,14 @@ import {ToastModule} from 'primeng/toast';
 import {MenubarModule} from 'primeng/menubar';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MenuComponent } from './compartidos/menu/menu.component';
 @NgModule({
 
   declarations: [
     AppComponent,
-    PermisoComponent,
-    MenuComponent,
     SeguimientoComponent,
-    PersonaComponent
+    PersonaComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
