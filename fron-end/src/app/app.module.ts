@@ -1,4 +1,3 @@
-import { PersonaComponent } from 'src/app/persona/persona.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -8,6 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PermisoComponent } from './permiso/permiso.component';
 import { MenuComponent } from './compartidos/menu/menu.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { HomeComponent } from './home/home.component';
+import { RolComponent } from './rol/rol.component';
+import { CampaniaComponent } from './campania/campania.component';
+import { PersonaComponent } from './persona/persona.component';
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
+
 //primeng
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {ConfirmationService} from 'primeng/api';
@@ -17,7 +23,6 @@ import {BlockUIModule} from 'primeng/blockui';
 import {ToastModule} from 'primeng/toast';
 
 import {MenubarModule} from 'primeng/menubar';
-import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
 
@@ -25,6 +30,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     PermisoComponent,
     MenuComponent,
+    CampaniaComponent,
+    RolComponent,
+    HomeComponent,
+    UsuarioComponent,
     SeguimientoComponent,
     PersonaComponent
   ],

@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+<<<<<<< HEAD
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+>>>>>>> 8585d4aac3116813d16b7dd65844cf614425198e
