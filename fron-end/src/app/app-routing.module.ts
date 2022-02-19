@@ -1,11 +1,14 @@
-import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PersonaComponent } from './persona/persona.component';
+
+import { PermisoComponent } from './permiso/permiso.component';
+
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path:'seguimiento', component: SeguimientoComponent},
-  {path:'persona',component:PersonaComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full' },
+  {path: 'home', component: HomeComponent},
+  {path: 'permiso',component: PermisoComponent},
 ];
 
 @NgModule({

@@ -1,23 +1,23 @@
 package CRM4RTONOCTURNOA.CRM.entity;
 
-import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.sql.Date;
+import lombok.Data;
 
 @Data
-@Table("seguimientos\".\"seguimiento")
-public class Seguimiento {
+@Table("campania_publicitaria\".\"campania_publicitaria")
+public class Campania {
+
     @Id
-    @Column("id_seguimiento")
-    private Long seguimientoId;
+    @Column("campania_id")
+    private long campaniaId;
     private String nombre;
+    private java.sql.Date fechaInicio;
+    private java.sql.Date fechaFinalizacion;
     private String descripcion;
-    @Column("fecha_creacion")
-    private Date fechaCreacion;
-    @Column("creado_por")
-    private String creadoPor;
     private Boolean estado;
+
+    
 }
