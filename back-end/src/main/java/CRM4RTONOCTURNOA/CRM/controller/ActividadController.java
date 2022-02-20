@@ -15,43 +15,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import CRM4RTONOCTURNOA.CRM.service.CampaniaService;
-import CRM4RTONOCTURNOA.CRM.entity.Campania;
+import CRM4RTONOCTURNOA.CRM.entity.Actividad;
+import CRM4RTONOCTURNOA.CRM.service.ActividadService;
 
 @RestController
 @CrossOrigin({"http://localhost:4200"})
-@RequestMapping("/api/campania")
-public class CampaniaController {
+@RequestMapping("/api/actividad") //ruta en la q se va a eschuchar al controller
+public class ActividadController{
     @Autowired
-    CampaniaService campaniaService;
+    ActividadService actividadService; 
 
+    //Create
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Campania save(@RequestBody Campania cliente) {
-        return campaniaService.save(cliente);
-        
+    public Actividad save(@RequestBody Actividad actividad)
+    {
+        System.out.println("Reciviendo save");
+        return actividadService.save(actividad);
     }
+
     //Read
     @GetMapping("/{id}")
-    public Campania findById(@PathVariable Long id){
-        return campaniaService.findById(id);
+    public Actividad findById(@PathVariable Long id)
+    {
+        return actividadService.findById(id);
     }
-    //UpDate
+
+    //Update
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    public Campania update(@RequestBody Campania cliente) {
-       return campaniaService.save(cliente);
+    public Actividad update(@RequestBody Actividad actividad)
+    {
+        return actividadService.save(actividad);
     }
-    //Delete    
+    //Delete
     @DeleteMapping("/deleteById/{id}")
-    public void deleteById(@PathVariable Long id) {
-        campaniaService.deleteById(id);
+    public void deleteById(@PathVariable Long id)
+    {
+        actividadService.deleteById(id);
     }
 
-    @GetMapping("/findAll")
-    public List<Campania> findAll(){
-        return campaniaService.findAll();
-    }
+    //Con el getMapping va a eschucar la ruta que necesitamos
     
+    @GetMapping("/findAll") //ruta
+    public List<Actividad> findAll() 
+    {
+        return actividadService.findAll(); //llama al servicio quien se encarga del acceso 
+        //a la informacion
+    }
 }
-
