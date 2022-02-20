@@ -41,15 +41,15 @@
       </div>
    </div>
 
-    <button [ngClass]="{'hidden': flag, 'flex': !flag}" (click)="cambiarFlag()" (click)="limpiarForm()" class="btn bg-primary border-primary text-white absolute right-0 bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus">
+    <button [ngClass]="{'hidden': flag, 'flex': !flag}" (click)="cambiarFlag()" (click)="limpiarForm()" (click)="iconDeletFalse()" class="btn bg-primary border-primary text-white absolute right-0 bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
       </svg>
     </button>
   </div>
 
-  <div [ngClass]="{'hidden': flag, 'block': !flag}" class="col-start-2 col-end-6 overflow-auto scrollbar-hide p-2" style="height:calc(100vh - 64px - 40px)">
-    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+  <div [ngClass]="{'hidden': flag, 'block': !flag}" class="col-start-2 col-end-6 overflow-auto scrollbar-hide p-2 relative" style="height:calc(100vh - 64px - 40px)">
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 ">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table class="min-w-full divide-y divide-gray-200">
@@ -70,8 +70,10 @@
               [class.active]="usuario==usuarioActual">
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" src="https://api.lorem.space/image/face?hash=3174" alt="">
+                    <div class="avatar">
+                      <div class="w-12 mask mask-squircle">
+                        <img src="https://api.lorem.space/image/face?hash=47449">
+                      </div>
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">Jane Cooper</div>
@@ -92,7 +94,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a (click)="seleccionarUsuario(usuario)" (click)="cambiarFlag()" class="text-primary hover:text-primary-focus cursor-pointer">Editar</a>
+                  <a (click)="seleccionarUsuario(usuario)" (click)="cambiarFlag()" (click)="iconDeletTrue()" class="text-primary hover:text-primary-focus cursor-pointer">Editar</a>
                 </td>
               </tr>
             </tbody>
@@ -100,27 +102,32 @@
         </div>
       </div>
     </div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <p *ngIf="listadoUsuarios.length==0" class="text-gray-400">No hay usuarios</p>
+    </div>
   </div>
 
   <div [ngClass]="{'block': flag, 'hidden': !flag}" class="col-start-2 col-end-6 p-2 relative">
 
     <div *ngIf="usuarioActual.empleadoId>0" class="bg-gray-100 rounded-lg">
-      <div class="max-h-10 mx-auto py-16 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+      <div class="max-h-10 mx-auto py-16 px-4 sm:px-4 lg:py-16 lg:px-4 lg:flex lg:items-center lg:justify-between">
         <div class="flex items-center">
-          <div class="flex-shrink-0 h-16 w-16">
-            <img class="h-16 w-16 rounded-full" src="https://api.lorem.space/image/face?hash=3174" alt="">
+          <div class="avatar">
+            <div class="w-24 mask mask-squircle">
+              <img src="https://api.lorem.space/image/face?hash=47449">
+            </div>
           </div>
           <h2 class="text-3xl ml-5 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             <span class="block text-sm font-medium text-gray-900">Jane Cooper <input [(ngModel)]="usuarioActual.estado" type="checkbox" checked="checked" class="checkbox checkbox-xs checkbox-primary ml-2"> </span>
             <span class="block text-sm font-light text-gray-500">jane.cooper@example.com</span>
           </h2>
         </div>
-      <button (click)="limpiarForm()" class="btn text-white btn-sm text-xs">Editar</button>
+      <button (click)="limpiarEmpleado()" class="btn text-white btn-sm text-xs">Editar</button>
       </div>
     </div>
 
     <div *ngIf="usuarioActual.empleadoId==0" class="bg-gray-100 rounded-lg">
-      <div class="max-h-10 mx-auto py-16 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+      <div class="max-h-10 mx-auto py-16 px-4 sm:px-4 lg:py-16 lg:px-4 lg:flex lg:items-center lg:justify-between">
         <div class="flex items-center">
           <div>
             <label for="empleado" class="block text-sm font-medium text-gray-700">Empleado</label>
@@ -141,14 +148,14 @@
       <div>
         <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
         <div class="mt-1 relative rounded-md shadow-sm">
-          <input type="text" name="username" id="username" class=" focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.username">
+          <input type="text" name="username" id="username" class=" focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.username" placeholder="username">
         </div>
       </div>
 
       <div>
         <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
         <div class="mt-1 relative rounded-md shadow-sm">
-          <input type="text" name="password" id="password" class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.password">
+          <input type="text" name="password" id="password" class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.password" placeholder="contraseña">
         </div>
       </div>
 
@@ -177,13 +184,17 @@
           </svg>
         </button>
       </div>
-      <div class="w-full h-48 p-2 bg-base-100 rounded-lg">
-        <button *ngFor="let permiso of counter(usuarioActual.permisoId)" (click)="deletePermiso()" class="m-2 btn btn-xs">
-          <span class="mr-2">Permiso</span>
+      <div class="w-full h-48 p-2  rounded-lg border border-primary">
+        <button *ngFor="let permiso of counter(usuarioActual.permisoId);let indice=index" (click)="deletePermiso()" class="m-2 btn btn-xs">
+          <span class="mr-2">Permiso {{indice+1}}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hover:text-error-content" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </button>
+
+        <div class="flex justify-center items-center w-full h-full">
+          <p *ngIf="usuarioActual.permisoId==0" class="text-gray-400">No hay permisos</p>
+        </div>
 
       </div>
     </div>
@@ -202,7 +213,7 @@
           </svg>
         </button>
 
-        <button *ngIf="usuarioActual.empleadoId!=0" (click)="cambiarFlag()" (click)="deleteById(usuarioActual.usuarioId)" class="btn bg-white border-white text-error-content btn-circle hover:bg-error-content hover:border-error-content hover:text-white ">
+        <button *ngIf="iconDelete==true" (click)="cambiarFlag()" (click)="deleteById(usuarioActual.usuarioId)" class="btn bg-white border-white text-error-content btn-circle hover:bg-error-content hover:border-error-content hover:text-white ">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
           </svg>

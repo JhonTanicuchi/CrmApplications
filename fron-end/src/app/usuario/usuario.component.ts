@@ -82,6 +82,21 @@ export class UsuarioComponent implements OnInit {
     this.flag = !this.flag;
   }
 
+  limpiarEmpleado(){
+    this.usuarioActual.empleadoId = 0;
+  }
+
+  iconDelete = false;
+
+  iconDeletFalse(){
+    this.iconDelete = false;
+  }
+
+  iconDeletTrue(){
+    this.iconDelete = true;
+  }
+
+
   addPermiso():void{
     this.usuarioActual.permisoId = this.usuarioActual.permisoId + 1;
   }
