@@ -11,6 +11,7 @@ import { CampaniaComponent } from './campania/campania.component';
 import { RolComponent } from './rol/rol.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { HomeComponent } from './home/home.component';
+import { EtapaComponent } from './etapa/etapa.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { HomeComponent } from './home/home.component';
     RolComponent,
     HomeComponent,
     UsuarioComponent,
+    EtapaComponent,
   ],
   imports: [
     BrowserModule,

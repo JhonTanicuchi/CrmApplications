@@ -5,6 +5,7 @@ import { PermisoComponent } from './permiso/permiso.component';
 import { RolComponent } from './rol/rol.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { HomeComponent } from './home/home.component';
+import { EtapaComponent } from './etapa/etapa.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'permiso',component: PermisoComponent},
   {path: 'rol', component: RolComponent},
   {path: 'usuario', component: UsuarioComponent},
+  {path: 'etapa', component: EtapaComponent}
 ];
 
 @NgModule({
