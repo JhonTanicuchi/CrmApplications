@@ -1,11 +1,12 @@
-package edu.yavirac.etapasbackend.service;
+package CRM4RTONOCTURNOA.CRM.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import edu.yavirac.etapasbackend.entity.Etapa;
-import edu.yavirac.etapasbackend.repository.EtapaRepository;
+
+import CRM4RTONOCTURNOA.CRM.entity.Etapa;
+import CRM4RTONOCTURNOA.CRM.repository.EtapaRepository;
 
 @Service
 public class EtapaService {

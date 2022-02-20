@@ -19,6 +19,7 @@ module.exports = {
   plugins: [
 >>>>>>> JH-Etapas
     require('daisyui'),
-    require('tailwind-scrollbar-hide')
+    require('tailwind-scrollbar-hide'),
+    require('@tailwindcss/forms'),
   ],
 }

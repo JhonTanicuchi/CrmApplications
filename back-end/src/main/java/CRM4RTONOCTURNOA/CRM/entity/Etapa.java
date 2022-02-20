@@ -1,4 +1,4 @@
-package edu.yavirac.etapasbackend.entity;
+package CRM4RTONOCTURNOA.CRM.entity;
 import org.springframework.data.annotation.Id;  
 import org.springframework.data.relational.core.mapping.Column;  
 import org.springframework.data.relational.core.mapping.Table;   

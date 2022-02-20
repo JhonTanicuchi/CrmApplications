@@ -1,4 +1,4 @@
-package edu.yavirac.etapasbackend.controller;
+package CRM4RTONOCTURNOA.CRM.controller;
 
 import java.util.List;
 
@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import CRM4RTONOCTURNOA.CRM.entity.Etapa;
+import CRM4RTONOCTURNOA.CRM.service.EtapaService;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,10 +18,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-
-
-import edu.yavirac.etapasbackend.entity.Etapa;
-import edu.yavirac.etapasbackend.service.EtapaService;
 
 @RestController
 @CrossOrigin({"http://localhost:4200"})  //permite decirle las rutas a ls que va a dar acceso
