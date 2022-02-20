@@ -24,52 +24,57 @@
             </ul>
         </aside>
         <main class="sm:h-full flex-1 flex flex-col min-h-0 min-w-0 overflow-auto">
-            <div class="navbar bg-neutral text-neutral-content rounded-xl">
-                <div class=" navbar-start">
-                    <a class="btn btn-ghost normal-case text-xl">Administracion de permisos</a>
-                </div>
-                <div class="navbar-end">
-                    <!-- The button to open modal -->
-                    <label for="my-modal" class="btn modal-button bg-success-content">Nuevo Permiso</label>
 
-                    <input type="checkbox" id="my-modal" class="modal-toggle">
-                    <div class="modal card shadow-xl" >
-                        <div class="modal-box " id="card-form">
-                            <div class="form-control text-center w-full max-w-xs">
-                                <h4 class="text-2xl text-black">Registrar permiso</h4>
-                                <div class="divider"></div> 
-                                <label class="label">
-                                    <span class="label-text ">Nombre del permiso:</span>
-                                </label>
-                                <input type="text" placeholder="nombrePermiso"
-                                    class="input input-bordered input-primary w-full max-w-xs">
-
-                                <label class="label">
-                                    <span class="label-text ">Fecha de creación:</span>
-                                </label>
-                                <input type="date" placeholder="Type here"
-                                    class="input input-primary text-black  w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text ">Estado:</span>
-                                </label>
-                                <select class="select w-full input-primary max-w-xs text-black  select-neutral">
-                                    <option disabled selected>Elige el estado del permiso:</option>
-                                    <option>Activo</option>
-                                    <option>Inactivo</option>
-                                </select>
-                            </div>
-
-                            <div class="modal-action" id="botones-options">
-                                <label for="my-modal" class="btn bg-success-content">Guardar</label>
-                                <label for="my-modal" class="btn bg-error-content">Cancelar</label>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
             <section class="flex-1 pt-3 md:p-6 lg:mb-0 lg:min-h-0 lg:min-w-0 ">
+                <div class="navbar bg-neutral text-neutral-content rounded-xl">
+                    <div class=" navbar-start">
+                        <a class="btn btn-ghost normal-case text-xl">Administracion de permisos</a>
+                    </div>
+                    <div class="navbar-end">
+                        <!-- The button to open modal -->
+                        <label for="my-modal" class="btn modal-button bg-success-content">Nuevo Permiso</label>
+
+                        <input type="checkbox" id="my-modal" class="modal-toggle">
+                        <div class="modal card shadow-xl">
+                            <div class="modal-box " id="card-form">
+                                <div class="form-control text-center w-full max-w-xs">
+                                    <h4 class="text-2xl text-black">Registrar permiso</h4>
+                                    <div class="divider"></div>
+                                    <label class="label">
+                                        <span class="label-text ">Nombre del permiso:</span>
+                                    </label>
+                                    <input type="text" placeholder="nombrePermiso"
+                                        class="input input-bordered input-primary w-full max-w-xs">
+
+                                    <label class="label">
+                                        <span class="label-text ">Fecha de creación:</span>
+                                    </label>
+                                    <input type="date" placeholder="Type here"
+                                        class="input input-primary text-black  w-full max-w-xs">
+                                    <label class="label">
+                                        <span class="label-text ">Estado:</span>
+                                    </label>
+                                    <select class="select w-full input-primary max-w-xs text-black  select-neutral">
+                                        <option disabled selected>Elige el estado del permiso:</option>
+                                        <option>Activo</option>
+                                        <option>Inactivo</option>
+                                    </select>
+                                </div>
+
+                                <div class="modal-action" id="botones-options">
+                                    <label for="my-modal" class="btn btn-primary">
+                                        Seguro
+                                    </label>
+                                    <label for="my-modal" class="btn btn-secondary">
+                                        Cancelar
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="overflow-x-auto ">
                     <div
                         class="min-w-screen  bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
@@ -80,11 +85,11 @@
                                 <table class="min-w-max w-full table-auto">
                                     <thead>
                                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                            <th class="py-3 px-6 text-left">Project</th>
-                                            <th class="py-3 px-6 text-left">Client</th>
-                                            <th class="py-3 px-6 text-center">Users</th>
-                                            <th class="py-3 px-6 text-center">Status</th>
-                                            <th class="py-3 px-6 text-center">Actions</th>
+                                            <th class="py-3 px-6 text-left">Permiso</th>
+                                            <th class="py-3 px-6 text-left">Fecha de creación</th>
+                                            <th class="py-3 px-6 text-center">Fecha de modificación</th>
+                                            <th class="py-3 px-6 text-center">Estado</th>
+                                            <th class="py-3 px-6 text-center">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="text-gray-600 text-sm font-light">
@@ -135,36 +140,102 @@
                                             </td>
                                             <td class="py-3 px-6 text-center">
                                                 <div class="flex item-center justify-center">
+
                                                     <div
                                                         class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                                        </svg>
+                                                        <label for="my-modal3"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                            </svg>
+                                                        </label>
+
                                                     </div>
-                                                    
+
+                                                    <input type="checkbox" id="my-modal3" class="modal-toggle">
+                                                    <div class="modal">
+                                                        <div class="card w-96 bg-base-100 shadow-xl">
+                                                            <div class="card-body">
+                                                                <h2 class="card-title ">Alerta!</h2>
+                                                                <p>¿Estás seguro de eliminar este permiso?</p>
+                                                                <div class="modal-action" id="botones-options">
+                                                                    <label for="my-modal3" class="btn btn-primary">
+                                                                        Seguro
+                                                                    </label>
+                                                                    <label for="my-modal3" class="btn btn-secondary">
+                                                                        Cancelar
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div
                                                         class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                        </svg>
+
+                                                        <label for="my-modal3"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                            </svg>
+                                                        </label>
                                                     </div>
+
+                                                    <input type="checkbox" id="my-modal3" class="modal-toggle">
+                                                    <div class="modal">
+                                                        <div class="card w-96 bg-base-100 shadow-xl">
+                                                            <div class="card-body">
+                                                                <h2 class="card-title ">Alerta!</h2>
+                                                                <p>¿Estás seguro de eliminar este permiso?</p>
+                                                                <div class="modal-action" id="botones-options">
+                                                                    <label for="my-modal3" class="btn btn-primary">
+                                                                        Seguro
+                                                                    </label>
+                                                                    <label for="my-modal3" class="btn btn-secondary">
+                                                                        Cancelar
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- The button to open modal -->
                                                     <div
                                                         class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                        </svg>
+
+                                                        <label for="my-modal2"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                            </svg>
+                                                        </label>
                                                     </div>
+                                                    <input type="checkbox" id="my-modal2" class="modal-toggle">
+                                                    <div class="modal">
+                                                        <div class="card w-96 bg-base-100 shadow-xl">
+                                                            <div class="card-body">
+                                                                <h2 class="card-title ">Alerta!</h2>
+                                                                <p>¿Estás seguro de eliminar este permiso?</p>
+                                                                <div class="modal-action" id="botones-options">
+                                                                    <label for="my-modal2" class="btn btn-primary">
+                                                                        Seguro
+                                                                    </label>
+                                                                    <label for="my-modal2" class="btn btn-secondary">
+                                                                        Cancelar
+                                                                    </label>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -177,7 +248,6 @@
             </section>
             <footer class="px-6 py-3 border-t flex w-full items-end">
                 <p class="text-gray-600">CRM - Rick®</p>
-
             </footer>
         </main>
 
@@ -194,19 +264,22 @@
     }
 
     .container-grande {
-        
+
         padding-left: 10px;
         margin-top: -10px;
         padding-top: 10px;
         padding-right: 10px;
-           
+
     }
-    #card-form{
-      padding-left: 90px;
+
+    #card-form {
+        padding-left: 90px;
     }
-    #botones-options{
+
+    #botones-options {
         padding-right: 130px;
     }
+
     main {
         font-size: clamp(0.9rem, 3vw, 1rem);
     }
