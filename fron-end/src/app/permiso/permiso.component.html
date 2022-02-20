@@ -106,7 +106,8 @@
                                     <tbody class="text-gray-600 text-sm font-light">
 
                                         <tr class="border-b border-gray-200 hover:bg-gray-100"
-                                        **ngFor="let permiso of listadoPermisos">
+                                        *ngFor="let permiso of listadoPermisos"
+                                        [class.active]="permiso==permisoActual"                                        >
                                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="mr-2">
@@ -134,7 +135,9 @@
                                                         <img class="w-6 h-6 rounded-full" alt=""
                                                             src="https://randomuser.me/api/portraits/men/1.jpg" />
                                                     </div>
-                                                    <span>{{permiso.fechaCreacion}}</span>
+                                                    <span>
+                                                        {{permiso.fechaCreacion}}
+                                                    </span>
                                                 </div>
                                             </td>
                                             <td class="py-3 px-6 text-left">

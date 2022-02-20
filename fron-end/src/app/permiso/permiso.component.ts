@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Permiso } from './permiso';
 import { PermisoService } from './permiso.service';
 
+
+
 @Component({
   selector: 'app-permiso',
   templateUrl: './permiso.component.html',
@@ -9,7 +11,7 @@ import { PermisoService } from './permiso.service';
 })
 export class PermisoComponent implements OnInit {
 
- 
+
   permisoActual: Permiso = new Permiso(0, "", new Date, new Date, false );
 
   listadoPermisos: Permiso[] = [];
