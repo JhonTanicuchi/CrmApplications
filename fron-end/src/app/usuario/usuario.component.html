@@ -1,7 +1,7 @@
 <div class="grid grid-cols-5 divide-x divide-black-100">
-  <div class="p-2 relative" style="height:calc(100vh - 64px - 40px)">
+  <div class="p-2 relative bg-white" style="height:calc(100vh - 64px - 40px)">
    <div>
-      <div class="shadow stats w-full mb-2  ">
+      <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
         <div class="stat">
           <div class="stat-figure  text-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -10,11 +10,11 @@
           </div>
           <div class="stat-value">{{UsuariosActivos()}}</div>
           <div class="stat-title">Activos</div>
-          <div class="stat-desc">{{listadoUsuarios.length-UsuariosActivos()}} Desconectados</div>
+          <div class="stat-desc text-secondary">{{listadoUsuarios.length-UsuariosActivos()}} Desconectados</div>
         </div>
       </div>
 
-      <div class="shadow stats bg-base-100 w-full mb-2">
+      <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
         <div class="stat">
           <div class="stat-figure text-primary">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="shadow stats w-full mb-2">
+      <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
         <div class="stat">
           <div class="stat-figure text-primary">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -48,12 +48,12 @@
     </button>
   </div>
 
-  <div [ngClass]="{'hidden': flag, 'block': !flag}" class="col-start-2 col-end-6 overflow-auto scrollbar-hide" style="height:calc(100vh - 64px - 40px)">
+  <div [ngClass]="{'hidden': flag, 'block': !flag}" class="col-start-2 col-end-6 overflow-auto scrollbar-hide p-2" style="height:calc(100vh - 64px - 40px)">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+            <thead class="bg-gray-100">
               <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empleado</th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area</th>
@@ -71,7 +71,7 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                      <img class="h-10 w-10 rounded-full" src="https://api.lorem.space/image/face?hash=3174" alt="">
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">Jane Cooper</div>
@@ -102,76 +102,111 @@
     </div>
   </div>
 
-  <div [ngClass]="{'block': flag, 'hidden': !flag}" class="col-start-2 col-end-6" >
+  <div [ngClass]="{'block': flag, 'hidden': !flag}" class="col-start-2 col-end-6 p-2 relative">
 
-    <div class="bg-gray-50">
-      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-        <div class="flex-shrink-0 h-10 w-10">
-          <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+    <div *ngIf="usuarioActual.empleadoId>0" class="bg-gray-100 rounded-lg">
+      <div class="max-h-10 mx-auto py-16 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 h-16 w-16">
+            <img class="h-16 w-16 rounded-full" src="https://api.lorem.space/image/face?hash=3174" alt="">
+          </div>
+          <h2 class="text-3xl ml-5 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <span class="block text-sm font-medium text-gray-900">Jane Cooper <input [(ngModel)]="usuarioActual.estado" type="checkbox" checked="checked" class="checkbox checkbox-xs checkbox-primary ml-2"> </span>
+            <span class="block text-sm font-light text-gray-500">jane.cooper@example.com</span>
+          </h2>
         </div>
-        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span class="block text-sm font-medium text-gray-900">Jane Cooper</span>
-          <span class="block ext-sm text-gray-500">jane.cooper@example.com</span>
-        </h2>
-        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-          <div class="ml-3 inline-flex rounded-md shadow">
-            <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">Editar</a>
+      <button (click)="limpiarForm()" class="btn text-white btn-sm text-xs">Editar</button>
+      </div>
+    </div>
+
+    <div *ngIf="usuarioActual.empleadoId==0" class="bg-gray-100 rounded-lg">
+      <div class="max-h-10 mx-auto py-16 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+        <div class="flex items-center">
+          <div>
+            <label for="empleado" class="block text-sm font-medium text-gray-700">Empleado</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <select [(ngModel)]="usuarioActual.empleadoId" class=" w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md">
+                <option disabled selected>Empleado</option>
+                <option *ngFor="let usuario of listadoUsuarios;let indice=index" value="{{indice+1}}" >{{usuario.username}}</option>
+              </select>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 
 
-    <div>
-      <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-      <div class="mt-1 relative rounded-md shadow-sm">
-        <input type="text" name="username" id="username" class=" focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.username" placeholder="Jhon">
+    <div class="p-5 pt-10 grid grid-cols-3 gap-4 gap-x-5 gap-y-5">
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input type="text" name="username" id="username" class=" focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.username">
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input type="text" name="password" id="password" class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.password">
+        </div>
+      </div>
+
+      <div>
+        <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
+        <div class="mt-1 relative shadow-sm">
+          <select [(ngModel)]="usuarioActual.rolId" id="rol" class=" w-full  focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md">
+            <option disabled selected>Rol</option>
+            <option value="1" >Admin</option>
+            <option value="2" >Creador</option>
+            <option value="3" >Gestor</option>
+            <option value="4" >Miembro</option>
+            <option value="5" >Mienbro Restringido</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="w-full p-5 pt-5">
+      <div class="flex justify-between items-center">
+        <h1 class="font-medium">Permisos</h1>
+        <button (click)="addPermiso()" class="btn bg-white border-white text-primary btn-circle hover:bg-white hover:border-white hover:text-primary-focus ">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+        </button>
+      </div>
+      <div class="w-full h-48 p-2 bg-base-100 rounded-lg">
+        <button *ngFor="let permiso of listadoPermisos" class="m-2 btn btn-xs">
+          <span class="mr-2">Permiso</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hover:text-error-content" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </button>
+
       </div>
     </div>
 
-    <div>
-      <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-      <div class="mt-1 relative rounded-md shadow-sm">
-        <input type="text" name="password" id="password" class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.password" placeholder="****">
-      </div>
-    </div>
+    <div class="card-actions mb-5 mx-3 absolute bottom-0 flex justify-between" style="width: calc(100% - 1rem - 0.75rem - 0.75rem);">
+        <button (click)="cambiarFlag()" class="btn bg-white text-neutral border-white btn-circle hover:bg-neutral hover:border-neutral hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+          </svg>
+        </button>
 
-    <div>
-      <label for="rol" class="block text-sm font-medium text-gray-700">Rol</label>
-      <div class="mt-1 relative rounded-md shadow-sm">
-        <input type="text" name="rol" id="rol" class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.rolId" placeholder="****">
-      </div>
-    </div>
+        <button (click)="cambiarFlag()" (click)="save(usuarioActual)" class="btn bg-primary border-primary text-white  hover:bg-primary-focus hover:border-primary-focus">
+          <span class="mr-2">Guardar</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+          </svg>
+        </button>
 
-    <div>
-      <label for="permisos" class="block text-sm font-medium text-gray-700">Permisos</label>
-      <div class="mt-1 relative rounded-md shadow-sm">
-        <input type="text" name="permisos" id="permisos" class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.permisoId" placeholder="****">
-      </div>
-    </div>
-
-    <div>
-      <label for="empleado" class="block text-sm font-medium text-gray-700">Empleado</label>
-      <div class="mt-1 relative rounded-md shadow-sm">
-        <input type="text" name="empleado" id="empleado" class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" [(ngModel)]="usuarioActual.empleadoId" placeholder="****">
-      </div>
-    </div>
-
-    <div>
-      <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
-      <div class="mt-1 relative rounded-md shadow-sm">
-        <select class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md" name="estado" id="estado" [(ngModel)]="usuarioActual.estado">
-          <option disabled selected>Selecciona un estado:</option>
-          <option>true</option>
-          <option>false</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="card-actions m-auto mb-5">
-      <label for="my-modal" class="btn text-white" (click)="cambiarFlag()">Cancelar</label>
-      <label for="my-modal" class="btn btn-primary"  (click)="cambiarFlag()" (click)="save(usuarioActual)" >Guardar</label>
-      <label for="my-modal" class="btn btn-primary" (click)="cambiarFlag()" (click)="deleteById(usuarioActual.usuarioId)"  >Eliminar</label>
+        <button (click)="cambiarFlag()" (click)="deleteById(usuarioActual.usuarioId)" class="btn bg-white border-white text-error-content btn-circle hover:bg-error-content hover:border-error-content hover:text-white ">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
     </div>
   </div>
 
