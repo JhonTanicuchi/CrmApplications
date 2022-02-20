@@ -14,7 +14,7 @@ export class UsuarioComponent implements OnInit {
 
   listadoUsuarios: Usuario[] = [];
 
-  listadoPermisos: string[] = [];
+
 
   constructor(
     private usuarioService: UsuarioService
@@ -83,9 +83,15 @@ export class UsuarioComponent implements OnInit {
   }
 
   addPermiso():void{
-
-    this.listadoPermisos.push("permiso")
-    this.usuarioActual.permisoId = this.listadoPermisos.length;
+    this.usuarioActual.permisoId = this.usuarioActual.permisoId + 1;
   }
+
+  deletePermiso():void{
+    this.usuarioActual.permisoId = this.usuarioActual.permisoId - 1;
+  }
+
+  counter(i: number) {
+    return new Array(i);
+}
 
 }
