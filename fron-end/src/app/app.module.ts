@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ActividadComponent } from './actividad/actividad.component';
@@ -26,7 +28,9 @@ import { PermisoComponent } from './permiso/permiso.component';
     ActividadComponent,
   ],
   imports: [
+    BrowserModule,
     AppRoutingModule,
+    CommonModule,
     FormsModule,
     HttpClientModule
   ],
