@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ActividadComponent } from './actividad/actividad.component';
@@ -18,13 +17,13 @@ import { PermisoComponent } from './permiso/permiso.component';
   declarations: [
     AppComponent,
     PermisoComponent,
+    CampaniaComponent,
     MenuComponent,
     RolComponent,
     HomeComponent,
     UsuarioComponent,
     EtapaComponent,
     ActividadComponent,
-    MenuComponent
   ],
   imports: [
     AppRoutingModule,

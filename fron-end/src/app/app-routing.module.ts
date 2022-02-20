@@ -1,4 +1,4 @@
- import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CampaniaComponent } from './campania/campania.component';
 import { PermisoComponent } from './permiso/permiso.component';
