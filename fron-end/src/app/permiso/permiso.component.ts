@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Permiso } from './permiso';
+import { PermisoService } from './permiso.service';
 
 @Component({
   selector: 'app-permiso',
@@ -7,9 +9,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PermisoComponent implements OnInit {
 
-  constructor() { }
+ 
+  permisoActual: Permiso = new Permiso(0, "", new Date, new Date, false );
+
+  listadoPermisos: Permiso[] = [];
+ 
+  constructor(
+    private permisoService: PermisoService
+  ) { }
 
   ngOnInit(): void {
+    this.findAll();
+  }
+
+  save(permiso: Permiso):void
+  {
+    console.log("ingresando al método save")
+    this.permisoService.save(permiso).subscribe(
+      (respuesta) => {
+        this.permisoActual = new Permiso(0, "", new Date, new Date, false );
+        this.findAll();
+      }
+    );
+  }
+  findAll():void
+  {
+    this.permisoService.findAll().subscribe(
+      respuesta => this.listadoPermisos = respuesta
+    );
+  }
+
+  seleccionarPermiso(permiso: Permiso):void
+  {
+    this.permisoActual = permiso;
+  }
+
+  limpiarForm(){
+    this.permisoActual = new Permiso(0, "", new Date, new Date, false );
+  }
+
+
+  deleteById(id: number):void
+  {
+    this.permisoService.deleteById(id).subscribe(
+      () => {
+        this.listadoPermisos = this.listadoPermisos
+        .filter( item => item.permisoId != id);
+        this.permisoActual = new Permiso(0, "", new Date, new Date, false );
+      }
+
+    );
   }
 
 }
