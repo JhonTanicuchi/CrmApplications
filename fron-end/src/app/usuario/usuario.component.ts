@@ -14,12 +14,15 @@ export class UsuarioComponent implements OnInit {
 
   listadoUsuarios: Usuario[] = [];
 
+  listadoPermisos: string[] = [];
+
   constructor(
     private usuarioService: UsuarioService
   ) { }
 
   ngOnInit(): void {
     this.findAll();
+
   }
 
   save(usuario: Usuario):void
@@ -78,4 +81,11 @@ export class UsuarioComponent implements OnInit {
   cambiarFlag(){
     this.flag = !this.flag;
   }
+
+  addPermiso():void{
+
+    this.listadoPermisos.push("permiso")
+    this.usuarioActual.permisoId = this.listadoPermisos.length;
+  }
+
 }
