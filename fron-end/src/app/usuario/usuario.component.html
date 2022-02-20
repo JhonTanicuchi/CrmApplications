@@ -41,7 +41,7 @@
       </div>
    </div>
 
-    <button [ngClass]="{'hidden': flag, 'flex': !flag}" (click)="cambiarFlag()" (click)="limpiarForm()" class="btn bg-primary border-primary absolute right-0 bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus">
+    <button [ngClass]="{'hidden': flag, 'flex': !flag}" (click)="cambiarFlag()" (click)="limpiarForm()" class="btn bg-primary border-primary text-white absolute right-0 bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
       </svg>
@@ -169,7 +169,7 @@
     </div>
 
     <div class="card-actions m-auto mb-5">
-      <label for="my-modal" class="btn" (click)="cambiarFlag()">Cancelar</label>
+      <label for="my-modal" class="btn text-white" (click)="cambiarFlag()">Cancelar</label>
       <label for="my-modal" class="btn btn-primary"  (click)="cambiarFlag()" (click)="save(usuarioActual)" >Guardar</label>
       <label for="my-modal" class="btn btn-primary" (click)="cambiarFlag()" (click)="deleteById(usuarioActual.usuarioId)"  >Eliminar</label>
     </div>
