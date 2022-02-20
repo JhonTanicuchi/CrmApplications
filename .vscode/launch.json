@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch EtapasBackendApplication",
+            "request": "launch",
+            "mainClass": "edu.yavirac.etapasbackend.EtapasBackendApplication",
+            "projectName": "CRM"
+        },
+        {
+            "type": "java",
             "name": "Launch CrmApplication",
             "request": "launch",
             "mainClass": "CRM4RTONOCTURNOA.CRM.CrmApplication",
