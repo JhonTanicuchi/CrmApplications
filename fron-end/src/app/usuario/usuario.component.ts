@@ -72,4 +72,10 @@ export class UsuarioComponent implements OnInit {
 
     );
   }
+
+  flag = false;
+
+  cambiarFlag(){
+    this.flag = !this.flag;
+  }
 }
