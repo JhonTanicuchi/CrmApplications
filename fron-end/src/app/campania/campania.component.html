@@ -50,12 +50,12 @@
           <div class="card mt-7">
             <div class="card-title"> Campania {{campania.nombre}}</div>
             <div class="card-body">
-              <input type="text" value="Nombre: {{campania.nombre}}" readonly id="nombre">
-              <input type="text" value="Fecha Inicio: {{campania.fechaInicio}}" readonly id="fechaInicio">
-              <input type="text" value="Fecha Finalizacion: {{campania.fechaFinalizacion}}" readonly
+              <input type="text" class="border-0" value="Nombre: {{campania.nombre}}" readonly id="nombre">
+              <input type="text" class="border-0" value="Fecha Inicio: {{campania.fechaInicio}}" readonly id="fechaInicio">
+              <input type="text" class="border-0" value="Fecha Finalizacion: {{campania.fechaFinalizacion}}" readonly
                 id="fechaFinalizacion">
-              <input type="text" value="Descipcion: {{campania.descripcion}} " readonly id="descripcion">
-              <input type="text" value="Estado: {{campania.estado}} " readonly id="estado">
+              <input type="text" class="border-0" value="Descipcion: {{campania.descripcion}} " readonly id="descripcion">
+              <input type="text" class="border-0" value="Estado: {{campania.estado}} " readonly id="estado">
             </div>
             <div class="card-actions">
               <button class="btn btn-danger m-3" (click)="seleccionarCampania(campania)">Editar</button>
