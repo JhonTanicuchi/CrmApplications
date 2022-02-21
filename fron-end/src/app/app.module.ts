@@ -1,5 +1,5 @@
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +24,7 @@ import {MessageService} from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import {BlockUIModule} from 'primeng/blockui';
 import {ToastModule} from 'primeng/toast';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,13 +38,14 @@ import {ToastModule} from 'primeng/toast';
     EtapaComponent,
     ActividadComponent,
     CotizacionComponent,
-    PersonaComponent
+    PersonaComponent,
+    SeguimientoComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    CommonModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,

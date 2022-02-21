@@ -1,12 +1,11 @@
 package CRM4RTONOCTURNOA.CRM.service;
 
-import java.util.List;
-
+import CRM4RTONOCTURNOA.CRM.entity.Persona;
+import CRM4RTONOCTURNOA.CRM.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import CRM4RTONOCTURNOA.CRM.entity.Persona;
-import CRM4RTONOCTURNOA.CRM.repository.PersonaRepository;
+import java.util.List;
 
 @Service
 public class PersonaService {

@@ -1,12 +1,17 @@
+<p-blockUI [blocked]="blocked" [baseZIndex]="1000">
+  <i class="pi pi-spin pi-spinner text-white" id="icon-loader"></i>
+  <p class="text-white loader m-2"> Cargando...</p>
+</p-blockUI>
+<p-toast position="top-right"></p-toast>
 <div class="container">
   <h1 class="text-3xl font-bold text-gray-900 text-center my-3">Seguimiento</h1>
   <div class="grid grid-cols-3 gap-4 p-3 m-auto border-t-2 text-center">
     <div class="col-span-2 border-r-2 p-1 text-center">
       <h4 class="text-3xl  text-gray-400 my-3">Listado de los últimos seguimentos</h4>
       <div class="overflow-x-auto ">
-        <table class="table w-full">
+        <table class="table w-full ">
           <!-- head -->
-          <thead>
+          <thead class="z-0">
             <tr>
               <th>ID</th>
               <th>Nombre</th>
@@ -14,10 +19,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
+            <tr *ngFor="let seguimiento of listSeguimientos" (click)="buscarSeguimiento(seguimiento.seguimientoId)">
+              <th>{{seguimiento.seguimientoId}}</th>
+              <td>{{seguimiento.nombre}}</td>
+              <td>{{seguimiento.descripcion}}</td>
             </tr>
           </tbody>
         </table>
@@ -26,43 +31,111 @@
     <div class="col-span-1 text-center">
 
       <div class="flex flex-row">
-        <div class="basis-1/2"><h4 class="text-3xl  text-gray-400 my-3">Información</h4></div>
-        <div class="basis-1/2">
-          <!-- <button class="btn btn-outline btn-info rounded-sm">Añadir</button> -->
-          <div class="grid grid-cols-2 gap-4">
+        <div class="flex-initial w-45">
+          <h4 class="text-3xl  text-gray-400 my-3">Información</h4>
+        </div>
+        <div class="flex-initial w-55">
+
+          <div class="grid grid-cols-3 gap-4">
             <div class="col-span-1">
-              <button class="btn btn-outline btn-warning rounded-sm">Editar</button>
+              <button class="btn btn-outline btn-info rounded-sm" (click)="displayNuevo = !displayNuevo">Añadir</button>
             </div>
             <div class="col-span-1">
-              <button class="btn btn-outline btn-error rounded-sm">Eliminar</button>
+              <button *ngIf="isSeguimiento" class="btn btn-outline btn-warning rounded-sm"
+                (click)="mostrarModalEditar()">Editar</button>
+            </div>
+            <div class="col-span-1">
+              <button *ngIf="isSeguimiento" class="btn btn-outline btn-error rounded-sm"
+                (click)="eliminarSeguimiento($event)">Eliminar</button>
             </div>
           </div>
         </div>
       </div>
       <hr class="my-2">
-      <!-- <div class="card w-96 bg-base-100 shadow-xl mx-auto">
-        <div class="card-body">
-          <h2 class="card-title text-error-content">Error!</h2>
-          <p>No hay un seguimiento seleccionado.</p>
-          <div class="justify-end card-actions">
-            <button class="btn btn-primary">Refrescar</button>
-          </div>
-        </div>
-      </div> -->
-
-      <div class="card w-96 bg-base-100 shadow-xl mx-auto">
-        <figure class="px-10 pt-10">
-          <img src="https://api.lorem.space/image/face?w=400&h=225" alt="Shoes" class="rounded-xl">
-        </figure>
-        <div class="card-body items-center text-center">
-          <h2 class="card-title">Nombre Seguimiento</h2>
-          <p>Descripción</p>
-          <div class="card-actions justify-end">
-            <p>Fecha</p>
-            <p>Encargado</p>
+      <div *ngIf="isSeguimiento">
+        <div class="card w-96 bg-base-100 shadow-xl mx-auto">
+          <figure class="px-10 pt-10">
+            <img src="https://api.lorem.space/image/face?w=400&h=225" alt="Shoes" class="rounded-xl">
+          </figure>
+          <div class="card-body items-center text-center">
+            <h2 class="card-title">{{seguimientoActual.nombre }}</h2>
+            <p>{{seguimientoActual.descripcion }}</p>
+            <div class="card-actions justify-end">
+              <p>{{seguimientoActual.fechaCreacion | date }} |</p>
+              <p>Creado por: {{seguimientoActual.creadoPor}}</p>
+            </div>
           </div>
         </div>
       </div>
+
+
+      <div *ngIf="!isSeguimiento">
+        <div class="card w-96 bg-base-100 shadow-xl mx-auto z-0">
+          <div class="card-body">
+            <h2 class="card-title text-error-content">Error!</h2>
+            <p>No hay un seguimiento seleccionado.</p>
+            <div class="justify-end card-actions">
+              <button class="btn btn-primary">Refrescar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+
+<p-dialog header="Nuevo" [modal]="true" [(visible)]="displayNuevo" [breakpoints]="breakpointsModal"
+  [style]="tamanioModal" (onHide)="limpiar()">
+  <form [formGroup]="formSeguimiento" (ngSubmit)="guardarSeguimiento()">
+    <input type="text" placeholder="Nombre" class="input input-bordered input-success w-full my-2"
+      formControlName="nombre">
+    <div class="grid grid-cols-2 gap-1 my-2">
+      <div class="col-span-1">
+        <input type="date" placeholder="Fecha" class="input input-bordered input-success w-full"
+          formControlName="fechaCreacion">
+
+      </div>
+      <div class="col-span-1">
+        <select class="select w-full max-w-xs select-success" formControlName="creadoPor">
+          <option [value]="null" selected>Seleccionar</option>
+          <option *ngFor="let creador of listCreadores" [value]="creador">{{creador}}</option>
+        </select>
+      </div>
+    </div>
+    <textarea class="textarea textarea-success my-2 w-full" placeholder="ingresar descripción"
+      formControlName="descripcion"></textarea>
+    <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save"
+      class="btn btn-active btn-primary w-full">Guardar</button>
+  </form>
+</p-dialog>
+
+<p-dialog header="Editar" [modal]="true" [(visible)]="displayEditar" [breakpoints]="breakpointsModal"
+  [style]="tamanioModal" (onHide)="limpiar()">
+  <form [formGroup]="formSeguimiento" (ngSubmit)="actualizarSeguimiento()">
+
+    <input type="text" placeholder="Nombre" class="input input-bordered input-success w-full my-2"
+      formControlName="nombre">
+    <div class="grid grid-cols-2 gap-1 my-2">
+      <div class="col-span-1">
+        <input type="date" placeholder="Fecha" class="input input-bordered input-success w-full"
+          formControlName="fechaCreacion">
+
+      </div>
+      <div class="col-span-1">
+        <select class="select w-full max-w-xs select-success" formControlName="creadoPor">
+          <option [value]="null" selected>Seleccionar</option>
+          <option *ngFor="let creador of listCreadores" [value]="creador">{{creador}}</option>
+        </select>
+      </div>
+    </div>
+    <textarea class="textarea textarea-success my-2 w-full" placeholder="ingresar descripción"
+      formControlName="descripcion"></textarea>
+      <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save"
+      class="btn btn-active btn-secondary w-full">Guardar</button>
+  </form>
+
+</p-dialog>
+
+
+<p-confirmPopup></p-confirmPopup>
