@@ -184,7 +184,7 @@
           </svg>
         </button>
       </div>
-      <div class="w-full h-48 p-2  rounded-lg border border-primary">
+      <div class="w-full h-48 p-2 overflow-auto scrollbar-hide rounded-lg border border-primary">
         <button *ngFor="let permiso of counter(usuarioActual.permisoId);let indice=index" (click)="deletePermiso()" class="m-2 btn btn-xs">
           <span class="mr-2">Permiso {{indice+1}}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hover:text-error-content" fill="none" viewBox="0 0 24 24" stroke="currentColor">
