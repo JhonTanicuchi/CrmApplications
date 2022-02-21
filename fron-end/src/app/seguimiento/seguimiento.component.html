@@ -1,7 +1,68 @@
 <div class="container">
-  <h1 class=" text-center text-lg font-medium">Seguimientos</h1>
-  <div class="grid grid-cols-3 gap-4 p-3 m-2">
-    <div class="col-span-2 ...">04</div>
-    <div class="col-span-1">05</div>
+  <h1 class="text-3xl font-bold text-gray-900 text-center my-3">Seguimiento</h1>
+  <div class="grid grid-cols-3 gap-4 p-3 m-auto border-t-2 text-center">
+    <div class="col-span-2 border-r-2 p-1 text-center">
+      <h4 class="text-3xl  text-gray-400 my-3">Listado de los últimos seguimentos</h4>
+      <div class="overflow-x-auto ">
+        <table class="table w-full">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1</th>
+              <td>Cy Ganderton</td>
+              <td>Quality Control Specialist</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-span-1 text-center">
+
+      <div class="flex flex-row">
+        <div class="basis-1/2"><h4 class="text-3xl  text-gray-400 my-3">Información</h4></div>
+        <div class="basis-1/2">
+          <!-- <button class="btn btn-outline btn-info rounded-sm">Añadir</button> -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-1">
+              <button class="btn btn-outline btn-warning rounded-sm">Editar</button>
+            </div>
+            <div class="col-span-1">
+              <button class="btn btn-outline btn-error rounded-sm">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-2">
+      <!-- <div class="card w-96 bg-base-100 shadow-xl mx-auto">
+        <div class="card-body">
+          <h2 class="card-title text-error-content">Error!</h2>
+          <p>No hay un seguimiento seleccionado.</p>
+          <div class="justify-end card-actions">
+            <button class="btn btn-primary">Refrescar</button>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="card w-96 bg-base-100 shadow-xl mx-auto">
+        <figure class="px-10 pt-10">
+          <img src="https://api.lorem.space/image/face?w=400&h=225" alt="Shoes" class="rounded-xl">
+        </figure>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">Nombre Seguimiento</h2>
+          <p>Descripción</p>
+          <div class="card-actions justify-end">
+            <p>Fecha</p>
+            <p>Encargado</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
