@@ -1,10 +1,10 @@
-package edu.yavirac.etapasbackend;
+package eduyavirac.cotizacionbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EtapasBackendApplicationTests {
+class CotizacionBackendApplicationTests {
 
 	@Test
 	void contextLoads() {

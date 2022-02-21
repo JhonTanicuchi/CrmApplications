@@ -1,4 +1,4 @@
-package CRM4RTONOCTURNOA.CRM.controller;
+package eduyavirac.cotizacionbackend.controller;
 
 import java.util.List;
 
@@ -15,49 +15,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import CRM4RTONOCTURNOA.CRM.entity.Usuario;
-import CRM4RTONOCTURNOA.CRM.service.UsuarioService;
+import eduyavirac.cotizacionbackend.entity.Cotizacion;
+import eduyavirac.cotizacionbackend.service.CotizacionService;
 
 @RestController
 @CrossOrigin({"http://localhost:4200"})
-@RequestMapping("/api/usuario")
-public class UsuarioController {
+@RequestMapping("/api/cotizacion" )
 
+public class CotizacionController {
+    
     @Autowired
-    UsuarioService usuarioService;
+    CotizacionService cotizacionService;
 
     //Create
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario save(@RequestBody Usuario usuario)
+    public Cotizacion save(@RequestBody Cotizacion cotizacion)
     {
-        return usuarioService.save(usuario);
+        //System.out.println("Recibe save");
+        return cotizacionService.save(cotizacion);
     }
 
-    //Read
+    //Read 
     @GetMapping("/{id}")
-    public Usuario findById(@PathVariable Long id)
+    public Cotizacion findById(@PathVariable Long id )
     {
-        return usuarioService.findById(id);
+        return cotizacionService.findById(id);
     }
-    //Update
+
+    //update
     @PutMapping("/update")
-    public Usuario update(@RequestBody Usuario usuario)
+    public Cotizacion update(@RequestBody Cotizacion cotizacion)
     {
-        return usuarioService.save(usuario);
+        return cotizacionService.save(cotizacion);
     }
-    
-    //Delete
+
+    //delete
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
-        usuarioService.deleteById(id);
-    }
-
+        cotizacionService.deleteById(id);
+    }  
+ 
     @GetMapping("/findAll")
-    public List<Usuario> findAll()
+    public List<Cotizacion> findAll()
     {
-        return usuarioService.findAll();
+        return cotizacionService.findAll();
     }
-    
 }
