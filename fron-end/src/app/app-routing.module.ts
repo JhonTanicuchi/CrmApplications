@@ -1,3 +1,4 @@
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CampaniaComponent } from './campania/campania.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'usuario', component: UsuarioComponent},
   {path: 'etapa', component: EtapaComponent},
   {path: 'actividad', component:ActividadComponent},
-  {path: 'cotizacion', component:CotizacionComponent}
+  {path: 'cotizacion', component:CotizacionComponent},
+  { path: 'seguimiento', component: SeguimientoComponent}
 ];
 
 @NgModule({
