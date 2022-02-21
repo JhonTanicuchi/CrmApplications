@@ -33,11 +33,10 @@
           <input class="input input-primary" type="text" name="nombre" id="" [(ngModel)]="rolActual.tipoRol" >
 
           <label class="label" for="nombre">Estado:</label> 
-          <select class="select w-full max-w-xs select-primary">
+          <select class="select w-full max-w-xs select-primary" [(ngModel)]="rolActual.estado">
             <option disabled selected>Estado</option>
             <option value="true">Activo</option>
             <option value="false">Inactivo</option>
-    
           </select>
         </div>
 
