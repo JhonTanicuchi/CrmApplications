@@ -7,6 +7,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { HomeComponent } from './home/home.component';
 import { EtapaComponent } from './etapa/etapa.component';
 import { ActividadComponent } from './actividad/actividad.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'rol', component: RolComponent},
   {path: 'usuario', component: UsuarioComponent},
   {path: 'etapa', component: EtapaComponent},
-  {path: 'actividad', component:ActividadComponent}
+  {path: 'actividad', component:ActividadComponent},
+  {path: 'cotizacion', component:CotizacionComponent}
 ];
 
 @NgModule({

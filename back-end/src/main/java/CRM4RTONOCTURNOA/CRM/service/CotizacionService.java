@@ -1,12 +1,12 @@
-package eduyavirac.cotizacionbackend.service;
+package CRM4RTONOCTURNOA.CRM.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import eduyavirac.cotizacionbackend.entity.Cotizacion;
-import eduyavirac.cotizacionbackend.repository.CotizacionRepository;
+import CRM4RTONOCTURNOA.CRM.entity.Cotizacion;
+import CRM4RTONOCTURNOA.CRM.repository.CotizacionRepository;
 
 @Service
 public class CotizacionService {

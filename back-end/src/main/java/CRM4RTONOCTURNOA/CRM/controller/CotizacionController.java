@@ -1,4 +1,4 @@
-package eduyavirac.cotizacionbackend.controller;
+package CRM4RTONOCTURNOA.CRM.controller;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import eduyavirac.cotizacionbackend.entity.Cotizacion;
-import eduyavirac.cotizacionbackend.service.CotizacionService;
+import CRM4RTONOCTURNOA.CRM.entity.Cotizacion;
+import CRM4RTONOCTURNOA.CRM.service.CotizacionService;
 
 @RestController
 @CrossOrigin({"http://localhost:4200"})
