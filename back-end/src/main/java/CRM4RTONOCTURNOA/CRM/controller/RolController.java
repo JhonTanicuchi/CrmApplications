@@ -15,18 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-<<<<<<< HEAD:back-end/src/main/java/CRM4RTONOCTURNOA/CRM/controller/RolController.java
  
 import CRM4RTONOCTURNOA.CRM.entity.Rol;
 import CRM4RTONOCTURNOA.CRM.service.RolService;
  
-=======
 
-
-import CRM4RTONOCTURNOA.CRM.entity.Campania;
-import CRM4RTONOCTURNOA.CRM.service.CampaniaService;
-
->>>>>>> develop:back-end/src/main/java/CRM4RTONOCTURNOA/CRM/controller/CampaniaController.java
 @RestController
 @CrossOrigin({"http://localhost:4200"})
 @RequestMapping("/api/rol")
