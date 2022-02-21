@@ -32,8 +32,8 @@ public class Usuario {
 
     private boolean estado;
 
-    @MappedCollection(idColumn = "permiso_id")
-    Set<Permiso> permiso = new HashSet<>();
+   /*  @MappedCollection(idColumn = "permiso_id")
+    Set<Permiso> permiso = new HashSet<>(); */
 
 }
 
