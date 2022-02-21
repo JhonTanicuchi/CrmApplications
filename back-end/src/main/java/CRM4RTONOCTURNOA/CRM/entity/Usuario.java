@@ -32,7 +32,7 @@ public class Usuario {
 
     private boolean estado;
 
-    @MappedCollection(idColumn = "usuario_id")
+    @MappedCollection(idColumn = "permiso_id")
     Set<Permiso> permiso = new HashSet<>();
 
 }
