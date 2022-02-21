@@ -1,8 +1,7 @@
 package CRM4RTONOCTURNOA.CRM.controller;
 
- 
 import java.util.List;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,58 +14,53 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-<<<<<<< HEAD:back-end/src/main/java/CRM4RTONOCTURNOA/CRM/controller/RolController.java
- 
-import CRM4RTONOCTURNOA.CRM.entity.Rol;
-import CRM4RTONOCTURNOA.CRM.service.RolService;
- 
-=======
 
+import CRM4RTONOCTURNOA.CRM.entity.Actividad;
+import CRM4RTONOCTURNOA.CRM.service.ActividadService;
 
-import CRM4RTONOCTURNOA.CRM.entity.Campania;
-import CRM4RTONOCTURNOA.CRM.service.CampaniaService;
-
->>>>>>> develop:back-end/src/main/java/CRM4RTONOCTURNOA/CRM/controller/CampaniaController.java
 @RestController
 @CrossOrigin({"http://localhost:4200"})
-@RequestMapping("/api/rol")
-public class RolController {
- 
+@RequestMapping("/api/actividad") //ruta en la q se va a eschuchar al controller
+public class ActividadController{
     @Autowired
-    RolService rolService;
- 
+    ActividadService actividadService; 
+
     //Create
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Rol save(@RequestBody Rol rol)
+    public Actividad save(@RequestBody Actividad actividad)
     {
-        return rolService.save(rol);
+        System.out.println("Reciviendo save");
+        return actividadService.save(actividad);
     }
- 
+
     //Read
     @GetMapping("/{id}")
-    public Rol findById(@PathVariable Long id)
+    public Actividad findById(@PathVariable Long id)
     {
-        return rolService.findById(id);
+        return actividadService.findById(id);
     }
+
     //Update
     @PutMapping("/update")
-    public Rol update(@RequestBody Rol rol)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public Actividad update(@RequestBody Actividad actividad)
     {
-        return rolService.save(rol);
+        return actividadService.save(actividad);
     }
-   
     //Delete
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
-        rolService.deleteById(id);
+        actividadService.deleteById(id);
     }
- 
-    @GetMapping("/findAll")
-    public List<Rol> findAll()
+
+    //Con el getMapping va a eschucar la ruta que necesitamos
+    
+    @GetMapping("/findAll") //ruta
+    public List<Actividad> findAll() 
     {
-        return rolService.findAll();
+        return actividadService.findAll(); //llama al servicio quien se encarga del acceso 
+        //a la informacion
     }
-   
 }
