@@ -1,73 +1,88 @@
-<div class="container">
-    <h1 class="text-3xl font-bold  text-center my-3 text-red-600">GESTIONAR PERSONAS </h1>
-    <div class="grid grid-cols-3 gap-4 p-3 m-auto border-t-2 text-center">
-      <div class="col-span-1 text-center">
-  
-        <div class="flex flex-row">
-          <div class="basis-1/2"><h4 class="text-3xl  text-gray-50y-400 my-3 text-blue-600  " >Perfil Personal </h4></div>
-          <div class="basis-1/2">
-            <!-- <button class="btn btn-outline btn-info rounded-sm">Añadir</button> -->
-          
-          </div>
+<div class="container bg-[url('https://th.bing.com/th/id/OIP.qhjZvOjErvm-pOSQXQRlbgHaE8?pid=ImgDet&rs=1')]">
+  <h1 class="text-3xl font-bold  text-center my-3 text-red-600">GESTIONAR PERSONAS </h1>
+  <div class="grid grid-cols-3 gap-4 p-3 m-auto border-t-2 text-center">
+    <div class="col-span-1 text-center">
+
+      <div class="flex flex-row">
+        <div class="basis-1/2">
+<h4>
+Perfil Personal
+</h4>
         </div>
-        <hr class="my-2">
-        <div class="card w-96 bg-base-100 shadow-xl mx-auto">
-          <div class="card-body">
-            <h2 class="card-title">Error!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="justify-end card-actions">
-              <button class="btn btn-primary">Buy Now</button>
-            </div>
+        <div class="basis-1/2">
+
+        </div>
+      </div>
+      <hr class="my-2">
+      <div class="card w-96 bg-base-100 shadow-xl mx-auto ">
+        <div class="card-body" *ngIf ="displayPersonaSelect" >
+          <img src="https://api.lorem.space/image/face?w=400&h=225" alt="Shoes" class="rounded-xl">
+          <h2 class="titulo">Datos personales</h2>
+          <h5 id="camposPropiedades">Cedula:{{personaSelect.cedula}} </h5>
+          <h5 id="camposPropiedades">Nombre:{{personaSelect.nombre}} </h5>
+          <h5 id="camposPropiedades">Apellido:{{personaSelect.apellido}} </h5>
+          <h5 id="camposPropiedades">Celular:{{personaSelect.celular}} </h5>
+          <h5 id="camposPropiedades">Correo:{{personaSelect.correo}} </h5>
+    
+
+          <div class="justify-end card-actions">
+            <button class="btn btn-primary">Salir</button>
           </div>
         </div>
       </div>
-      <div class="col-span-2 border-r-2 p-1 text-center">
-        <h4 class="text-3xl  text-gray-400 my-3">Listado de los últimos seguimentos</h4>
-        <!-- <li class="border-2 mx-2 rounded bg-slate-400 text-yellow-50">
+    </div>
+    <div class="col-span-2 border-r-2 p-1 text-center">
+      <h4 class="text-3xl  text-gray-400 my-3">Personas Registradas Actualmente</h4>
+  
+      <div class="grid grid-cols-1 gap-4 text-left">
+        <div class="col-span-1">
+          <button class="bg-green-500 hover:bg-green-700 text-white font-bold px-1 py-3  rounded-full">Agregar Personas</button>
+      <!-- <li class="border-2 mx-2 rounded bg-slate-400 text-yellow-50">
           <div class="grid grid-cols-3 gap-4 p-2 m-2">
             <div class="col-span-1">ID</div>
             <div class="col-span-1">Nombre</div>
             <div class="col-span-1">Descripción</div>
           </div>
         </li> -->
-        <div class="overflow-x-auto ">
-          <table class="table w-full">
-            <!-- head -->
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>CEDULA</th>
-                <th>NOMBRE</th>
-                <th>CORREO</th>
-                <th>ACCIÓN</th>
+      <div class="overflow-x-auto text-center pt-2">
+        <table class="table w-full">
+          <!-- head -->
+          <thead class="text-center text-blue-900" >
+            <tr>
+              <th>ID</th>
+              <th>CEDULA</th>
+              <th>NOMBRE</th>
+              <th>CORREO</th>
+              <th>ACCIÓN</th>
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>3</td>
-                <td>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="col-span-1">
-                          <button class="btn btn-outline btn-warning rounded-sm">Ver</button>
-          
-                        </div>
-                        <div class="col-span-1">
-                          <button class="btn btn-outline btn-error  rounded-sm">ELIMINAR</button>
-                        </div>
-                        <div class="col-span-1">
-                          <button class="btn btn-outline btn-warning rounded-sm">EDITAR</button>
-                        </div>
-                      </div>
-
-                </td>
             </tr>
-            </tbody>
-          </table>
-        </div>
+          </thead>
+          <tbody >
+            <tr  class="bg-gray-300 border border-grey-500 md:border-none block md:table-row " *ngFor="let persona of personas">
+              <th class="p-2 md:border md:border-grey-500 text-left block md:table-cell" >{{persona.personaId}}</th>
+              <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell" >{{persona.cedula}}</td>
+              <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell" >{{persona.nombre + " " + persona.apellido}}</td>
+              <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell" >{{persona.correo}}</td>
+              <td>
+                <!-- <button class="btn btn-outline btn-info rounded-sm">Añadir</button> -->
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="col-span-1">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ">Ver Perfil</button>
+
+                  </div>
+                  <div class="col-span-1">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 btn-error border-red-500 px-4 rounded-full">Eliminar</button>
+                  </div>
+                  <div class="col-span-1">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Modificar</button>
+                  </div>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
