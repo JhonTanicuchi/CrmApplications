@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import CRM4RTONOCTURNOA.CRM.entity.Rol;
 import CRM4RTONOCTURNOA.CRM.service.RolService;
  
+
 @RestController
 @CrossOrigin({"http://localhost:4200"})
 @RequestMapping("/api/rol")
