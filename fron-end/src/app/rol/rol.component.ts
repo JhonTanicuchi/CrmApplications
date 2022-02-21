@@ -39,7 +39,7 @@ export class RolComponent implements OnInit {
     );
   }
 
-  seleccionarUsuario(rol: Rol):void
+  seleccionarRol(rol: Rol):void
   {
     this.rolActual = rol;
   }

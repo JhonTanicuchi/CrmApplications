@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import lombok.Data;
 
 @Data
-@Table("roles")
+@Table("administracion\".\"roles")
 public class Rol {
 
     @Id
