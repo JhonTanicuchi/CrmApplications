@@ -40,7 +40,7 @@ export class PersonaComponent implements OnInit {
     const NuevaPersona: Persona = {
       ...this.formPersona.value
     }
-    this.apiService.createPersona(NuevaPersona).subscribe(respuesta => { console.log(respuesta); this.displayNuevaPersona = false; this.listarPersona() })
+    this.apiService.createPersona(NuevaPersona).subscribe(respuesta => { console.log(respuesta); this.displayNuevaPersona = false; this.listarPersona(); this.formPersona.reset(); })
 
   }
 
@@ -60,7 +60,7 @@ export class PersonaComponent implements OnInit {
       personaId: this.personaSelect.personaId,
       ...this.formPersona.value
     }
-    this.apiService.updatePersona(persona).subscribe(respuesta => { this.displayPersonaSelect = true; this.personaSelect = respuesta; this.displayPersonaEdit = false; this.listarPersona() })
+    this.apiService.updatePersona(persona).subscribe(respuesta => { this.displayPersonaSelect = true; this.personaSelect = respuesta; this.displayPersonaEdit = false; this.listarPersona(); this.formPersona.reset(); })
 
   }
   selectPersonaEdit(persona: Persona) {

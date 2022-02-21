@@ -85,7 +85,7 @@
   </div>
 </div>
 
-<p-dialog header="Nuevo" [modal]="true" [(visible)]="displayNuevo" [breakpoints]="breakpointsModal"
+<p-dialog header="Nuevo" [modal]="true" [(visible)]="displayNuevo" [breakpoints]="breakpointsModal" (onHide)="this.formSeguimiento.reset();"
   [style]="tamanioModal" (onHide)="limpiar()">
   <form [formGroup]="formSeguimiento" (ngSubmit)="guardarSeguimiento()">
     <input type="text" placeholder="Nombre" class="input input-bordered input-success w-full my-2"
@@ -110,7 +110,7 @@
   </form>
 </p-dialog>
 
-<p-dialog header="Editar" [modal]="true" [(visible)]="displayEditar" [breakpoints]="breakpointsModal"
+<p-dialog header="Editar" [modal]="true" [(visible)]="displayEditar" [breakpoints]="breakpointsModal" (onHide)="this.formSeguimiento.reset();"
   [style]="tamanioModal" (onHide)="limpiar()">
   <form [formGroup]="formSeguimiento" (ngSubmit)="actualizarSeguimiento()">
 
@@ -131,7 +131,7 @@
     </div>
     <textarea class="textarea textarea-success my-2 w-full" placeholder="ingresar descripción"
       formControlName="descripcion"></textarea>
-      <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save"
+    <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save"
       class="btn btn-active btn-secondary w-full">Guardar</button>
   </form>
 

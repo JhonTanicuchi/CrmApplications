@@ -75,6 +75,7 @@ export class SeguimientoComponent implements OnInit {
           this.blocked = false;
           this.messageService.add({ severity: 'success', summary: 'Mensaje', detail: 'Seguimiento guardado correctamente', life: 5000 });
           this.listarSeguimientos();
+          this.formSeguimiento.reset();
         }, err => {
           this.blocked = false;
           this.messageService.add({severity:'error', summary: 'Error', detail: 'Hubo un error intente más tarde', life:5000});
@@ -113,6 +114,7 @@ export class SeguimientoComponent implements OnInit {
         .subscribe(res => {
           this.blocked = false;
           this.seguimientoActual = res;
+          this.formSeguimiento.reset();
           this.displayEditar = false;
           this.listarSeguimientos();
           this.messageService.add({ severity: 'info', summary: 'Información', detail: 'Seguimiento actualizado correctamente', life: 5000 });
@@ -139,6 +141,7 @@ export class SeguimientoComponent implements OnInit {
         this.apiService.deleteSeguimiento(this.seguimientoId)
           .subscribe(res => {
             this.blocked = false;
+            this.formSeguimiento.reset();
             this.listarSeguimientos();
             this.messageService.add({ severity: 'success', summary: 'Mensaje', detail: 'Seguimiento eliminado correctamente', life: 5000 });
           }, err => {
