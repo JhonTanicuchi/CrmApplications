@@ -25,6 +25,7 @@ import { DialogModule } from 'primeng/dialog';
 import {BlockUIModule} from 'primeng/blockui';
 import {ToastModule} from 'primeng/toast';
 import { CommonModule } from '@angular/common';
+import { ConocenosComponent } from './conocenos/conocenos.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CommonModule } from '@angular/common';
     ActividadComponent,
     CotizacionComponent,
     PersonaComponent,
-    SeguimientoComponent
+    SeguimientoComponent,
+    ConocenosComponent
   ],
   imports: [
     CommonModule,

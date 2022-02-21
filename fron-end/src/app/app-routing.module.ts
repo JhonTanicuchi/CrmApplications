@@ -10,6 +10,7 @@ import { EtapaComponent } from './etapa/etapa.component';
 import { ActividadComponent } from './actividad/actividad.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
 import { PersonaComponent } from './persona/persona.component';
+import { ConocenosComponent } from './conocenos/conocenos.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'cotizacion', component:CotizacionComponent},
   { path: 'seguimiento', component: SeguimientoComponent},
   { path: 'persona', component: PersonaComponent},
+  { path: 'conocenos', component: ConocenosComponent},
 
 ];
 
