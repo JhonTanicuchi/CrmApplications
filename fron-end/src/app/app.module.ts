@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { EtapaComponent } from './etapa/etapa.component';
 import { PermisoComponent } from './permiso/permiso.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import { PersonaComponent } from './persona/persona.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CotizacionComponent } from './cotizacion/cotizacion.component';
     UsuarioComponent,
     EtapaComponent,
     ActividadComponent,
-    CotizacionComponent
+    CotizacionComponent,
+    PersonaComponent
   ],
   imports: [
     BrowserModule,
