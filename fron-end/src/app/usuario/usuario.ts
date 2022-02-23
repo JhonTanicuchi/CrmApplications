@@ -5,7 +5,7 @@ export class Usuario {
     public username: string,
     public password: string,
     public rolId: number,
-    public permisoId: number,
+    public permisos: number,
     public empleadoId: number,
     public estado: boolean
   )

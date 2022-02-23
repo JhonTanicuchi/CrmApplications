@@ -134,7 +134,7 @@
             <div class="mt-1 relative rounded-md shadow-sm">
               <select [(ngModel)]="usuarioActual.empleadoId" class=" w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md">
                 <option disabled selected>Empleado</option>
-                <option *ngFor="let usuario of listadoUsuarios;let indice=index" value="{{indice+1}}" >{{usuario.username}}</option>
+                <option *ngFor="let empleado of empleados | async;let indice=index" value="{{empleado.personaId}}" >{{empleado.nombre}} {{empleado.apellido}}</option>
               </select>
             </div>
           </div>
@@ -164,11 +164,7 @@
         <div class="mt-1 relative shadow-sm">
           <select [(ngModel)]="usuarioActual.rolId" id="rol" class=" w-full  focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md">
             <option disabled selected>Rol</option>
-            <option value="1" >Admin</option>
-            <option value="2" >Creador</option>
-            <option value="3" >Gestor</option>
-            <option value="4" >Miembro</option>
-            <option value="5" >Mienbro Restringido</option>
+            <option *ngFor="let rol of roles | async;" value="{{rol.rolId}}" >{{rol.nombreRol}}</option>
           </select>
         </div>
       </div>
@@ -178,22 +174,22 @@
     <div class="w-full p-5 pt-5">
       <div class="flex justify-between items-center">
         <h1 class="font-medium">Permisos</h1>
-        <button (click)="addPermiso()" class="btn bg-white border-white text-primary btn-circle hover:bg-white hover:border-white hover:text-primary-focus ">
+        <button class="btn bg-white border-white text-primary btn-circle hover:bg-white hover:border-white hover:text-primary-focus ">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
         </button>
       </div>
       <div class="w-full h-48 p-2  rounded-lg border border-primary">
-        <button *ngFor="let permiso of counter(usuarioActual.permisoId);let indice=index" (click)="deletePermiso()" class="m-2 btn btn-xs">
-          <span class="mr-2">Permiso {{indice+1}}</span>
+        <button *ngFor="let permiso of permisos | async" class="m-2 btn btn-xs">
+          <span class="mr-2">{{permiso.nombrePermiso}}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hover:text-error-content" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </button>
 
         <div class="flex justify-center items-center w-full h-full">
-          <p *ngIf="usuarioActual.permisoId==0" class="text-gray-400">No hay permisos</p>
+          <p *ngIf="usuarioActual.permisos == 0" class="text-gray-400">No hay permisos</p>
         </div>
 
       </div>

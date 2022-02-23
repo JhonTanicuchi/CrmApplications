@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Permiso } from '../permiso/permiso';
+import { PermisoService } from '../permiso/permiso.service';
+import { Persona } from '../persona/persona';
+import { PersonaService } from '../persona/persona.service';
+import { Rol } from '../rol/rol';
+import { RolService } from '../rol/rol.service';
 import { Usuario } from './usuario';
 import { UsuarioService } from './usuario.service';
 
@@ -14,14 +21,22 @@ export class UsuarioComponent implements OnInit {
 
   listadoUsuarios: Usuario[] = [];
 
-
+  permisos!: Observable<Permiso[]>;
+  roles!: Observable<Rol[]>;
+  empleados!: Observable<Persona[]>;
 
   constructor(
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private permisoService: PermisoService,
+    private rolService: RolService,
+    private empleadoService: PersonaService,
   ) { }
 
   ngOnInit(): void {
     this.findAll();
+    this.permisos = this.permisoService.findAll();
+    this.roles = this.rolService.findAll();
+    this.empleados = this.empleadoService.findAll();
 
   }
 
@@ -96,17 +111,8 @@ export class UsuarioComponent implements OnInit {
     this.iconDelete = true;
   }
 
-
-  addPermiso():void{
-    this.usuarioActual.permisoId = this.usuarioActual.permisoId + 1;
-  }
-
-  deletePermiso():void{
-    this.usuarioActual.permisoId = this.usuarioActual.permisoId - 1;
-  }
-
   counter(i: number) {
     return new Array(i);
-}
+  }
 
 }
