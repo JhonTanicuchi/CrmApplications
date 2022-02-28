@@ -10,7 +10,7 @@ import { UsuarioService } from './usuario.service';
 })
 export class UsuarioComponent implements OnInit {
 
-  usuarioActual: Usuario = new Usuario(0,"","",0,0,0,false);
+  usuarioActual: Usuario = new Usuario(0,"","","",false,0);
 
   listadoUsuarios: Usuario[] = [];
 
@@ -30,7 +30,7 @@ export class UsuarioComponent implements OnInit {
     console.log("ingresando al método save")
     this.usuarioService.save(usuario).subscribe(
       (respuesta) => {
-        this.usuarioActual = new Usuario(0,"","",0,0,0,false);
+        this.usuarioActual = new Usuario(0,"","","",false,0);
         this.findAll();
       }
     );
@@ -49,7 +49,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   limpiarForm(){
-    this.usuarioActual = new Usuario(0,"","",0,0,0,false);
+    this.usuarioActual = new Usuario(0,"","","",false,0);
   }
 
   UsuariosActivos():number
@@ -70,7 +70,7 @@ export class UsuarioComponent implements OnInit {
       () => {
         this.listadoUsuarios = this.listadoUsuarios
         .filter( item => item.usuarioId != id);
-        this.usuarioActual = new Usuario(0,"","",0,0,0,false);
+        this.usuarioActual = new Usuario(0,"","","",false,0);
       }
 
     );
@@ -82,9 +82,9 @@ export class UsuarioComponent implements OnInit {
     this.flag = !this.flag;
   }
 
-  limpiarEmpleado(){
-    this.usuarioActual.empleadoId = 0;
-  }
+ /*  limpiarPersona(){
+    this.usuarioActual.personaId = 0;
+  } */
 
   iconDelete = false;
 
@@ -97,16 +97,23 @@ export class UsuarioComponent implements OnInit {
   }
 
 
-  addPermiso():void{
+  /* addPermiso():void{
     this.usuarioActual.permisoId = this.usuarioActual.permisoId + 1;
   }
 
   deletePermiso():void{
     this.usuarioActual.permisoId = this.usuarioActual.permisoId - 1;
-  }
+  } */
 
   counter(i: number) {
     return new Array(i);
 }
+
+  CambiarPassword(){
+    
+
+
+  }
+
 
 }

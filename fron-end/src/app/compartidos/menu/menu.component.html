@@ -6,14 +6,14 @@
   </div>
   <div class="flex-none">
     <div class="navbar-center hidden lg:flex">
-      <ul class="menu inline-block p-0">
+      <ul class="menu menu-horizontal p-0">
         <div class="dropdown dropdown-end">
-          <li><a tabindex="0">Administración</a></li>
+          <li *ngIf="enSesion()" ><a tabindex="0">Administración</a></li>
           <ul
             tabindex="0"
             class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           >
-            <li>
+            <li >
               <a [routerLink]="['/usuario']">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +34,18 @@
             </li>
           </ul>
         </div>
+        <div *ngIf="enSesion()" class="dropdown dropdown-end ml-2">
+          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+            <div class=" mask mask-squircle">
+              <img src="https://api.lorem.space/image/face?hash=33791">
+            </div>
+          </label>
+          <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+            <li><a>Nombre Usuario</a></li>
+            <li (click)="cerrarSesion()"><a>Cerrar Sesion</a></li>
+          </ul>
+        </div>
+        <button *ngIf="!enSesion()" [routerLink]="[('/login')]" class="px-4 py-3 btn text-xs capitalize bg-gray-900 text-gray-200 font-semibold hover:bg-gray-800">Iniciar Sesion</button>
       </ul>
     </div>
   </div>

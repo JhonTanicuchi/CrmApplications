@@ -1,4 +1,4 @@
-package CRM4RTONOCTURNOA.CRM.controller;
+package CRM4RTONOCTURNOA.CRM.auth.controller;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import CRM4RTONOCTURNOA.CRM.entity.Usuario;
-import CRM4RTONOCTURNOA.CRM.service.UsuarioService;
+import CRM4RTONOCTURNOA.CRM.auth.entity.Usuario;
+import CRM4RTONOCTURNOA.CRM.auth.service.UsuarioService;
 
 @RestController
 @CrossOrigin({"http://localhost:4200"})
