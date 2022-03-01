@@ -21,19 +21,13 @@ public class Usuario {
 
     private String password;
 
-    @Column("roll_id")
-    private long rollId;
+    @Column("rol_id")
+    private long rolId;
 
-    @Column("permiso_id")
-    private long permisoId;
-
-    @Column("empleado_id")
-    private long empleadoId;
+    @Column("persona_id")
+    private long personaId;
 
     private boolean estado;
-
-   /*  @MappedCollection(idColumn = "permiso_id")
-    Set<Permiso> permiso = new HashSet<>(); */
 
 }
 

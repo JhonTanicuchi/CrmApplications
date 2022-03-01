@@ -9,105 +9,97 @@ import { RolService } from '../rol/rol.service';
 import { Usuario } from './usuario';
 import { UsuarioService } from './usuario.service';
 
-
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
+  styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioComponent implements OnInit {
-
-  usuarioActual: Usuario = new Usuario(0,"","",0,0,0,false);
+  usuarioActual: Usuario = new Usuario(0, '', '', 0, 0, false);
 
   listadoUsuarios: Usuario[] = [];
 
+
+  personaDatos: Persona;
   permisos!: Observable<Permiso[]>;
   roles!: Observable<Rol[]>;
-  empleados!: Observable<Persona[]>;
+  personas!: Observable<Persona[]>;
 
   constructor(
     private usuarioService: UsuarioService,
     private permisoService: PermisoService,
     private rolService: RolService,
-    private empleadoService: PersonaService,
-  ) { }
+    private personaService: PersonaService
+  ) {}
 
   ngOnInit(): void {
     this.findAll();
     this.permisos = this.permisoService.findAll();
     this.roles = this.rolService.findAll();
-    this.empleados = this.empleadoService.findAll();
+    this.personas = this.personaService.findAll();
+
 
   }
 
-  save(usuario: Usuario):void
-  {
-    console.log("ingresando al método save")
-    this.usuarioService.save(usuario).subscribe(
-      (respuesta) => {
-        this.usuarioActual = new Usuario(0,"","",0,0,0,false);
-        this.findAll();
-      }
-    );
+  save(usuario: Usuario): void {
+    console.log('ingresando al método save');
+    this.usuarioService.save(usuario).subscribe((respuesta) => {
+      this.usuarioActual = new Usuario(0, '', '', 0, 0, false);
+      this.findAll();
+    });
   }
 
-  findAll():void
-  {
-    this.usuarioService.findAll().subscribe(
-      respuesta => this.listadoUsuarios = respuesta
-    );
+  findAll(): void {
+    this.usuarioService
+      .findAll()
+      .subscribe((respuesta) => (this.listadoUsuarios = respuesta));
   }
 
-  seleccionarUsuario(usuario: Usuario):void
-  {
+  seleccionarUsuario(usuario: Usuario): void {
     this.usuarioActual = usuario;
+    console.log(this.usuarioActual);
   }
 
-  limpiarForm(){
-    this.usuarioActual = new Usuario(0,"","",0,0,0,false);
+  limpiarForm() {
+    this.usuarioActual = new Usuario(0, '', '', 0, 0, false);
   }
 
-  UsuariosActivos():number
-  {
+  UsuariosActivos(): number {
     var totalActivos = 0;
-    this.listadoUsuarios.forEach(usuario => {
-      if(usuario.estado == true){
+    this.listadoUsuarios.forEach((usuario) => {
+      if (usuario.estado == true) {
         totalActivos++;
       }
     });
-    return totalActivos
+    return totalActivos;
   }
 
-
-  deleteById(id: number):void
-  {
-    this.usuarioService.deleteById(id).subscribe(
-      () => {
-        this.listadoUsuarios = this.listadoUsuarios
-        .filter( item => item.usuarioId != id);
-        this.usuarioActual = new Usuario(0,"","",0,0,0,false);
-      }
-
-    );
+  deleteById(id: number): void {
+    this.usuarioService.deleteById(id).subscribe(() => {
+      this.listadoUsuarios = this.listadoUsuarios.filter(
+        (item) => item.usuarioId != id
+      );
+      this.usuarioActual = new Usuario(0, '', '', 0, 0, false);
+    });
   }
 
   flag = false;
 
-  cambiarFlag(){
+  cambiarFlag() {
     this.flag = !this.flag;
   }
 
-  limpiarEmpleado(){
-    this.usuarioActual.empleadoId = 0;
+  limpiarPersona() {
+    this.usuarioActual.personaId = 0;
   }
 
   iconDelete = false;
 
-  iconDeletFalse(){
+  iconDeletFalse() {
     this.iconDelete = false;
   }
 
-  iconDeletTrue(){
+  iconDeletTrue() {
     this.iconDelete = true;
   }
 
@@ -115,4 +107,10 @@ export class UsuarioComponent implements OnInit {
     return new Array(i);
   }
 
+  buscarPersona(id: number) {
+    this.personaService.buscarId(id).subscribe((respuesta) => {
+      console.log(respuesta);
+      this.personaDatos = respuesta;
+    });
+  }
 }

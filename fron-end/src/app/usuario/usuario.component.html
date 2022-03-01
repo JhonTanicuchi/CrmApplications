@@ -75,9 +75,9 @@
                         <img src="https://api.lorem.space/image/face?hash=47449">
                       </div>
                     </div>
-                    <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">Jane Cooper</div>
-                      <div class="text-sm text-gray-500">jane.cooper@example.com</div>
+                    <div  class="ml-4">
+                      <div  class="text-sm font-medium text-gray-900">Nombre Apellido {{usuario.personaId}}</div>
+                      <div class="text-sm text-gray-500">correo.nombre@example.com</div>
                     </div>
                   </div>
                 </td>
@@ -94,7 +94,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <a (click)="seleccionarUsuario(usuario)" (click)="cambiarFlag()" (click)="iconDeletTrue()" class="text-primary hover:text-primary-focus cursor-pointer">Editar</a>
+                  <a (click)="seleccionarUsuario(usuario)" (click)="cambiarFlag()" (click)="iconDeletTrue()" (click)="buscarPersona(usuarioActual.personaId)"class="text-primary hover:text-primary-focus cursor-pointer">Editar</a>
                 </td>
               </tr>
             </tbody>
@@ -109,7 +109,7 @@
 
   <div [ngClass]="{'block': flag, 'hidden': !flag}" class="col-start-2 col-end-6 p-2 relative">
 
-    <div *ngIf="usuarioActual.empleadoId>0" class="bg-gray-100 rounded-lg">
+    <div *ngIf="usuarioActual.personaId>0" class="bg-gray-100 rounded-lg">
       <div class="max-h-10 mx-auto py-16 px-4 sm:px-4 lg:py-16 lg:px-4 lg:flex lg:items-center lg:justify-between">
         <div class="flex items-center">
           <div class="avatar">
@@ -118,23 +118,24 @@
             </div>
           </div>
           <h2 class="text-3xl ml-5 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            <span class="block text-sm font-medium text-gray-900">Jane Cooper <input [(ngModel)]="usuarioActual.estado" type="checkbox" checked="checked" class="checkbox checkbox-xs checkbox-primary ml-2"> </span>
-            <span class="block text-sm font-light text-gray-500">jane.cooper@example.com</span>
+            <span class="block text-xl uppercase font-bold text-gray-900">{{personaDatos.nombre}} {{personaDatos.apellido}}<input [(ngModel)]="usuarioActual.estado" type="checkbox" checked="checked" class="checkbox checkbox-xs checkbox-primary ml-2"> </span>
+            <span class="block text-sm font-medium text-gray-500">{{personaDatos.cedula}}</span>
+            <span class="block text-sm font-light text-gray-500">{{personaDatos.correo}}</span>
           </h2>
         </div>
-      <button (click)="limpiarEmpleado()" class="btn text-white btn-sm text-xs">Editar</button>
+      <button (click)="limpiarPersona()" class="btn text-white btn-sm text-xs">Editar</button>
       </div>
     </div>
 
-    <div *ngIf="usuarioActual.empleadoId==0" class="bg-gray-100 rounded-lg">
+    <div *ngIf="usuarioActual.personaId==0" class="bg-gray-100 rounded-lg">
       <div class="max-h-10 mx-auto py-16 px-4 sm:px-4 lg:py-16 lg:px-4 lg:flex lg:items-center lg:justify-between">
         <div class="flex items-center">
           <div>
             <label for="empleado" class="block text-sm font-medium text-gray-700">Empleado</label>
             <div class="mt-1 relative rounded-md shadow-sm">
-              <select [(ngModel)]="usuarioActual.empleadoId" class=" w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md">
+              <select [(ngModel)]="usuarioActual.personaId" (change)="buscarPersona(usuarioActual.personaId)"  class=" w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md">
                 <option disabled selected>Empleado</option>
-                <option *ngFor="let empleado of empleados | async;let indice=index" value="{{empleado.personaId}}" >{{empleado.nombre}} {{empleado.apellido}}</option>
+                <option *ngFor="let persona of personas | async" [value]="persona.personaId" value="{{persona.personaId}}" >{{persona.nombre}} {{persona.apellido}}</option>
               </select>
             </div>
           </div>
@@ -189,7 +190,7 @@
         </button>
 
         <div class="flex justify-center items-center w-full h-full">
-          <p *ngIf="usuarioActual.permisos == 0" class="text-gray-400">No hay permisos</p>
+          <p *ngIf="usuarioActual.rolId == 0" class="text-gray-400">No hay permisos</p>
         </div>
 
       </div>
