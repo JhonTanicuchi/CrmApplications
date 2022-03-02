@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-alerta',
-  templateUrl: './alerta.component.html'
+  templateUrl: './alerta.component.html',
 })
 export class AlertaComponent implements OnInit {
-
-  ultimoError = "";
-  constructor() { }
+  ultimoError = '';
+  constructor() {}
 
   ngOnInit(): void {
-    this.ultimoError = String(sessionStorage.getItem("ultimoError"));
+    this.ultimoError = String(sessionStorage.getItem('ultimoError'));
   }
-
 }

@@ -1,8 +1,6 @@
 package CRM4RTONOCTURNOA.CRM.auth.security;
 
-
 import CRM4RTONOCTURNOA.CRM.auth.service.UsuarioService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,48 +19,45 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter 
-{
-	
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
-
-	
 	@Autowired
 	private JWTUtil jwtUtil;
-    
-	@Autowired 
+
+	@Autowired
 	UsuarioService usuarioService;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
-        http.cors().and().csrf().disable();
-        http
-        	.authorizeRequests()
-        		.antMatchers("/api/home").permitAll()
-        		.anyRequest().authenticated();
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().and().csrf().disable();
+		http
+				.authorizeRequests()
+				.antMatchers("/api/home").permitAll()
+				.anyRequest().authenticated();
+		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), this.usuarioService))
-		.exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint());
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    }
-    @Bean
+				.exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint());
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	}
+
+	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
 	}
-	
+
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
-    
+
 }

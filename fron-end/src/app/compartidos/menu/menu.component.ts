@@ -4,28 +4,26 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(
-    private router: Router
-  ) {}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  enSesion():boolean
-  {
-    if (sessionStorage.getItem("username")!=null)
-      return true;
-
+  enSesion(): boolean {
+    if (sessionStorage.getItem('username') != null) return true;
+    console.log(this.router.url);
     return false;
   }
 
-  cerrarSesion():void
-  {
+  cerrarSesion(): void {
     sessionStorage.clear();
     this.router.navigate(['/home']);
+  }
+
+  inLogin(): boolean {
+    if ('/login' != this.router.url) return true;
+
+    return false;
   }
 }

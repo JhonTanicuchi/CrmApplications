@@ -1,24 +1,21 @@
 package CRM4RTONOCTURNOA.CRM.auth.entity;
 
-
 import java.util.Collection;
 import java.util.HashSet;
-
 import java.util.Set;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.data.annotation.Transient;
 import lombok.Data;
 
 @Data
 @Table("administracion\".\"usuarios")
-public class Usuario implements UserDetails{
-    
+public class Usuario implements UserDetails {
+
     @Id
     @Column("usuario_id")
     private long usuarioId;
@@ -28,7 +25,6 @@ public class Usuario implements UserDetails{
     private boolean estado;
     /* @Column("persona_id")
     private long personaId; */
-
     @MappedCollection(idColumn = "usuario_id")
     private Set<RolUsuario> roles = new HashSet<>();
 
@@ -64,5 +60,4 @@ public class Usuario implements UserDetails{
         return this.estado;
     }
 
-    
 }

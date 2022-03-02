@@ -3,25 +3,19 @@ import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-
   credenciales = {
-    username: "",
-    password: ""
-  }
+    username: '',
+    password: '',
+  };
 
-  constructor(
-    private loginService: LoginService
-  ) { }
+  constructor(private loginService: LoginService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  iniciarSesion():void
-  {
+  iniciarSesion(): void {
     this.loginService.iniciarSesion(this.credenciales);
   }
-
 }
