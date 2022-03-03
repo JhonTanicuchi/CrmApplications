@@ -35,4 +35,7 @@ public class EtapaService {
         return etapaRepository.findAll();  //parametros de salida
     }
 
+    public List<Etapa> findBySeguimientoId(Long id){
+        return  etapaRepository.findBySeguimientoId(id);
+    }
 }

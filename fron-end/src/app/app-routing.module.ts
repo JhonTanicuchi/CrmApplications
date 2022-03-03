@@ -1,3 +1,4 @@
+import { SeguimientoEtapasComponent } from './seguimiento/seguimiento-etapas/seguimiento-etapas.component';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'actividad', component:ActividadComponent},
   {path: 'cotizacion', component:CotizacionComponent},
   { path: 'seguimiento', component: SeguimientoComponent},
+  { path: 'seguimiento/:id', component: SeguimientoEtapasComponent},
   { path: 'persona', component: PersonaComponent},
   { path: 'conocenos', component: ConocenosComponent},
 

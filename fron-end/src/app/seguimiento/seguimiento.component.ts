@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Seguimiento } from './seguimiento';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seguimiento',
@@ -13,7 +14,6 @@ export class SeguimientoComponent implements OnInit {
 
   blocked: boolean = true;
   seguimientoId!: number;
-  isSeguimiento: boolean = false;
 
   seguimientoActual!: Seguimiento;
 
@@ -34,7 +34,8 @@ export class SeguimientoComponent implements OnInit {
     private apiService: SeguimientoService,
     private formBuilder: FormBuilder,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -89,13 +90,13 @@ export class SeguimientoComponent implements OnInit {
     this.seguimientoId = idSeguimiento ;
     this.apiService.getSeguimientoById(this.seguimientoId)
       .subscribe(res => {
-        this.isSeguimiento = true;
         this.seguimientoActual = res;
       }, err => {
         this.blocked = false;
         console.log(err);
       })
-  }
+/*     this.router.navigate([`/seguimiento/${idSeguimiento}`]);
+ */  }
 
   mostrarModalEditar() {
     this.displayEditar = true;

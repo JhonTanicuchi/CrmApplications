@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class seguimietoEtapasDTO {
+public class EtapaPersonaDTO {
     private Long etapaId;
     private String nombreEtapa;
     List<Persona> personas;

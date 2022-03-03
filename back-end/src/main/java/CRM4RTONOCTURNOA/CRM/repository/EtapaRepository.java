@@ -9,6 +9,8 @@ import java.util.List;
 public interface EtapaRepository extends CrudRepository<Etapa, Long> {
 
     List<Etapa> findAll();
-    
+
+
+    List<Etapa> findBySeguimientoId(long idSeguimiento);
 
 }
