@@ -53,5 +53,4 @@ public class UsuarioController {
     public List<Usuario> findAll() {
         return usuarioService.findAll();
     }
-
 }

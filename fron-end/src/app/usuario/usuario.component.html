@@ -108,88 +108,18 @@
     class="p-2 relative bg-white"
     style="height: calc(100vh - 64px - 40px)"
   >
-    <div class="mb-2">
-      <div class="grid grid-cols-3 w-full rounded-lg bg-gray-100 h-16">
-        <div class="flex justify-center">
-          <div
-            class="rounded-full p-2 bg-neutral flex justify-center items-center stat-figure text-primary tooltip tooltip-bottom"
-            data-tip="hello"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
-              />
-            </svg>
-          </div>
-        </div>
 
-        <div class="flex justify-center">
-          <div
-            class="stat-figure text-primary tooltip tooltip-bottom"
-            data-tip="hello"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-              />
-            </svg>
-          </div>
-        </div>
 
-        <div class="flex justify-center">
-          <div
-            class="stat-figure text-primary tooltip tooltip-bottom"
-            data-tip="hello"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
 
-      <div>
-        <div class="mt-1 relative rounded-md shadow-sm">
-          <input
-            type="text"
-            name="username"
-            id="username"
-            class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
-            [(ngModel)]="usuarioActual.username"
-            placeholder="username"
-          />
-        </div>
-      </div>
+      <div
+
+      class="bg-gray-100 rounded-lg flex items-center justify-center text-center mb-2"
+    >
+      <h2 class="p-4 text-lg font-medium text-gray-500">
+        Lista de empleados
+      </h2>
     </div>
+
     <div class="overflow-auto scrollbar-hide h-full rounded-lg">
       <div
         *ngFor="let usuario of listadoUsuarios"
@@ -314,7 +244,7 @@
                   class="px-6 py-4 whitespace-nowrap"
                 >
                   <span
-                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gr text-red-800"
                   >
                     Inactivo
                   </span>
@@ -352,126 +282,111 @@
     [ngClass]="{ block: flag, hidden: !flag }"
     class="col-start-2 col-end-6 p-2 relative"
   >
-    <div class="w-full">
-      <ul class="steps w-full">
-        <li class="step step-primary">Empleado</li>
-        <li class="step step-primary">Rol</li>
-        <li class="step">Credenciales</li>
-        <li class="step">Guardar</li>
-      </ul>
+    <div
+      *ngIf="iconDelete == false"
+      class="bg-gray-100 rounded-lg flex items-center justify-center text-center"
+    >
+      <h2 class="p-4 text-xl uppercase font-bold text-gray-500">
+        Nuevo Usuario
+      </h2>
     </div>
 
-    <div class="bg-gray-100 rounded-lg">
-      <div
-        class="max-h-10 mx-auto py-16 px-4 sm:px-4 lg:py-16 lg:px-4 lg:flex lg:items-center lg:justify-between"
-      >
-        <div class="flex items-center">
-          <div class="avatar">
-            <div class="w-24 mask mask-squircle">
-              <img src="https://api.lorem.space/image/face?hash=47449" />
+    <div
+      *ngIf="iconDelete == true"
+      class="bg-gray-100 rounded-lg flex items-center justify-center text-center"
+    >
+      <h2 class="p-4 text-xl uppercase font-bold text-gray-500">
+        Usuario N°{{ usuarioActual.usuarioId }}
+      </h2>
+    </div>
+
+    <div class="my-2 grid grid-cols-2">
+
+        <div
+          class="bg-sky-50 rounded-lg p-4 flex items-center justify-between h-full"
+        >
+          <div class="flex h-full items-center">
+            <div class="avatar">
+              <div class="w-24 mask mask-squircle">
+                <img src="https://api.lorem.space/image/face?hash=47449" />
+              </div>
             </div>
-          </div>
-          <h2
-            class="text-3xl ml-5 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
-          >
-            <span class="block text-sm font-medium text-gray-900"
-              >Jane Cooper
-              <input
-                [(ngModel)]="usuarioActual.estado"
-                type="checkbox"
-                checked="checked"
-                class="checkbox checkbox-xs checkbox-primary ml-2"
-              />
-            </span>
-            <span class="block text-sm font-light text-gray-500"
-              >jane.cooper@example.com</span
-            >
-          </h2>
-        </div>
-        <button class="btn text-white btn-sm text-xs">Editar</button>
-      </div>
-    </div>
 
-    <div class="bg-gray-100 rounded-lg">
-      <div
-        class="max-h-10 mx-auto py-16 px-4 sm:px-4 lg:py-16 lg:px-4 lg:flex lg:items-center lg:justify-between"
-      >
-        <div class="flex items-center">
-          <div>
-            <label
-              for="empleado"
-              class="block text-sm font-medium text-gray-700"
-              >Empleado</label
-            >
-            <div class="mt-1 relative rounded-md shadow-sm">
-              <select
-                class="w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md"
+            <div>
+              <h2
+                class="text-3xl ml-7 mb-5 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex items-center"
               >
-                <option disabled selected>Empleado</option>
-                <option
-                  *ngFor="let usuario of listadoUsuarios; let indice = index"
-                  value="{{ indice + 1 }}"
+                <span class="block text-xl uppercase font-bold text-gray-900"
+                  >Nombre Apellido</span
                 >
-                  {{ usuario.username }}
-                </option>
-              </select>
+                <input
+                  *ngIf="iconDelete == true"
+                  [(ngModel)]="usuarioActual.estado"
+                  type="checkbox"
+                  checked="checked"
+                  class="checkbox checkbox-xs checkbox-primary ml-2"
+                />
+              </h2>
+              <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
+                ><span class="font-semibold">Identificación:</span> 1725028640</span
+              >
+              <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
+                ><span class="font-semibold">Celular:</span> 0981863497</span
+              >
+              <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
+                ><span class="font-semibold">Correo:</span> correo@yavirac.edu.ec</span
+              >
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="p-5 pt-10 grid grid-cols-3 gap-4 gap-x-5 gap-y-5">
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700"
-          >Nombre</label
-        >
-        <div class="mt-1 relative rounded-md shadow-sm">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
-            [(ngModel)]="usuarioActual.username"
-            placeholder="{{ usuarioActual.username }}"
-            disabled
-          />
-        </div>
-      </div>
+<button
+      class="shadow btn btn-sm bg-primary border-primary text-white  bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+</svg>
+    </button>
 
-      <div>
-        <label for="username" class="block text-sm font-medium text-gray-700"
-          >Username</label
-        >
-        <div class="mt-1 relative rounded-md shadow-sm">
-          <input
-            type="text"
-            name="username"
-            id="username"
-            class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
-            [(ngModel)]="usuarioActual.username"
-            placeholder="username"
-          />
-        </div>
-      </div>
 
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700"
-          >Contraseña</label
-        >
-        <div class="mt-1 relative rounded-md shadow-sm">
-          <input
-            type="text"
-            name="password"
-            id="password"
-            class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
-            [(ngModel)]="usuarioActual.password"
-            placeholder="contraseña"
-          />
         </div>
-      </div>
 
-      <div>
+
+      <div class="py-10 px-20 grid gap-4">
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700"
+            >Username</label
+          >
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
+              [(ngModel)]="usuarioActual.username"
+              placeholder="username"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700"
+            >Contraseña</label
+          >
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
+              [(ngModel)]="usuarioActual.password"
+              placeholder="contraseña"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <!-- <div>
         <label for="rol" class="block text-sm font-medium text-gray-700"
           >Rol</label
         >
@@ -489,54 +404,61 @@
             <option value="5">Mienbro Restringido</option>
           </select>
         </div>
+      </div> -->
       </div>
     </div>
 
-    <div class="w-full p-5 pt-5">
-      <div class="flex justify-between items-center">
-        <h1 class="font-medium">Permisos</h1>
-        <button
-          class="btn bg-white border-white text-primary btn-circle hover:bg-white hover:border-white hover:text-primary-focus"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-        </button>
+    <div class="grid grid-cols-2">
+      <div>
+        <h1 class="font-medium">Rol</h1>
       </div>
-      <div
-        class="w-full h-48 p-2 overflow-auto scrollbar-hide rounded-lg border border-primary"
-      >
-        <button class="m-2 btn btn-xs">
-          <span class="mr-2">Permiso</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 hover:text-error-content"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </button>
 
-        <div class="flex justify-center items-center w-full h-full">
-          <p class="text-gray-400">No hay permisos</p>
+      <div class="w-full p-5">
+        <div class="flex justify-between items-center">
+          <h1 class="font-medium">Permisos</h1>
+          <button
+            class="btn bg-white border-white text-primary btn-circle hover:bg-white hover:border-white hover:text-primary-focus"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="w-full h-48 p-2 overflow-auto scrollbar-hide rounded-lg border border-primary"
+        >
+          <button class="m-2 btn btn-xs">
+            <span class="mr-2">Permiso</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 hover:text-error-content"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </button>
+
+          <div class="flex justify-center items-center w-full h-full">
+            <p class="text-gray-400">No hay permisos</p>
+          </div>
         </div>
       </div>
     </div>
