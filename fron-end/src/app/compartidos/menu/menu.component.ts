@@ -6,9 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './menu.component.html',
 })
 export class MenuComponent implements OnInit {
+  nombreSession: string = '';
+
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.nombreSession = String(sessionStorage.getItem('nombre'));
+  }
 
   enSesion(): boolean {
     if (sessionStorage.getItem('username') != null) return true;

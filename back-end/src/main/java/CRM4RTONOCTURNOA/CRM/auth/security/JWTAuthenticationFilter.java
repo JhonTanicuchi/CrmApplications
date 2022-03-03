@@ -58,13 +58,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             FilterChain chain,
             Authentication auth) throws IOException, ServletException {
 
+        String nombre = ((Usuario) auth.getPrincipal()).getNombre();
         String username = ((Usuario) auth.getPrincipal()).getUsername();
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
         String role = "";
         for (GrantedAuthority authority : authorities) {
             role = authority.getAuthority();
         }
-        String token = jwtUtil.generateToken(username, role);
+        String token = jwtUtil.generateToken(nombre, username, role);
         res.addHeader("Authorization", "Bearer " + token);
         res.addHeader("Access-Control-Expose-Headers", "Authorization");
     }

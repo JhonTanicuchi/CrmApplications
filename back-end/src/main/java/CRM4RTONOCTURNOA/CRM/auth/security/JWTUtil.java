@@ -17,15 +17,20 @@ public class JWTUtil {
     private static final long EXPIRATION = 7200;
     private static final String ROLE_CLAIMS = "rol";
 
-    public String generateToken(String username, String role) {
+    public String generateToken(String nombre, String username, String role) {
         Map<String, Object> map = new HashMap<>();
         map.put(ROLE_CLAIMS, role);
-        return Jwts.builder()
+        map.put("nombre", nombre);
+        return Jwts.builder()  
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .setClaims(map)
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION * 1000))
                 .compact();
+    }
+
+    public static String getNombre(String token) {
+        return getTokenBody(token).getSubject();
     }
 
     public static String getUsername(String token) {
