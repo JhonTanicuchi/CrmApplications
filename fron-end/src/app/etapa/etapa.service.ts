@@ -47,5 +47,12 @@ export class EtapaService {
     return this.http.get<Etapa[]>(this.url+"/findAll", this.httpOptions);
   }
 
+  public findAllBySeguimientoId(idSeguimeinto: number): Observable<Etapa[]>
+  {
+    return this.http.get<Etapa[]>(this.url+"/etapaPorSeguimiento/"+idSeguimeinto, this.httpOptions);
+  }
+
+
+
 
 }

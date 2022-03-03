@@ -1,6 +1,7 @@
 package CRM4RTONOCTURNOA.CRM.controller;
 
 import CRM4RTONOCTURNOA.CRM.dto.EtapaPersonaDTO;
+import CRM4RTONOCTURNOA.CRM.dto.EtapasPersonaDTO;
 import CRM4RTONOCTURNOA.CRM.entity.Etapa;
 import CRM4RTONOCTURNOA.CRM.entity.EtapaPersona;
 import CRM4RTONOCTURNOA.CRM.entity.Persona;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin({"http://localhost:4200"})  //permite decirle las rutas a ls que va a dar acceso
+@CrossOrigin({"http://localhost:4200"})
 @RequestMapping("/api/etapaPersona")
 public class EtapaPersonaController {
 
@@ -31,22 +32,41 @@ public class EtapaPersonaController {
         return  etapaPersonaService.save(etapaPersona);
     }
 
+    @GetMapping("/etapaSeguimiento/{id}")
+    public EtapaPersonaDTO getEtapaPersonaDTO (@PathVariable Long id){
+        EtapaPersonaDTO etapaPersonaDTO = new EtapaPersonaDTO();
+
+        EtapaPersona etapaPersona = etapaPersonaService.findById(id);
+
+        Etapa etapa = etapaService.findByid(etapaPersona.getEtapaId());
+        Persona persona = personaService.findByIdPersona(etapaPersona.getPersonaId());
+
+        etapaPersonaDTO.setPersonaId(persona.getPersonaId());
+        etapaPersonaDTO.setNombreCompleto(persona.getNombre() + ' ' + persona.getApellido());
+        etapaPersonaDTO.setEtapaId(etapa.getEtapasId());
+        etapaPersonaDTO.setNombreEtapa(etapa.getNombre());
+        etapaPersonaDTO.setObservacion(etapaPersona.getObservacion()== null ?  "Sin observaciòn" : etapaPersona.getObservacion());
+
+        return etapaPersonaDTO;
+
+    }
+
     @GetMapping("/getEtapaSeguimiento/{id}")
-    public List<EtapaPersonaDTO> getEtapaPersona (@PathVariable Long id){
+    public List<EtapasPersonaDTO> getEtapaPersona (@PathVariable Long id){
         List<Etapa> etapaSeguimiento = etapaService.findBySeguimientoId(id);
-        List<EtapaPersonaDTO> etapaPersonaDTOS = new ArrayList<>();
+        List<EtapasPersonaDTO> etapaPersonaDTOS = new ArrayList<>();
 
         for (Etapa etapaActual : etapaSeguimiento){
             List<Persona> personaPorCategorias = new ArrayList<>();
 
             List<EtapaPersona> etapaPersonas = etapaPersonaService.findByIdEtapa(etapaActual.getEtapasId());
-            EtapaPersonaDTO etapaPersonaDTO = new EtapaPersonaDTO();
-
+            EtapasPersonaDTO etapaPersonaDTO = new EtapasPersonaDTO();
+            etapaPersonaDTO.setEtapaId(etapaActual.getEtapasId());
+            etapaPersonaDTO.setNombreEtapa(etapaActual.getNombre());
             for (EtapaPersona etapaPersonasActual: etapaPersonas){
 
                 personaPorCategorias.add(personaService.findByIdPersona(etapaPersonasActual.getPersonaId()));
-                etapaPersonaDTO.setEtapaId(etapaActual.getEtapasId());
-                etapaPersonaDTO.setNombreEtapa(etapaActual.getNombre());
+
                 etapaPersonaDTO.setPersonas(personaPorCategorias);
             }
             etapaPersonaDTOS.add(etapaPersonaDTO);

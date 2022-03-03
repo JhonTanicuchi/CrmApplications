@@ -1,12 +1,7 @@
 package CRM4RTONOCTURNOA.CRM.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import CRM4RTONOCTURNOA.CRM.dto.EtapaPersonaDTO;
-import CRM4RTONOCTURNOA.CRM.entity.EtapaPersona;
-import CRM4RTONOCTURNOA.CRM.entity.Persona;
-import CRM4RTONOCTURNOA.CRM.service.EtapaPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CRM4RTONOCTURNOA.CRM.entity.Etapa;
 import CRM4RTONOCTURNOA.CRM.service.EtapaService;
-import CRM4RTONOCTURNOA.CRM.service.PersonaService;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,4 +63,9 @@ public class EtapaController {
     }
 
 
+    @GetMapping("/etapaPorSeguimiento/{id}")
+    public  List<Etapa> findBySeguimientoId(@PathVariable Long id) {
+        return etapaService.findBySeguimientoId(id);
+
+    }
 }

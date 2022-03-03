@@ -16,4 +16,5 @@ public class EtapaPersona {
     private Long etapaId;
     @Column("persona_id")
     private Long personaId;
+    private String observacion;
 }

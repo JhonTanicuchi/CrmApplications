@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class EtapaPersonaService {
 
-    @Autowired  //anotacion permite inyectar clases aqui => EtapaRepository y no instanciarlas
+    @Autowired
     EtapaPersonaRepository etapaPersonaRepository;
 
     public List<EtapaPersona> findByIdEtapa (Long idEtapa){
