@@ -1,6 +1,6 @@
 export interface EtapaPersona {
   etapaPersonaId?: number;
   etapaId: number;
-  personaId: number;
-  observacion: string;
+  personaId?: number;
+  observacion?: string;
 }

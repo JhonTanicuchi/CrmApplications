@@ -6,6 +6,7 @@ import { ActividadComponent } from './actividad/actividad.component';
 import { EtapaComponent } from './etapa/etapa.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { HomeComponent } from './home/home.component';
+import { SeguimientoEtapasComponent } from './seguimiento/seguimiento-etapas/seguimiento-etapas.component';
 import { RolComponent } from './rol/rol.component';
 import { CampaniaComponent } from './campania/campania.component';
 import { PermisoComponent } from './permiso/permiso.component';
@@ -26,8 +27,7 @@ import { DialogModule } from 'primeng/dialog';
 import {BlockUIModule} from 'primeng/blockui';
 import {ToastModule} from 'primeng/toast';
 import { CommonModule } from '@angular/common';
-import { SeguimientoEtapasComponent } from './seguimiento/seguimiento-etapas/seguimiento-etapas.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SortablejsModule } from 'ngx-sortablejs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +57,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     BlockUIModule,
     ToastModule,
     DialogModule,
-    DragDropModule
+    SortablejsModule.forRoot({ animation: 150 }),
   ],
   providers: [ConfirmationService,MessageService],
   bootstrap: [AppComponent]

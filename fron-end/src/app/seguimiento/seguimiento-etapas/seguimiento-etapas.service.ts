@@ -32,19 +32,7 @@ export class SeguimientoEtapasService {
     return this.http.put<EtapaPersona>(this.urlEtapaPersona+'/updateEtapaPersona',etapaPersona,this.httpOptions)
   }
 
-  /* public getSeguimientoById(idSeguimiento: number):Observable<Seguimiento>{
-    return this.http.get<Seguimiento>(this.urlSeguimiento+'/findById/'+idSeguimiento,this.httpOptions);
+  public updateEtapaPersona(etapaPersona: EtapaPersona):Observable<EtapaPersona>{
+    return this.http.put<EtapaPersona>(this.urlEtapaPersona+'/updateEtapaPersona',etapaPersona,this.httpOptions)
   }
-
-  public createSeguimiento(seguimiento: Seguimiento):Observable<Seguimiento>{
-    return this.http.post<Seguimiento>(this.urlSeguimiento+'/save',seguimiento,this.httpOptions);
-  }
-
-  public updateSeguimiento(seguimiento: Seguimiento):Observable<Seguimiento>{
-    return this.http.put<Seguimiento>(this.urlEtapaPersona+'/put',seguimiento,this.httpOptions)
-  }
-
-  public deleteSeguimiento(idSeguimiento: number):Observable<Seguimiento>{
-    return this.http.put<Seguimiento>(this.urlSeguimiento+'/delete/'+idSeguimiento,null,this.httpOptions);
-  } */
 }

@@ -10,6 +10,8 @@ import { Seguimiento } from './../seguimiento';
 import { Component, Input, OnInit } from '@angular/core';
 import { Persona } from 'src/app/persona/persona';
 import { Etapa } from 'src/app/etapa/etapa';
+import { Options } from 'sortablejs';
+import { HttpXhrBackend, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-seguimiento-etapas',
@@ -19,6 +21,10 @@ import { Etapa } from 'src/app/etapa/etapa';
 export class SeguimientoEtapasComponent implements OnInit {
 
   @Input() seguimiento: Seguimiento;
+
+  etapasSeguimiento: EtapaSeguimiento[] = [];
+
+  idEtapaPersona: number = 0;
 
   displayNuevo = false;
 
@@ -53,7 +59,7 @@ export class SeguimientoEtapasComponent implements OnInit {
       .subscribe((res: EtapaSeguimiento[]) => {
         console.log('etapas de este seguimiento');
         console.log(res);
-
+        this.etapasSeguimiento = res;
 
       });
   }
@@ -92,4 +98,34 @@ export class SeguimientoEtapasComponent implements OnInit {
         this.limpiar();
       });
   }
+
+  options: Options = {
+
+    group: 'tablero',
+    onAdd: function (/**Event*/evt) {
+      var itemEl = evt.item;
+      let etapaPersonaId = itemEl.id;
+      let etapaId = evt.to.id;
+
+      const httpClient = new HttpClient(new HttpXhrBackend({
+        build: () => new XMLHttpRequest()
+      }));
+
+      console.log(etapaPersonaId, etapaId);
+      debugger
+
+      let seguimientoEtapasService: SeguimientoEtapasService = new SeguimientoEtapasService(httpClient);
+
+      let putEtapaPersona : EtapaPersona = {
+        etapaPersonaId : Number(etapaPersonaId) ,
+        etapaId: Number(etapaId)
+      }
+
+      seguimientoEtapasService.updateEtapaPersona(putEtapaPersona)
+      .subscribe();
+
+    },
+  }
+
+
 }

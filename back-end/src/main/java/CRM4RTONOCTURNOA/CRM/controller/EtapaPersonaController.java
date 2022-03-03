@@ -40,7 +40,7 @@ public class EtapaPersonaController {
 
         Etapa etapa = etapaService.findByid(etapaPersona.getEtapaId());
         Persona persona = personaService.findByIdPersona(etapaPersona.getPersonaId());
-
+        etapaPersonaDTO.setEtapaPersonaId(etapaPersona.getEtapaPersonaId());
         etapaPersonaDTO.setPersonaId(persona.getPersonaId());
         etapaPersonaDTO.setNombreCompleto(persona.getNombre() + ' ' + persona.getApellido());
         etapaPersonaDTO.setEtapaId(etapa.getEtapasId());
@@ -57,18 +57,22 @@ public class EtapaPersonaController {
         List<EtapasPersonaDTO> etapaPersonaDTOS = new ArrayList<>();
 
         for (Etapa etapaActual : etapaSeguimiento){
-            List<Persona> personaPorCategorias = new ArrayList<>();
+
+            List<EtapaPersonaDTO> etapaPersonaDTOS1 = new ArrayList<>();
 
             List<EtapaPersona> etapaPersonas = etapaPersonaService.findByIdEtapa(etapaActual.getEtapasId());
+
             EtapasPersonaDTO etapaPersonaDTO = new EtapasPersonaDTO();
+
             etapaPersonaDTO.setEtapaId(etapaActual.getEtapasId());
             etapaPersonaDTO.setNombreEtapa(etapaActual.getNombre());
+
             for (EtapaPersona etapaPersonasActual: etapaPersonas){
 
-                personaPorCategorias.add(personaService.findByIdPersona(etapaPersonasActual.getPersonaId()));
-
-                etapaPersonaDTO.setPersonas(personaPorCategorias);
+                etapaPersonaDTOS1.add(getEtapaPersonaDTO(etapaPersonasActual.getEtapaPersonaId()));
+    etapaPersonaDTO.setEtapaPersonaDTO(etapaPersonaDTOS1);
             }
+
             etapaPersonaDTOS.add(etapaPersonaDTO);
 
         }
@@ -78,7 +82,7 @@ public class EtapaPersonaController {
 
     @PutMapping("/updateEtapaPersona")
     public EtapaPersona updateEtapaPersona (@RequestBody EtapaPersona etapaPersona){
-        EtapaPersona etapaPersonaDB = etapaPersonaService.findById(etapaPersona.getPersonaId());
+        EtapaPersona etapaPersonaDB = etapaPersonaService.findById(etapaPersona.getEtapaPersonaId());
         etapaPersonaDB.setEtapaId(etapaPersona.getEtapaId());
         return etapaPersonaService.save(etapaPersonaDB);
     }
