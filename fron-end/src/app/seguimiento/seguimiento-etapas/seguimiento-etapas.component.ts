@@ -1,3 +1,4 @@
+import { SeguimientoComponent } from './../seguimiento.component';
 import { EtapaPersona } from './etapa-persona';
 import { PersonaService } from './../../persona/persona.service';
 import { EtapaService } from './../../etapa/etapa.service';
@@ -19,6 +20,7 @@ import { HttpXhrBackend, HttpClient } from '@angular/common/http';
   styleUrls: ['./seguimiento-etapas.component.css']
 })
 export class SeguimientoEtapasComponent implements OnInit {
+
 
   @Input() seguimiento: Seguimiento;
 
@@ -42,10 +44,10 @@ export class SeguimientoEtapasComponent implements OnInit {
     private personaService: PersonaService,
     private formBuilder: FormBuilder,
     private messageService: MessageService,
+    private seguimientoComponente: SeguimientoComponent
   ) { }
 
   ngOnInit(): void {
-    console.log(this.seguimiento);
     this.listarEtapasPorSeguimiento(this.seguimiento.seguimientoId);
     this.formEtapaPersona = this.formBuilder.group({
       etapaId: [null, [Validators.required, Validators.minLength(1)]],
@@ -55,12 +57,12 @@ export class SeguimientoEtapasComponent implements OnInit {
   }
 
   listarEtapasPorSeguimiento(idSeguimineto: number): void {
+    this.seguimientoComponente.blocked = true;
+
     this.apiService.listarEtapasDeSeguimiento(idSeguimineto)
       .subscribe((res: EtapaSeguimiento[]) => {
-        console.log('etapas de este seguimiento');
-        console.log(res);
         this.etapasSeguimiento = res;
-
+        this.seguimientoComponente.blocked = false;
       });
   }
 
@@ -88,6 +90,8 @@ export class SeguimientoEtapasComponent implements OnInit {
   }
 
   guardarEtapaPersona() {
+    this.seguimientoComponente.blocked = true;
+
     console.log(this.formEtapaPersona.value);
     const nuevaEtapaPersona: EtapaPersona = {
       ...this.formEtapaPersona.value
@@ -110,9 +114,6 @@ export class SeguimientoEtapasComponent implements OnInit {
       const httpClient = new HttpClient(new HttpXhrBackend({
         build: () => new XMLHttpRequest()
       }));
-
-      console.log(etapaPersonaId, etapaId);
-      debugger
 
       let seguimientoEtapasService: SeguimientoEtapasService = new SeguimientoEtapasService(httpClient);
 
