@@ -40,16 +40,16 @@ public class EtapaPersonaController {
             List<Persona> personaPorCategorias = new ArrayList<>();
 
             List<EtapaPersona> etapaPersonas = etapaPersonaService.findByIdEtapa(etapaActual.getEtapasId());
+            EtapaPersonaDTO etapaPersonaDTO = new EtapaPersonaDTO();
 
             for (EtapaPersona etapaPersonasActual: etapaPersonas){
 
                 personaPorCategorias.add(personaService.findByIdPersona(etapaPersonasActual.getPersonaId()));
-                EtapaPersonaDTO etapaPersonaDTO = new EtapaPersonaDTO();
                 etapaPersonaDTO.setEtapaId(etapaActual.getEtapasId());
                 etapaPersonaDTO.setNombreEtapa(etapaActual.getNombre());
                 etapaPersonaDTO.setPersonas(personaPorCategorias);
-                etapaPersonaDTOS.add(etapaPersonaDTO);
             }
+            etapaPersonaDTOS.add(etapaPersonaDTO);
 
         }
 
