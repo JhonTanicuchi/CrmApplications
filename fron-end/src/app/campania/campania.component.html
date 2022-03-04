@@ -1,0 +1,68 @@
+<div >
+  <h1 class="text-center mt-5 shadow-lg border-y" >
+    <span class="text-primary font-bold">Administración</span>
+    de Campania
+  </h1>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs text-center">
+  <div class="col-span-6 shadow-lg flex justify-center">
+    <div class="row " id="row">
+      <div class="card" id="card-fixed">
+        <div class="card card-title ">Campania</div>
+        <div class="grid grid-cols-2 card-body form-control gap-2">
+
+          <label class="label text-right" for="nombre">Nombre:</label>
+          <input placeholder='Nombre de la campaña' class="input input-primary" type="text" name="nombre" id=""
+            [(ngModel)]="campaniaActual.nombre">
+
+          <label class="label" for="fechaInicio">Fecha Inicio:</label>
+          <input min="2022-01-01" class="input input-primary" type="date" name="fechaInicio" id=""
+            [(ngModel)]="campaniaActual.fechaInicio">
+
+          <label class="label" for="fechaFinalizacion">Fecha Finalizacion:</label>
+          <input min="2022-01-01" class="input input-primary" type="date" name="fechaFinalizacion" id=""
+            [(ngModel)]="campaniaActual.fechaFinalizacion">
+
+          <label class="label" for="descripcion">Descipcion:</label>
+          <input placeholder='Descipcion de la campaña' class="input input-primary " type="text" name="descripcion"
+            [(ngModel)]="campaniaActual.descripcion" required>
+
+          <label class="label" for="estado">Estado</label>
+          <select name="estado" class="select select-bordered select-primary w-full max-w-xs"
+            [(ngModel)]="campaniaActual.estado">
+            <option disabled="" selected="">Seleccionar Estado</option>
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+          </select>
+        </div>
+        <div class="card-actions text-center dropdown dropdown-end">
+          <button class="btn btn-primary mr-6 m-3" (click)="save(campaniaActual)">Guardar</button>
+          <button class="btn btn-danger ml-5" (click)="deleteById(campaniaActual.campaniaId)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-6 border rounded-sm shadow-lg ">
+    <p class="bg-neutral text-neutral-content rounded-sm">Listado</p>
+    <div class="row ">
+      <div *ngFor="let campania of listadoCampanias">
+        <div class="col-span-6  shadow-lg flex justify-center">
+          <div class="card mt-7">
+            <div class="card-title"> Campania {{campania.nombre}}</div>
+            <div class="card-body">
+              <input type="text" class="border-0" value="Nombre: {{campania.nombre}}" readonly id="nombre">
+              <input type="text" class="border-0" value="Fecha Inicio: {{campania.fechaInicio}}" readonly id="fechaInicio">
+              <input type="text" class="border-0" value="Fecha Finalizacion: {{campania.fechaFinalizacion}}" readonly
+                id="fechaFinalizacion">
+              <input type="text" class="border-0" value="Descipcion: {{campania.descripcion}} " readonly id="descripcion">
+              <input type="text" class="border-0" value="Estado: {{campania.estado}} " readonly id="estado">
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-danger m-3" (click)="seleccionarCampania(campania)">Editar</button>
+              <button class="btn btn-danger m-3" (click)="deleteById(campania.campaniaId)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

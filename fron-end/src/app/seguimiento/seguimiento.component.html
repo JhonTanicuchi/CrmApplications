@@ -1,0 +1,103 @@
+<p-blockUI [blocked]="blocked" [baseZIndex]="1000">
+  <i class="pi pi-spin pi-spinner text-white" id="icon-loader"></i>
+  <p class="text-white loader m-2"> Cargando...</p>
+</p-blockUI>
+<p-toast position="top-right"></p-toast>
+<div class="container" >
+  <div class="grid grid-cols-4 gap-4 p-3">
+    <div class="col-span-3">
+      <h1 class="text-3xl font-bold text-gray-900 text-center my-3">Seguimientos</h1>
+    </div>
+    <div class="col-span-1">
+      <div class="grid grid-cols-3 gap-4">
+        <div class="col-span-1">
+          <button class="btn btn-outline btn-info rounded-sm" *ngIf="!seguimientoActual" (click)="displayNuevo = !displayNuevo">Añadir</button>
+          <button class="btn btn-outline btn-success rounded-sm" *ngIf="seguimientoActual" (click)="seguimientoActual = null">Regresar</button>
+        </div>
+        <div class="col-span-1">
+          <button *ngIf="seguimientoActual" class="btn btn-outline btn-warning rounded-sm"
+            (click)="mostrarModalEditar()">Editar</button>
+        </div>
+        <div class="col-span-1">
+          <button *ngIf="seguimientoActual" class="btn btn-outline btn-error rounded-sm"
+            (click)="eliminarSeguimiento($event)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-6 gap-1 p-3 m-auto border-t-2 text-center" *ngIf="!seguimientoActual" >
+    <div class="col-span-2 p-1 text-center" *ngFor="let seguimiento of listSeguimientos">
+      <div class="card w-96 bg-base-100 shadow-xl"  >
+        <div class="card-body">
+          <h2 class="card-title">{{seguimiento.nombre}}</h2>
+          <p>{{seguimiento.descripcion}}</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" (click)="buscarSeguimiento(seguimiento.seguimientoId)">Ver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border-t-2 text-center m-auto" *ngIf="seguimientoActual" >
+    <app-seguimiento-etapas *ngIf="seguimientoActual" [seguimiento]="seguimientoActual"></app-seguimiento-etapas>
+  </div>
+
+
+</div>
+
+<p-dialog header="Nuevo" [modal]="true" [(visible)]="displayNuevo" [breakpoints]="breakpointsModal" (onHide)="this.formSeguimiento.reset();"
+  [style]="tamanioModal" (onHide)="limpiar()">
+  <form [formGroup]="formSeguimiento" (ngSubmit)="guardarSeguimiento()">
+    <input type="text" placeholder="Nombre" class="input input-bordered input-success w-full my-2"
+      formControlName="nombre">
+    <div class="grid grid-cols-2 gap-1 my-2">
+      <div class="col-span-1">
+        <input type="date" placeholder="Fecha" class="input input-bordered input-success w-full"
+          formControlName="fechaCreacion">
+
+      </div>
+      <div class="col-span-1">
+        <select class="select w-full max-w-xs select-success" formControlName="creadoPor">
+          <option [value]="null" selected>Seleccionar</option>
+          <option *ngFor="let creador of listCreadores" [value]="creador">{{creador}}</option>
+        </select>
+      </div>
+    </div>
+    <textarea class="textarea textarea-success my-2 w-full" placeholder="ingresar descripción"
+      formControlName="descripcion"></textarea>
+    <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save"
+      class="btn btn-active btn-primary w-full">Guardar</button>
+  </form>
+</p-dialog>
+
+<p-dialog header="Editar" [modal]="true" [(visible)]="displayEditar" [breakpoints]="breakpointsModal" (onHide)="this.formSeguimiento.reset();"
+  [style]="tamanioModal" (onHide)="limpiar()">
+  <form [formGroup]="formSeguimiento" (ngSubmit)="actualizarSeguimiento()">
+
+    <input type="text" placeholder="Nombre" class="input input-bordered input-success w-full my-2"
+      formControlName="nombre">
+    <div class="grid grid-cols-2 gap-1 my-2">
+      <div class="col-span-1">
+        <input type="date" placeholder="Fecha" class="input input-bordered input-success w-full"
+          formControlName="fechaCreacion">
+
+      </div>
+      <div class="col-span-1">
+        <select class="select w-full max-w-xs select-success" formControlName="creadoPor">
+          <option [value]="null" selected>Seleccionar</option>
+          <option *ngFor="let creador of listCreadores" [value]="creador">{{creador}}</option>
+        </select>
+      </div>
+    </div>
+    <textarea class="textarea textarea-success my-2 w-full" placeholder="ingresar descripción"
+      formControlName="descripcion"></textarea>
+    <button [disabled]="!formSeguimiento.valid" type="submit" name="save" id="save"
+      class="btn btn-active btn-secondary w-full">Guardar</button>
+  </form>
+
+</p-dialog>
+
+
+<p-confirmPopup></p-confirmPopup>
+

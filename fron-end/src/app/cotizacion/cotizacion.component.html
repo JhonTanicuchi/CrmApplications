@@ -1,0 +1,109 @@
+
+<div>
+  <h1 class="text-center my-2 shadow-lg">
+    <span class="text-primary font-bold">INGRESO DE </span>
+    COTIZACION
+  </h1>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-6 gap-4 text-xs text-center">
+
+  <div class="container">
+    <div class="border rounded-sm shadow-lg">
+      <p class="bg-neutral text-neutral-content rounded-sm text-center"><b>EMPREZA XYZ.SA</b></p><br>
+      <h2><b>Direccion</b></h2>
+      <p>Av. 6 de Direccion y Av. Gaspar de Villaroel</p><br>
+      <h2><b>Cuidad</b></h2>
+      <p>Quito-Ecuador</p><br>
+      <h2><b>Sitio Web</b></h2>
+      <p>empresaxyz@gmail.com</p><br>
+      <h2><b>Telefono</b></h2>
+      <p>5107020-5104060</p><br>
+      <h2><b>Email</b></h2>
+      <p>socioempresaxyz@hotmail.com</p><br>
+      <h2><b>Redes Sociales</b></h2><br>
+      <p>Facebook:empresaxyz@  Instagram:empresaxyz@</p><br><br>
+    </div>
+  </div>
+
+  <div class="col-span-3 shadow-lg  text-center">
+    <p class="bg-neutral text-neutral-content rounded-sm "><b>DATOS DE CLIENTE</b></p><br>
+
+    <label class="label" for="Identificacion">Identificación:</label>
+    <input class="input input-primary" type="text" name="Identificacion" id=""
+      [(ngModel)]="cotizacionActual.identificacion">
+
+    <label class="label" for="Nombre">Nombre:</label>
+    <input class="input input-primary" type="text" name="Nombre" id="" [(ngModel)]="cotizacionActual.nombre ">
+
+    <label class="label" for="Direccion">Direccion:</label>
+    <input class="input input-primary" type="text" name="Direccion" id="" [(ngModel)]="cotizacionActual.direccion ">
+
+    <label class="label" for="Telefono">Telefono:</label>
+    <input class="input input-primary" type="text" name="Telefono" id=""
+      [(ngModel)]="cotizacionActual.telefono"><br><br>
+
+  </div>
+
+  <div class="border rounded-sm shadow-lg">
+    <p class="bg-neutral text-neutral-content rounded-sm text-center"><b>COTIZACION</b></p>
+
+    <label class="label" for="nCotizacion">Cliente Nº:</label>
+    <input class="input input-primary" type="text" name="nCotizacion" id="" [(ngModel)]="cotizacionActual.idcliente">
+
+    <label class="label" for="Fecha">Fecha:</label>
+    <input class="input input-primary" type="text" name="Fecha" id="" [(ngModel)]="cotizacionActual.fecha">
+    <br><br><br>
+    <div class="card-actions" style="align-content: center;">
+      <br><br><br><br>
+      <button class="btn btn-primary" (click)="save(cotizacionActual)">Guardar</button>
+      <br><br><br><br>
+      <button class="btn btn-danger" (click)="deleteById(cotizacionActual.idcliente)">Eliminar</button>
+    </div>
+  </div>
+
+</div>
+<br><br>
+
+<div class="container col-md-4">
+  <p class="bg-neutral text-neutral-content rounded-sm text-center"><b>Detalles Cotizacion-Cliente</b></p>
+
+  <br><br>
+
+  <div class="grid grid-cols-1 sm:grid-cols-6 gap-4 text-xs text-center">
+
+    <div class="col-span-3 shadow-lg  text-center">
+      <p class="bg-neutral text-neutral-content rounded-sm"><b>CLIENTE</b></p>
+      <div>
+        <ul class="menu">
+          <li class="hover:bg-accent active" *ngFor="let cotizacion of listadoCotizacion "
+            (click)="seleccionarCotizacion(cotizacion)" [class.active]="cotizacion==cotizacionActual">
+            <a>{{cotizacion.identificacion}}</a>
+          </li>
+          <li class="hover:bg-accent active" *ngFor="let cotizacion of listadoCotizacion "
+            (click)="seleccionarCotizacion(cotizacion)" [class.active]="cotizacion==cotizacionActual">
+            <a>{{cotizacion.nombre}}</a>
+          </li>
+          <li class="hover:bg-accent active" *ngFor="let cotizacion of listadoCotizacion "
+            (click)="seleccionarCotizacion(cotizacion)" [class.active]="cotizacion==cotizacionActual">
+            <a>{{cotizacion.direccion}}</a>
+          </li>
+          <li class="hover:bg-accent active" *ngFor="let cotizacion of listadoCotizacion "
+            (click)="seleccionarCotizacion(cotizacion)" [class.active]="cotizacion==cotizacionActual">
+            <a>{{cotizacion.telefono}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <br><br>
+    <div class="col-span-2 shadow-lg">
+      <div class="card">
+        <div class="grid grid-cols-2 card-body form-control gap-2">
+          <label class="label" for="Detalles">Observacion:</label>
+          <input class="input input-primary" type="text" name="Detalles" id="" [(ngModel)]="cotizacionActual.observacion ">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
