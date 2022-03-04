@@ -24,26 +24,26 @@
                                         <span class="label-text ">Nombre del permiso:</span>
                                     </label>
                                     <input type="text" placeholder="Ingresa nombre" name="nombrePermiso" id=""
-                                        [(ngModel)]="permisoActual.nombrePermiso"
+                                       
                                         class="input input-bordered input-primary w-full max-w-xs text-blue-600  ">
 
                                     <label class="label" for="fechaCreacion">
                                         <span class="label-text ">Fecha de creación:</span>
                                     </label>
                                     <input type="date" placeholder="Type here" name="fechaCreacion" id=""
-                                        [(ngModel)]="permisoActual.fechaCreacion"
+                                 
                                         class="input input-primary text-black  w-full max-w-xs">
                                     <label class="label" for="fechaCreacion">
                                         <span class="label-text ">Fecha de modificación:</span>
                                     </label>
                                     <input type="date" placeholder="Type here" name="fechaModificacion" id=""
-                                        [(ngModel)]="permisoActual.fechaModificacion"
+                                      
                                         class="input input-primary text-black  w-full max-w-xs">
                                     <label class="label" for="estado">
                                         <span class="label-text ">Estado:</span>
                                     </label>
                                     <select class="select w-full input-primary max-w-xs text-black  select-neutral"
-                                        name="estado" id="" [(ngModel)]="permisoActual.estado">
+                                        name="estado" id="" >
                                         <option disabled selected>Elige el estado del permiso:</option>
                                         <option value="true">Activo</option>
                                         <option value="false">Inactivo</option>
@@ -202,7 +202,7 @@
             <footer class="p-10 footer bg-neutral text-primary-content footer-center">
                 <div>
                     <div class="flex-1">
-                        <a [routerLink]="['../']" class="btn btn-ghost normal-case text-xl">CRM&nbsp;<span
+                        <a >CRM&nbsp;<span
                                 class="text-primary">Applications</span></a>
                     </div>
                     <p>Copyright © 2022 - All right reserved</p>

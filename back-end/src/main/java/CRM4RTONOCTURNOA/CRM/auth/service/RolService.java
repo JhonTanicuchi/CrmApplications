@@ -32,7 +32,7 @@ public class RolService {
         List<String> nombrePermisos = new ArrayList<>();
         List<Permiso> permisos = permisoService.findByRolId(rolId);
         for (Permiso permiso : permisos) {
-            nombrePermisos.add(permiso.getNombre());
+            nombrePermisos.add(permiso.getNombrePermiso());
         }
         return nombrePermisos;
     }

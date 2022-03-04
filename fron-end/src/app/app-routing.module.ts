@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PermisoComponent } from './permiso/permiso.component';
-
+import { UsuarioComponent } from './usuario/usuario.component';
 import { HomeComponent } from './home/home.component';
-
-
+import { LoginComponent } from './login/login.component';
+import { AlertaComponent } from './login/alerta/alerta/alerta.component';
+import { PermisoComponent } from './permiso/permiso.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  {path: 'permiso',component: PermisoComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'alerta', component: AlertaComponent },
+  { path: 'usuario', component: UsuarioComponent },
+  { path: 'permiso', component: PermisoComponent}
 ];
 
 @NgModule({
