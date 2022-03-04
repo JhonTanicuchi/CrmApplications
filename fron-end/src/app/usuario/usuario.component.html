@@ -12,6 +12,13 @@
         hidden: registroRol,
         block: !registroRol
       }"
+
+      [ngClass]="{
+        hidden: flagPersonas
+      }"
+      [ngClass]="{
+        hidden: flagRoles
+      }"
     >
       <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
         <div class="stat">
@@ -66,9 +73,10 @@
 
     <button
       (click)="cambiarFlag()"
+      (click)="volverFlag()"
       (click)="limpiarForm()"
-      (click)="iconDeletFalse()"
-      [ngClass]="{ hidden: flag, flex: !flag }"
+      (click)="viewEdit()"
+      [ngClass]="{ hidden: flagPrincipal, flex: !flagPrincipal }"
       class="shadow btn bg-primary border-primary text-white absolute right-0 bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus"
     >
       <svg
@@ -183,7 +191,7 @@
             <div class="font-semibold stat-title">{{rol.nombre}}</div>
             <div class="stat-desc">
               <span class="text-sm font-normal text-gray-500"
-                ><span class="font-semibold">Id: </span>{{rol.nombre}}</span
+                ><span class="font-semibold">Id: </span>{{rol.rolId}}</span
               >
             </div>
           </div>
@@ -193,7 +201,7 @@
   </div>
 
   <div
-    [ngClass]="{ hidden: flag, block: !flag }"
+    [ngClass]="{ hidden: flagPrincipal, block: !flagPrincipal }"
     class="col-start-2 col-end-6 overflow-auto scrollbar-hide p-2 relative bg-gray-200"
     style="height: calc(100vh - 64px - 40px)"
   >
@@ -267,7 +275,7 @@
                   <div class="text-sm text-gray-500">Retenciones</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ usuario.username }}
+                  {{usuario.username}}
                 </td>
                 <td
                   *ngIf="usuario.estado == true"
@@ -297,8 +305,9 @@
                 >
                   <a
                     (click)="seleccionarUsuario(usuario)"
-                    (click)="cambiarFlag()"
-                    (click)="iconDeletTrue()"
+                    (click)="volverFlag()"
+                    (click)="viewCreate()"
+                    (click)="buscarPersona(usuarioActual.personaId)"
                     class="text-primary hover:text-primary-focus cursor-pointer"
                     >Editar</a
                   >
@@ -319,18 +328,18 @@
   </div>
 
   <div
-    [ngClass]="{ block: flag, hidden: !flag }"
+    [ngClass]="{ block: flagPrincipal, hidden: !flagPrincipal }"
     class="col-start-2 col-end-6 p-2 relative bg-gray-200"
   >
     <div
-      *ngIf="iconDelete == false"
+      *ngIf="view == false"
       class="bg-gray-500 rounded-lg flex items-center justify-center text-center"
     >
       <h2 class="p-4 text-xl uppercase font-bold text-white">Nuevo Usuario</h2>
     </div>
 
     <div
-      *ngIf="iconDelete == true"
+      *ngIf="view == true"
       class="bg-gray-500 rounded-lg flex items-center justify-center text-center"
     >
       <h2 class="p-4 text-xl uppercase font-bold text-white">
@@ -340,40 +349,12 @@
 
     <div class="my-4 grid grid-cols-4 gap-4">
       <div
-        class="col-span-2 rounded-lg p-10 hidden items-center justify-between h-full shadow-md bg-error"
-      >
-        <h1 class="flex items-center justify-center">
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-red-600 mr-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
-          </span>
-          Selecciona un empleado
-        </h1>
-        <button
-          (click)="restrictionFlagPersona()"
-          class="btn btn-sm btn-outline btn-error capitalize shadow-xl"
-        >
-          <span>Agregar</span>
-        </button>
-      </div>
-
-      <div
         [ngClass]="{
           hidden: seleccionarPersona,
           flex: !seleccionarPersona
         }"
+      [ngClass]="{ hidden: view, flex: !view }"
+
         class="flex col-span-2 rounded-lg p-10 items-center justify-between h-52 shadow-md bg-white"
       >
         <h1 class="flex items-center justify-center">
@@ -444,6 +425,8 @@
           flex: seleccionarPersona,
           hidden: !seleccionarPersona
         }"
+        [ngClass]="{ flex: view, hidden: !view }"
+
         class="hidden col-span-2 rounded-lg p-4 items-center justify-between h-full shadow-md bg-white"
       >
         <div class="flex h-full items-center">
@@ -461,7 +444,7 @@
                 ></span
               >
               <input
-                *ngIf="iconDelete == true"
+                *ngIf="view == true"
                 [(ngModel)]="usuarioActual.estado"
                 type="checkbox"
                 checked="checked"
@@ -470,14 +453,14 @@
             </h2>
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
               ><span class="font-semibold">Identificación:</span>
-              1725028640</span
+              </span
             >
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Celular:</span> 0981863497</span
+              ><span class="font-semibold">Celular:</span> </span
             >
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
               ><span class="font-semibold">Correo:</span>
-              correo@yavirac.edu.ec</span
+              </span
             >
           </div>
         </div>
@@ -489,6 +472,7 @@
 
         <button
           (click)="seleccionarFlagPersona()"
+          (click)="limpiarPersona()"
           class="shadow btn btn-sm bg-primary border-primary text-white bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus"
         >
           <svg
@@ -510,43 +494,11 @@
 
       <div
         [ngClass]="{
-          flex: restrictionCredenciales,
-          hidden: !restrictionCredenciales
-        }"
-        class="col-span-2 rounded-lg p-10 hidden items-center justify-between h-52 shadow-md bg-error"
-      >
-        <h1 class="flex items-center justify-center">
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-red-600 mr-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
-          </span>
-          Completa las credenciales
-        </h1>
-        <button
-          (click)="agregarFlagCredenciales()"
-          class="btn btn-sm btn-outline btn-error capitalize shadow-xl"
-        >
-          <span>Agregar</span>
-        </button>
-      </div>
-
-      <div
-        [ngClass]="{
           hidden: agregarCredenciales,
           flex: !agregarCredenciales
         }"
+
+        [ngClass]="{ hidden: view, flex: !view }"
         class="col-span-2 rounded-lg p-10 items-center justify-between h-52 shadow-md bg-white"
       >
         <h1 class="flex items-center justify-center">
@@ -584,6 +536,7 @@
         [ngClass]="{
           hidden: !registroCredenciales
         }"
+        [ngClass]="{ flex: view, hidden: !view }"
         class="col-span-2 rounded-lg shadow-md bg-white"
       >
         <div
@@ -611,7 +564,7 @@
             </div>
           </div>
 
-          <div *ngIf="iconDelete == false">
+          <div *ngIf="view == false">
             <label
               for="password"
               class="block text-sm font-medium text-gray-700"
@@ -630,7 +583,7 @@
             </div>
           </div>
 
-          <div *ngIf="iconDelete == true">
+          <div *ngIf="view == true">
             <label
               for="password"
               class="block text-sm font-medium text-gray-700"
@@ -649,56 +602,6 @@
             </div>
           </div>
         </div>
-
-        <!-- <div>
-        <label for="rol" class="block text-sm font-medium text-gray-700"
-          >Rol</label
-        >
-        <div class="mt-1 relative shadow-sm">
-          <select
-            [(ngModel)]="usuarioActual.rolId"
-            id="rol"
-            class="w-full focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md"
-          >
-            <option disabled selected>Rol</option>
-            <option *ngFor="let rol of roles | async;" value="{{rol.rolId}}" >{{rol.nombreRol}}</option>
-          </select>
-        </div>
-      </div> -->
-      </div>
-
-      <div
-        [ngClass]="{
-          flex: restrictionRol,
-          hidden: !restrictionRol
-        }"
-        class="col-span-4 rounded-lg p-10 hidden items-center justify-between h-72 shadow-md bg-error"
-      >
-        <h1 class="flex items-center justify-center">
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-red-600 mr-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
-          </span>
-          Selecciona un rol
-        </h1>
-        <button
-          (click)="agregarFlagRol()"
-          class="btn btn-sm btn-outline btn-error capitalize shadow-xl"
-        >
-          <span>Agregar</span>
-        </button>
       </div>
 
       <div
@@ -706,6 +609,8 @@
           hidden: seleccionarRol,
           block: !seleccionarRol
         }"
+
+        [ngClass]="{ hidden: view, flex: !view }"
         class="col-span-4 rounded-lg p-10 flex items-center justify-between h-72 shadow-md bg-white"
       >
         <h1 class="flex items-center justify-center">
@@ -776,6 +681,8 @@
           block: seleccionarRol,
           hidden: !seleccionarRol
         }"
+
+        [ngClass]="{ block: view, hidden: !view }"
         class="hidden rounded-lg shadow-md bg-white"
       >
         <div
@@ -853,6 +760,8 @@
           block: seleccionarRol,
           hidden: !seleccionarRol
         }"
+
+        [ngClass]="{ block: view, hidden: !view }"
         class="hidden col-span-3 w-full rounded-lg shadow-md bg-white"
       >
         <div
@@ -872,7 +781,7 @@
 
           <div
             *ngIf="usuarioActual.rolId == 0"
-            class="flex justify-center hidden items-center w-full h-full"
+            class="flex justify-center items-center w-full h-full"
           >
             <p class="text-gray-400">No hay permisos</p>
           </div>
@@ -886,6 +795,8 @@
     >
       <button
         (click)="cambiarFlag()"
+        (click)="cerrarFlag()"
+        (click)="volverFlag()"
         class="btn bg-white text-neutral border-white btn-circle hover:bg-neutral hover:border-neutral hover:text-white shadow-xl"
       >
         <svg
@@ -905,7 +816,8 @@
       </button>
 
       <button
-        (click)="saveCredentials(usuarioActual)"
+        (click)="save(usuarioActual)"
+        (click)="volverFlag()"
         class="btn bg-primary border-primary text-white hover:bg-primary-focus hover:border-primary-focus"
       >
         <span class="mr-2">Guardar</span>
@@ -926,7 +838,7 @@
       </button>
 
       <button
-        *ngIf="iconDelete == true"
+        *ngIf="view == true"
         (click)="cambiarFlag()"
         (click)="deleteById(usuarioActual.usuarioId)"
         class="btn bg-white border-white text-error-content btn-circle hover:bg-error-content hover:border-error-content hover:text-white shadow-xl"

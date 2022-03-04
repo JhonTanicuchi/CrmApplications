@@ -18,21 +18,6 @@ export class UsuarioComponent implements OnInit {
 
   listadoUsuarios: Usuario[] = [];
 
-  restrictionCredenciales = false;
-  restrictionRol = false;
-  restrictionPersona = false;
-
-  registroCredenciales = false;
-  registroRol = false;
-  registroPersona = false;
-
-  agregarCredenciales = false;
-  agregarRol = false;
-  agregarPersona = false;
-
-  seleccionarRol = false;
-  seleccionarPersona = false;
-
   personaDatos: Persona;
   permisos!: Observable<Permiso[]>;
   roles!: Observable<Rol[]>;
@@ -52,7 +37,22 @@ export class UsuarioComponent implements OnInit {
     this.personas = this.personaService.findAll();
   }
 
-  saveCredentials(usuario: Usuario): void {
+  restrictionCredenciales = false;
+  restrictionRol = false;
+  restrictionPersona = false;
+
+  registroCredenciales = false;
+  registroRol = false;
+  registroPersona = false;
+
+  agregarCredenciales = false;
+  agregarRol = false;
+  agregarPersona = false;
+
+  seleccionarRol = false;
+  seleccionarPersona = false;
+
+  /* saveCredentials(usuario: Usuario): void {
     if (
       //this.usuarioActual.personaId <= 0 &&
       this.usuarioActual.username != '' &&
@@ -75,13 +75,13 @@ export class UsuarioComponent implements OnInit {
         this.restrictionFlagRol();
       }
 
-      /* if (this.usuarioActual.personaID <= 0) {
+      if (this.usuarioActual.personaID <= 0) {
         console.log('Completa persona');
         this.cambiarFlagPersona();
 
-      } */
+      }
     }
-  }
+  } */
 
   restrictionFlagCredenciales() {
     this.restrictionCredenciales = true;
@@ -186,23 +186,39 @@ export class UsuarioComponent implements OnInit {
   }
 
   flag = false;
+  flagPrincipal = false;
+
+  flagPersonas = false;
+  flagRoles = false;
 
   cambiarFlag() {
     this.flag = !this.flag;
+  }
+
+  cerrarFlag() {
+    this.flag = !this.flag;
+    this.registroPersona = false;
+    this.registroRol = false;
+  }
+
+  volverFlag() {
+    this.flagPrincipal = !this.flagPrincipal;
+    console.log(this.flagPrincipal);
   }
 
   limpiarPersona() {
     this.usuarioActual.personaId = 0;
   }
 
-  iconDelete = false;
+  view = false;
 
-  iconDeletFalse() {
-    this.iconDelete = false;
+  viewEdit() {
+    //deletfalse
+    this.view = false;
   }
 
-  iconDeletTrue() {
-    this.iconDelete = true;
+  viewCreate() {
+    this.view = true;
   }
 
   counter(i: number) {
