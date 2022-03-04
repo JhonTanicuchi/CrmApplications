@@ -11,10 +11,116 @@ export class UsuarioComponent implements OnInit {
 
   listadoUsuarios: Usuario[] = [];
 
+  restrictionCredenciales = false;
+  restrictionRol = false;
+  restrictionPersona = false;
+
+  registroCredenciales = false;
+  registroRol = false;
+  registroPersona = false;
+
+  agregarCredenciales = false;
+  agregarRol = false;
+  agregarPersona = false;
+
+  seleccionarRol = false;
+  seleccionarPersona = false;
+
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     this.findAll();
+  }
+
+  saveCredentials(usuario: Usuario): void {
+    if (
+      //this.usuarioActual.personaId <= 0 &&
+      this.usuarioActual.username != '' &&
+      this.usuarioActual.password != '' &&
+      this.usuarioActual.rolId <= 0
+    ) {
+      this.cambiarFlag();
+      this.save(usuario);
+    } else {
+      if (
+        this.usuarioActual.username == '' ||
+        this.usuarioActual.password == ''
+      ) {
+        console.log('Completa username');
+        this.restrictionFlagCredenciales();
+      }
+
+      if (this.usuarioActual.rolId <= 0) {
+        console.log('Completa rolId');
+        this.restrictionFlagRol();
+      }
+
+      /* if (this.usuarioActual.personaID <= 0) {
+        console.log('Completa persona');
+        this.cambiarFlagPersona();
+
+      } */
+    }
+  }
+
+  restrictionFlagCredenciales() {
+    this.restrictionCredenciales = true;
+    this.agregarCredenciales = true;
+    this.registroCredenciales = false;
+  }
+
+  restrictionFlagRol() {
+    this.restrictionRol = true;
+    this.agregarRol = true;
+    this.registroRol = false;
+    this.seleccionarRol = false;
+  }
+
+  restrictionFlagPersona() {
+    this.restrictionPersona = true;
+    this.agregarPersona = true;
+    this.registroPersona = false;
+  }
+
+  agregarFlagCredenciales() {
+    this.restrictionCredenciales = false;
+    this.agregarCredenciales = true;
+    this.registroCredenciales = true;
+  }
+
+  agregarFlagRol() {
+    this.restrictionRol = false;
+    this.agregarRol = true;
+    this.registroRol = true;
+  }
+
+  agregarFlagPersona() {
+    this.restrictionPersona = false;
+    this.agregarPersona = true;
+    this.registroPersona = true;
+  }
+
+  registroFlagCredenciales() {
+    this.agregarCredenciales = true;
+    this.registroCredenciales = true;
+  }
+
+  registroFlagRol() {
+    this.agregarRol = true;
+    this.registroRol = true;
+  }
+  seleccionarFlagRol() {
+    this.seleccionarRol = !this.seleccionarRol;
+    this.registroRol = !this.registroRol;
+  }
+
+  registroFlagPersona() {
+    this.registroPersona = true;
+  }
+
+  seleccionarFlagPersona() {
+    this.seleccionarPersona = !this.seleccionarPersona;
+    this.registroPersona = !this.registroPersona;
   }
 
   save(usuario: Usuario): void {
@@ -89,6 +195,4 @@ export class UsuarioComponent implements OnInit {
   counter(i: number) {
     return new Array(i);
   }
-
-  CambiarPassword() {}
 }

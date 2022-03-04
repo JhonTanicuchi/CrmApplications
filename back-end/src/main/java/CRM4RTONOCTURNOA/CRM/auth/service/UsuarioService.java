@@ -34,11 +34,6 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario findById(long id) {
-        return usuarioRepository.findById(id).get();
-
-    }
-
     // Read
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id).get();
