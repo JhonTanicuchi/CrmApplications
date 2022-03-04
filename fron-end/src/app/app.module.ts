@@ -12,20 +12,24 @@ import { CampaniaComponent } from './campania/campania.component';
 import { PermisoComponent } from './permiso/permiso.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './compartidos/menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { TokenInterceptor } from './login/token.interceptor';
+import { RespuestaBackendInterceptor } from './login/respuesta-backend.interceptor';
+import { AlertaComponent } from './login/alerta/alerta/alerta.component';
 
 //primeng
-import {ConfirmPopupModule} from 'primeng/confirmpopup';
-import {ConfirmationService} from 'primeng/api';
-import {MessageService} from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
-import {BlockUIModule} from 'primeng/blockui';
-import {ToastModule} from 'primeng/toast';
+import { BlockUIModule } from 'primeng/blockui';
+import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { SortablejsModule } from 'ngx-sortablejs';
 @NgModule({
@@ -43,7 +47,9 @@ import { SortablejsModule } from 'ngx-sortablejs';
     PersonaComponent,
     SeguimientoComponent,
     ConocenosComponent,
-    SeguimientoEtapasComponent
+    SeguimientoEtapasComponent,
+    LoginComponent,
+    AlertaComponent,
   ],
   imports: [
     CommonModule,
@@ -59,7 +65,20 @@ import { SortablejsModule } from 'ngx-sortablejs';
     DialogModule,
     SortablejsModule.forRoot({ animation: 150 }),
   ],
-  providers: [ConfirmationService,MessageService],
-  bootstrap: [AppComponent]
+  providers: [
+    ConfirmationService,
+    MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RespuestaBackendInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

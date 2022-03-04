@@ -1,24 +1,20 @@
-package CRM4RTONOCTURNOA.CRM.entity;
+package CRM4RTONOCTURNOA.CRM.auth.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-
 import lombok.Data;
 
 @Data
-@Table("administracion\".\"roles")
-public class Rol {
+@Table("administracion\".\"permisos_roles")
+public class PermisoRol {
 
     @Id
+    @Column("permiso_rol_id")
+    private long permisoRolId;
+    @Column("permiso_id")
+    private long permisoId;
     @Column("rol_id")
     private long rolId;
-
-    @Column("nombre_rol")
-    private String nombreRol;
-
-    @Column("tipo_rol")
-    private String tipoRol;
-    private Boolean estado;
 
 }

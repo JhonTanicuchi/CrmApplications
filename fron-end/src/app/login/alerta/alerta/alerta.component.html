@@ -1,0 +1,33 @@
+<div class="w-full" id="container-grande">
+  <div class="flex" style="height: calc(100vh - 64px - 40px)">
+    <div
+      class="flex items-center justify-center text-center lg:text-left lg:w-1/2"
+    >
+      <div>
+        <div class="mt-5 px-16">
+          <div class="max-w-md text-center">
+            <h2 class="text-5xl m-5 font-black uppercase text-gray-800">
+              Credenciales <span class="text-primary">incorrectas</span>
+            </h2>
+            <p class="mb-5">Posiblemente no tienes acceso</p>
+            <p class="font-bold text-xl">{{ ultimoError }}</p>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="hidden rounded-xl overflow-hidden lg:block lg:w-1/2"
+      style="clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
+    >
+      <div
+        class="h-full object-cover"
+        style="
+          background-image: url(https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+        "
+      >
+        <div class="h-full bg-black opacity-25"></div>
+      </div>
+    </div>
+  </div>
+</div>

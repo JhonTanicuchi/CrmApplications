@@ -1,11 +1,7 @@
 export class Rol {
-
-    constructor(
-      public rolId: number,
-      public nombreRol: string,
-      public tipoRol: string,
-      public estado: boolean,
-    )
-    {}
-  }
-  
+  constructor(
+    public rolId: number,
+    public nombre: string,
+    public permisos: number
+  ) {}
+}

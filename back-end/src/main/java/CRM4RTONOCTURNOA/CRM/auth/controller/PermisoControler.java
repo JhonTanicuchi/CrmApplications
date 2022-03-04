@@ -1,8 +1,7 @@
-package CRM4RTONOCTURNOA.CRM.controller;
+package CRM4RTONOCTURNOA.CRM.auth.controller;
 
- 
 import java.util.List;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,51 +14,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
- 
-import CRM4RTONOCTURNOA.CRM.entity.Rol;
-import CRM4RTONOCTURNOA.CRM.service.RolService;
- 
+
+import CRM4RTONOCTURNOA.CRM.auth.entity.Permiso;
+import CRM4RTONOCTURNOA.CRM.auth.service.PermisoService;
 
 @RestController
-@CrossOrigin({"http://localhost:4200"})
-@RequestMapping("/api/rol")
-public class RolController {
- 
+@CrossOrigin({ "http://localhost:4200" })
+@RequestMapping("/api/permiso")
+public class PermisoControler {
+
     @Autowired
-    RolService rolService;
- 
-    //Create
+    PermisoService permisoService;
+
+    // Create
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Rol save(@RequestBody Rol rol)
-    {
-        return rolService.save(rol);
+    public Permiso save(@RequestBody Permiso permiso) {
+        return permisoService.save(permiso);
     }
- 
-    //Read
+
+    // Read
     @GetMapping("/{id}")
-    public Rol findById(@PathVariable Long id)
-    {
-        return rolService.findById(id);
+    public Permiso findById(@PathVariable Long id) {
+        return permisoService.findById(id);
     }
-    //Update
+
+    // Update
     @PutMapping("/update")
-    public Rol update(@RequestBody Rol rol)
-    {
-        return rolService.save(rol);
+    public Permiso update(@RequestBody Permiso permiso) {
+        return permisoService.save(permiso);
     }
-   
-    //Delete
+
+    // Delete
     @DeleteMapping("/deleteById/{id}")
-    public void deleteById(@PathVariable Long id)
-    {
-        rolService.deleteById(id);
+    public void deleteById(@PathVariable Long id) {
+        permisoService.deleteById(id);
     }
- 
+
     @GetMapping("/findAll")
-    public List<Rol> findAll()
-    {
-        return rolService.findAll();
+    public List<Permiso> findAll() {
+        return permisoService.findAll();
     }
-   
+
+ 
+
 }

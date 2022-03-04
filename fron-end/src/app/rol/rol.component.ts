@@ -9,7 +9,7 @@ import { RolService } from './rol.service';
 })
 export class RolComponent implements OnInit {
 
-  rolActual: Rol = new Rol(0,"","",false);
+  rolActual: Rol = new Rol(0,"",0);
 
   listadoRoles: Rol[] = [];
 
@@ -26,7 +26,7 @@ export class RolComponent implements OnInit {
     console.log("ingresando al método save")
     this.rolService.save(rol).subscribe(
       (respuesta) => {
-        this.rolActual = new Rol(0,"","",false);
+        this.rolActual = new Rol(0,"",0);
         this.findAll();
       }
     );
@@ -45,7 +45,7 @@ export class RolComponent implements OnInit {
   }
 
   limpiarForm(){
-    this.rolActual = new Rol(0,"","",false);
+    this.rolActual = new Rol(0,"",0);
   }
 
   deleteById(id: number):void
@@ -54,7 +54,7 @@ export class RolComponent implements OnInit {
       () => {
         this.listadoRoles = this.listadoRoles
         .filter( item => item.rolId != id);
-        this.rolActual = new Rol(0,"","",false);
+        this.rolActual = new Rol(0,"",0);
       }
 
     );

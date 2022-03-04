@@ -2,7 +2,6 @@ package CRM4RTONOCTURNOA.CRM.service;
 
 import CRM4RTONOCTURNOA.CRM.entity.EtapaPersona;
 import CRM4RTONOCTURNOA.CRM.repository.EtapaPersonaRepository;
-import CRM4RTONOCTURNOA.CRM.repository.EtapaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

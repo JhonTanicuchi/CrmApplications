@@ -11,16 +11,16 @@
       <div class="card card-title text-primary">Rol</div>
       <div class="grid grid-cols-2 card-body form-control gap-2">
         <label class="label" for="nombreRol">Nombre Rol:</label>
-        <input class="input input-primary" type="text" name="nombreRol" id="" [(ngModel)]="rolActual.nombreRol">
+        <input class="input input-primary" type="text" name="nombreRol" id="" [(ngModel)]="rolActual.nombre">
 
         <label class="label" for="nombre">Tipo Rol:</label>
-        <input class="input input-primary" type="text" name="nombre" id="" [(ngModel)]="rolActual.tipoRol">
+        <!-- <input class="input input-primary" type="text" name="nombre" id="" [(ngModel)]="rolActual.tipoRol">
         <label class="label" for="nombre">Estado:</label>
         <select class="select w-full max-w-xs select-primary" [(ngModel)]="rolActual.estado">
           <option disabled selected>Estado</option>
           <option value="true">Activo</option>
           <option value="false">Inactivo</option>
-        </select>
+        </select> -->
       </div>
       <div class="card-actions">
         <button class="btn btn-primary" id="btn-Guardar" (click)="save(rolActual)">Guardar</button>
@@ -50,16 +50,16 @@
         (click)="seleccionarRol(rol)"
           [class.active]="rol==rolActual">
           <td>
-            <a>{{rol.nombreRol}}</a>
+            <a>{{rol.nombre}}</a>
           </td>
 
           <td class="px-16 py-2">
-            <span>{{rol.tipoRol}}</span>
+            <span>...</span>
           </td>
 
           <td class="px-16 py-2">
             <select name="" id="">
-              <option>{{rol.estado}}</option>
+              <option>...</option>
             </select>
           </td>
         </tr>
@@ -68,4 +68,4 @@
   </div>
 
 
-  
+
