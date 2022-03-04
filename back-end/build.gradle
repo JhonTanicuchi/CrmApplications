@@ -26,6 +26,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'net.sf.jasperreports:jasperreports:6.18.1'
 }
 
 tasks.named('test') {

@@ -1,13 +1,9 @@
-package eduyavirac.cotizacionbackend.repository;
-
-import java.util.List;
+package CRM4RTONOCTURNOA.CRM.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import eduyavirac.cotizacionbackend.entity.Cotizacion;
 
-public interface CotizacionRepository extends CrudRepository<Cotizacion,Long> {
+import CRM4RTONOCTURNOA.CRM.entity.Cotizacion;
+
+public interface CotizacionRepository extends CrudRepository <Cotizacion, Long> {
     
-    List<Cotizacion> findAll();
-
 }
-

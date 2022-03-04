@@ -1,0 +1,51 @@
+<div>
+  <h1 class="text-center my-2 shadow-lg">
+    <span class="text-primary font-bold">Administración</span>
+    de clientes</h1>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-6 gap-4 text-xs text-center">
+
+  <div class="border rounded-sm shadow-lg">
+    <p class="bg-neutral text-neutral-content rounded-sm" >Listado</p>
+    <div >
+      <ul class="menu" >
+        <li class="hover:bg-accent active"
+        *ngFor="let cliente of listadoClientes"
+        (click)="seleccionarCliente(cliente)"
+        [class.active]="cliente==clienteActual"
+        >
+        <a>{{cliente.nombre}}</a>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="col-span-4 shadow-lg" >
+    <div class="card">
+      <div class="card card-title">Cliente</div>
+      <div class="grid grid-cols-2 card-body form-control gap-2">
+
+        <label class="label" for="Identificacion">Identificación:</label>
+        <input class="input input-primary" type="text" name="Identificacion" id="" [(ngModel)]="clienteActual.identificacion">
+
+        <label class="label" for="nombre">Nombre:</label>
+        <input class="input input-primary" type="text" name="nombre" id="" [(ngModel)]="clienteActual.nombre" >
+
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary" (click)="save(clienteActual)" >Guardar</button>
+        <button class="btn btn-danger" (click)="deleteById(clienteActual.clienteId)" >Eliminar</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="shadow-lg">Info</div>
+
+</div>
+
+

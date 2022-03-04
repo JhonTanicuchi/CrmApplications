@@ -1,23 +1,40 @@
-package eduyavirac.cotizacionbackend.entity;
+package CRM4RTONOCTURNOA.CRM.entity;
+
+
+
+
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+
 import lombok.Data;
 
+
+
 @Data
-@Table("cotizacion")
+@Table("reporte\".\"cotizaciones")
 public class Cotizacion {
-    
+
     @Id
-    @Column("id_cotizacion")
-    private long idcotizacion;
-    @Column("id_cliente")
-    private long idcliente;
-    private String nombre;
-    private String identificacion;
-    private String direccion;
-    private String telefono;
+    @Column("cotizacion_id")
+    private long cotizacionId;
+
+    private String nro;
+
+    private Timestamp fecha;
+
+    @Column("cliente_id")
+    private long clienteId;
+
     private String observacion;
-    private String fecha;
+
+    @MappedCollection(idColumn = "cotizacion_id")
+    Set<DetalleCotizacion> detalleCotizacion = new HashSet<>();
+
+    
 }

@@ -7,16 +7,22 @@ import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
 import{HttpClientModule } from '@angular/common/http';
-import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import { CotizacionComponent } from './reporte/cotizacion/cotizacion.component'; 
 
 import { MenuComponent } from './compartidos/menu/menu.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteBusquedaComponent } from './cliente/cliente-busqueda/cliente-busqueda.component';
+import { ProductoBusquedaComponent } from './producto/producto-busqueda/producto-busqueda.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CotizacionComponent,
-    MenuComponent
+    MenuComponent,
+    ClienteComponent,
+    ClienteBusquedaComponent,
+    ProductoBusquedaComponent
   ],
   imports: [
     BrowserModule,

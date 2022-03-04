@@ -1,0 +1,10 @@
+<div class="dropdown dropdown-hover">
+  <input #inputBusqueda class="input input-primary input-sm md:w-48" type="text"
+  [value]="nombreClienteSelecionado"
+  placeholder="Ingrese el nombre" (input)="buscar(inputBusqueda.value)">
+  <ul class="menu dropdown-content bg-base-100">
+    <li *ngFor="let cliente of clientes | async ">
+      <a (click)="seleccionar(cliente)">{{cliente.nombre}}</a>
+    </li>
+  </ul>
+</div>

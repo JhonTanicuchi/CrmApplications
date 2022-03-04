@@ -1,0 +1,74 @@
+<div class=" m-3 md:max-w-2xl mx-auto rounded-lg shadow-2xl border-4">
+  <p class="text-center uppercase font-bold my-4">Registro de <span class="text-primary">Cotizacion</span> </p>
+  <div>
+    <div class="rounded-lg shadow-2xl border-2 m-3">
+      <div class="grid md:grid-cols-6 ">
+        <p class="p-3">Nro de Cotizacion:</p>
+        <input class="col-span-2 input input-primary input-sm mt-2" type="text" name="" id=""
+          placeholder="001" [(ngModel)]="cotizacion.nro">
+      </div>
+    </div>
+  </div>
+  
+  <p class="text-center uppercase font-bold my-4"><span class="text-primary">Detalle Cotizacion</span> </p>
+  
+  <div class="grid grid-cols-2 gap-2 ">
+    <div class="rounded-lg shadow-2xl border-2 m-3">
+      <div class="grid md:grid-cols-3 ">
+        <p class="p-3">Cliente:</p>
+        <app-cliente-busqueda class="col-span-2 pt-3" (emisorEvento)="cliente=$event"></app-cliente-busqueda>
+        <div class="divider col-span-3"></div>
+        <p class="p-3">Identificación:</p>
+        <p class="p-3">{{cliente.identificacion}}</p>
+      </div>
+    </div>
+    <div class="rounded-lg shadow-2xl border-2 m-3">
+      <div class="grid md:grid-cols-3 ">
+        <p class="p-3">Fecha:</p>
+        <input class="col-span-2 input input-primary input-sm mt-2" type="date" name="" id=""
+          [(ngModel)]="cotizacion.fecha">
+      </div>
+    </div>
+  </div>
+
+  <div class="rounded-lg shadow-2xl border-2 m-3">
+    <table class="table table-compact w-full">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Sub-total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let linea of cotizacion.detalleCotizacion">
+          <td>
+            {{linea.nombreProducto}}
+          </td>
+          <td>
+            <input class="input input-primary input-sm md:w-24" type="text" name="" id="" [(ngModel)]="linea.cantidad">
+          </td>
+          <td>
+            <input class="input input-primary input-sm md:w-24" type="text" name="" id="" [(ngModel)]="linea.precio">
+          </td>
+          <td>
+            <p>{{linea.cantidad*linea.precio}}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <app-producto-busqueda (emisor)="agregarDetalle($event)"></app-producto-busqueda>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rounded-lg shadow-2xl border-2 m-3">
+    <button class="btn btn-primary m-3" (click)="facturar()">Guardar</button>
+    <button class="btn btn-secondary m-3">Limpiar</button>
+  </div>
+
+</div>
