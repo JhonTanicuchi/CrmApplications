@@ -1,5 +1,6 @@
 package CRM4RTONOCTURNOA.CRM.auth.security;
 
+import CRM4RTONOCTURNOA.CRM.auth.service.PermisoService;
 import CRM4RTONOCTURNOA.CRM.auth.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

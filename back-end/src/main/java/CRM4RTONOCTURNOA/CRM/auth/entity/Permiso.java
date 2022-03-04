@@ -20,4 +20,5 @@ public class Permiso {
     @Column("fecha_modificacion")
     private Timestamp fechaModificacion;
     private Boolean estado;
+    
 }
