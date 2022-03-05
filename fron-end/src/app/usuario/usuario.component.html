@@ -12,7 +12,6 @@
         hidden: registroRol,
         block: !registroRol
       }"
-
       [ngClass]="{
         hidden: flagPersonas
       }"
@@ -100,8 +99,8 @@
         block: registroPersona,
         hidden: !registroPersona
       }"
-      class="hidden p-2 relative bg-white shadow-2xl z-10"
-      style="height: calc(100vh - 64px - 40px)"
+      class="hidden relative bg-white"
+      style="height: calc(100vh - 64px - 40px - 1rem)"
     >
       <div
         class="bg-gray-200 rounded-lg flex items-center justify-center text-center mb-2"
@@ -116,7 +115,7 @@
         <div
           *ngFor="let persona of personas | async"
           (click)="seleccionarFlagPersona()"
-          class="shadow stats w-full mb-2 rounded-lg bg-gray-100"
+          class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
             <div class="stat-figure text-primary">
@@ -135,11 +134,13 @@
                 />
               </svg>
             </div>
-            <div class="font-semibold stat-title">{{persona.nombre}} {{persona.apellido}}</div>
+            <div class="font-semibold stat-title">
+              {{ persona.nombre }} {{ persona.apellido }}
+            </div>
             <div class="stat-desc">
               <span class="text-sm font-normal text-gray-500"
                 ><span class="font-semibold">Identificación:</span>
-                {{persona.cedula}}</span
+                {{ persona.cedula }}</span
               >
             </div>
           </div>
@@ -152,8 +153,8 @@
         block: registroRol,
         hidden: !registroRol
       }"
-      class="hidden p-2 relative bg-white shadow-2xl z-10"
-      style="height: calc(100vh - 64px - 40px)"
+      class="hidden relative bg-white"
+      style="height: calc(100vh - 64px - 40px - 1rem)"
     >
       <div
         class="bg-gray-200 rounded-lg flex items-center justify-center text-center mb-2"
@@ -167,31 +168,30 @@
       >
         <div
           *ngFor="let rol of roles | async"
-
           (click)="seleccionarFlagRol()"
-          class="shadow stats w-full mb-2 rounded-lg bg-gray-100"
+          class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
             <div class="stat-figure text-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
+                class="h-6 w-6 mr-2 text-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                stroke-width="2"
               >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
                 />
               </svg>
             </div>
-            <div class="font-semibold stat-title">{{rol.nombre}}</div>
+            <div class="font-semibold stat-title">{{ rol.nombre }}</div>
             <div class="stat-desc">
               <span class="text-sm font-normal text-gray-500"
-                ><span class="font-semibold">Id: </span>{{rol.rolId}}</span
+                ><span class="font-semibold">Id: </span>{{ rol.rolId }}</span
               >
             </div>
           </div>
@@ -275,7 +275,7 @@
                   <div class="text-sm text-gray-500">Retenciones</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{usuario.username}}
+                  {{ usuario.username }}
                 </td>
                 <td
                   *ngIf="usuario.estado == true"
@@ -353,15 +353,16 @@
           hidden: seleccionarPersona,
           flex: !seleccionarPersona
         }"
-      [ngClass]="{ hidden: view, flex: !view }"
-
+        [ngClass]="{ hidden: view, flex: !view }"
         class="flex col-span-2 rounded-lg p-10 items-center justify-between h-52 shadow-md bg-white"
       >
-        <h1 class="flex items-center justify-center">
+        <h1
+          class="flex items-center justify-center font-semibold text-xl text-gray-500"
+        >
           <span
             ><svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-primary"
+              class="h-10 w-10 text-primary mr-2"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -382,22 +383,22 @@
             block: !registroPersona
           }"
           (click)="registroFlagPersona()"
-          class="btn btn-sm btn-outline btn-info capitalize shadow-xl"
+          class="btn btn-sm btn-outline btn-secondary capitalize shadow-xl"
         >
           <span>Agregar</span>
         </button>
 
-        <button
+        <div
           [ngClass]="{
             block: registroPersona,
             hidden: !registroPersona
           }"
           (click)="registroFlagPersona()"
-          class="btn btn-error capitalize shadow-xl flex justify-end items-center"
+          class="capitalize flex justify-end items-center"
           disabled
         >
           <svg
-            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-primary"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -416,8 +417,8 @@
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             ></path>
           </svg>
-          <span class="text-black">Esperando...</span>
-        </button>
+          <span class="text-black font-light">Esperando...</span>
+        </div>
       </div>
 
       <div
@@ -426,7 +427,6 @@
           hidden: !seleccionarPersona
         }"
         [ngClass]="{ flex: view, hidden: !view }"
-
         class="hidden col-span-2 rounded-lg p-4 items-center justify-between h-full shadow-md bg-white"
       >
         <div class="flex h-full items-center">
@@ -440,9 +440,9 @@
             <h2
               class="text-3xl ml-7 mb-5 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex items-center"
             >
-              <span class="block text-xl uppercase font-bold text-gray-900"
-                ></span
-              >
+              <span
+                class="block text-xl uppercase font-bold text-gray-900"
+              ></span>
               <input
                 *ngIf="view == true"
                 [(ngModel)]="usuarioActual.estado"
@@ -453,15 +453,13 @@
             </h2>
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
               ><span class="font-semibold">Identificación:</span>
-              </span
-            >
+            </span>
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Celular:</span> </span
-            >
+              ><span class="font-semibold">Celular:</span>
+            </span>
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
               ><span class="font-semibold">Correo:</span>
-              </span
-            >
+            </span>
           </div>
         </div>
 
@@ -497,15 +495,16 @@
           hidden: agregarCredenciales,
           flex: !agregarCredenciales
         }"
-
         [ngClass]="{ hidden: view, flex: !view }"
         class="col-span-2 rounded-lg p-10 items-center justify-between h-52 shadow-md bg-white"
       >
-        <h1 class="flex items-center justify-center">
+        <h1
+          class="flex items-center justify-center font-semibold text-xl text-gray-500"
+        >
           <span
             ><svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-primary"
+              class="h-10 w-10 text-primary mr-2"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -522,7 +521,7 @@
         </h1>
         <button
           (click)="registroFlagCredenciales()"
-          class="btn btn-sm btn-outline btn-info capitalize shadow-xl"
+          class="btn btn-sm btn-outline btn-secondary capitalize shadow-xl"
         >
           <span>Agregar</span>
         </button>
@@ -609,15 +608,16 @@
           hidden: seleccionarRol,
           block: !seleccionarRol
         }"
-
         [ngClass]="{ hidden: view, flex: !view }"
         class="col-span-4 rounded-lg p-10 flex items-center justify-between h-72 shadow-md bg-white"
       >
-        <h1 class="flex items-center justify-center">
+        <h1
+          class="flex items-center justify-center font-semibold text-xl text-gray-500"
+        >
           <span
             ><svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-primary"
+              class="h-10 w-10 text-primary mr-2"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -638,22 +638,22 @@
             block: !registroRol
           }"
           (click)="registroFlagRol()"
-          class="btn btn-sm btn-outline btn-info capitalize shadow-xl"
+          class="btn btn-sm btn-outline btn-secondary capitalize shadow-xl"
         >
           <span>Agregar</span>
         </button>
 
-        <button
+        <div
           [ngClass]="{
             block: registroRol,
             hidden: !registroRol
           }"
           (click)="registroFlagRol()"
-          class="btn btn-error capitalize shadow-xl flex justify-end items-center"
+          class="capitalize flex justify-end items-center"
           disabled
         >
           <svg
-            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-primary"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -672,8 +672,8 @@
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             ></path>
           </svg>
-          <span class="text-black">Esperando...</span>
-        </button>
+          <span class="text-black font-light">Esperando...</span>
+        </div>
       </div>
 
       <div
@@ -681,7 +681,6 @@
           block: seleccionarRol,
           hidden: !seleccionarRol
         }"
-
         [ngClass]="{ block: view, hidden: !view }"
         class="hidden rounded-lg shadow-md bg-white"
       >
@@ -760,7 +759,6 @@
           block: seleccionarRol,
           hidden: !seleccionarRol
         }"
-
         [ngClass]="{ block: view, hidden: !view }"
         class="hidden col-span-3 w-full rounded-lg shadow-md bg-white"
       >
