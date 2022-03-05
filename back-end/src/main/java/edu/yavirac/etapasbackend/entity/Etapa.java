@@ -9,8 +9,8 @@ import lombok.Data;
 @Table("seguimientos\".\"etapas")
 
 public class Etapa {
-    @Column("etapas_id")  //mapiamos para que reconozca con la base datos
     @Id
+    @Column("etapas_id")  //mapiamos para que reconozca con la base datos
     private long etapasId;  //long tipo de dato definitivo pk en java que crea
     private String  nombre; 
     private String  descripcion;
