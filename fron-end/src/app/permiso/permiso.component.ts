@@ -12,7 +12,7 @@ import { PermisoService } from './permiso.service';
 export class PermisoComponent implements OnInit {
 
 
-  permisoActual: Permiso = new Permiso(0, "", new Date, new Date, false );
+  permisoActual: Permiso = new Permiso(0, "", new Date, new Date, true );
 
   listadoPermisos: Permiso[] = [];
  
@@ -29,7 +29,7 @@ export class PermisoComponent implements OnInit {
     console.log("ingresando al método save")
     this.permisoService.save(permiso).subscribe(
       (respuesta) => {
-        this.permisoActual = new Permiso(0, "", new Date, new Date, false );
+        this.permisoActual = new Permiso(0, "", new Date, new Date, true );
         this.findAll();
       }
     );
@@ -47,7 +47,7 @@ export class PermisoComponent implements OnInit {
   }
 
   limpiarForm(){
-    this.permisoActual = new Permiso(0, "", new Date, new Date, false );
+    this.permisoActual = new Permiso(0, "", new Date, new Date, true );
   }
 
 
@@ -57,7 +57,7 @@ export class PermisoComponent implements OnInit {
       () => {
         this.listadoPermisos = this.listadoPermisos
         .filter( item => item.permisoId != id);
-        this.permisoActual = new Permiso(0, "", new Date, new Date, false );
+        this.permisoActual = new Permiso(0, "", new Date, new Date, true );
       }
 
     );
