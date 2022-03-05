@@ -18,7 +18,10 @@ export class UsuarioComponent implements OnInit {
 
   listadoUsuarios: Usuario[] = [];
 
-  personaDatos: Persona;
+  personaDatos!: Persona;
+  rolDatos!: Rol;
+  permisosDatos!: Observable<Permiso[]>;
+
   permisos!: Observable<Permiso[]>;
   roles!: Observable<Rol[]>;
   personas!: Observable<Persona[]>;
@@ -227,8 +230,22 @@ export class UsuarioComponent implements OnInit {
 
   buscarPersona(id: number) {
     this.personaService.buscarId(id).subscribe((respuesta) => {
-      console.log(respuesta);
       this.personaDatos = respuesta;
+      console.log(respuesta);
+    });
+    //this.usuarioActual.personaId = this.personaDatos.personaId;
+    //this.usuarioActual.nombre = this.personaDatos.nombre + ' ' + this.personaDatos.apellido;
+  }
+
+  buscarPermisos(id: number) {
+    this.permisosDatos = this.permisoService.findByRolId(id);
+    //this.usuarioActual.rolId = this.rolDatos.rolId;
+  }
+
+  buscarRol(id: number) {
+    this.rolService.findById(id).subscribe((respuesta) => {
+      this.rolDatos = respuesta;
+      console.log(respuesta);
     });
   }
 }

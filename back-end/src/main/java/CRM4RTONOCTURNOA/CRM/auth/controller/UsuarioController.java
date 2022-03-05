@@ -26,7 +26,7 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     // Create
-    @PreAuthorize("hasAuthority('CREAR')")
+    @PreAuthorize("hasAuthority('CREAR_USUARIOS')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Usuario save(@RequestBody Usuario usuario) {
@@ -34,27 +34,27 @@ public class UsuarioController {
     }
 
     // Read
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_USUARIOS')")
     @GetMapping("/{id}")
     public Usuario findById(@PathVariable Long id) {
         return usuarioService.findById(id);
     }
 
     // Update
-    @PreAuthorize("hasAuthority('ACTUALIZAR')")
+    @PreAuthorize("hasAuthority('ACTUALIZAR_USUARIOS')")
     @PutMapping("/update")
     public Usuario update(@RequestBody Usuario usuario) {
         return usuarioService.save(usuario);
     }
 
     // Delete
-    @PreAuthorize("hasAuthority('ELIMINAR')")
+    @PreAuthorize("hasAuthority('ELIMINAR_USUARIOS')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id) {
         usuarioService.deleteById(id);
     }
 
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_USUARIOS')")
     @GetMapping("/findAll")
     public List<Usuario> findAll() {
         return usuarioService.findAll();

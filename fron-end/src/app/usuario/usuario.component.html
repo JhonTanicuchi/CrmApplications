@@ -115,6 +115,7 @@
         <div
           *ngFor="let persona of personas | async"
           (click)="seleccionarFlagPersona()"
+          (click)="buscarPersona(persona.personaId)"
           class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
@@ -169,6 +170,8 @@
         <div
           *ngFor="let rol of roles | async"
           (click)="seleccionarFlagRol()"
+          (click)="buscarPermisos(rol.rolId)"
+
           class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
@@ -307,7 +310,6 @@
                     (click)="seleccionarUsuario(usuario)"
                     (click)="volverFlag()"
                     (click)="viewCreate()"
-                   
                     class="text-primary hover:text-primary-focus cursor-pointer"
                     >Editar</a
                   >
@@ -442,7 +444,7 @@
             >
               <span
                 class="block text-xl uppercase font-bold text-gray-900"
-              ></span>
+              >Nombre Apellido</span>
               <input
                 *ngIf="view == true"
                 [(ngModel)]="usuarioActual.estado"
@@ -452,21 +454,16 @@
               />
             </h2>
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Identificación:</span>
+              ><span class="font-semibold">Identificación: 1725028540</span>
             </span>
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Celular:</span>
+              ><span class="font-semibold">Celular: 0981546879</span>
             </span>
             <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Correo:</span>
+              ><span class="font-semibold">Correo: correo@yavirac.edu.ec</span>
             </span>
           </div>
         </div>
-
-        <!-- <select [(ngModel)]="usuarioActual.personaId" (change)="buscarPersona(usuarioActual.personaId)"  class=" w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md">
-                <option disabled selected>Empleado</option>
-                <option *ngFor="let persona of personas | async" [value]="persona.personaId" value="{{persona.personaId}}" >{{persona.nombre}} {{persona.apellido}}</option>
-              </select> -->
 
         <button
           (click)="seleccionarFlagPersona()"
@@ -708,7 +705,7 @@
                   d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
                 />
               </svg>
-              <h1 class="font-bold uppercase">Administrador</h1>
+              <h1 class="font-bold uppercase">rol</h1>
             </div>
             <button
               (click)="seleccionarFlagRol()"
@@ -747,9 +744,9 @@
                 />
               </svg>
             </div>
-            <div class="stat-value">{{ UsuariosActivos() }}</div>
+            <div class="stat-value">5</div>
             <div class="stat-title">Permisos</div>
-            <div class="stat-desc">Encontrados en Administrador</div>
+            <div class="stat-desc">Encontrados en rol</div>
           </div>
         </div>
       </div>
@@ -771,18 +768,18 @@
           class="h-48 grid grid-rows-4 grid-cols-4 gap-2 w-full p-4 overflow-auto scrollbar-hide rounded-lg"
         >
           <button
-            *ngFor="let permiso of permisos | async; let i = index"
+            *ngFor="let permiso of permisosDatos | async; let i = index"
             class="bg-gray-100 rounded-lg shadow"
           >
-            <span>{{ permiso.permisoId }}</span>
+            <span>{{permiso.nombre}}</span>
           </button>
 
-          <div
-            *ngIf="usuarioActual.rolId == 0"
+          <!-- <div
+            *ngIf="usuarioActual.rolId<=0"
             class="flex justify-center items-center w-full h-full"
           >
             <p class="text-gray-400">No hay permisos</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

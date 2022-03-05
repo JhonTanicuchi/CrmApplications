@@ -47,7 +47,7 @@ export class UsuarioService {
     );
   }
 
-  //(FindAll)
+  //FinalAll
   public findAll(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.url + '/findAll', this.httpOptions);
   }

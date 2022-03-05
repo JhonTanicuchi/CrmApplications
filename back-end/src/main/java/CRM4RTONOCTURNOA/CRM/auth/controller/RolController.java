@@ -30,7 +30,7 @@ public class RolController {
     RolService rolService;
  
     //Create
-    @PreAuthorize("hasAuthority('CREAR')")
+    @PreAuthorize("hasAuthority('CREAR_ROLES')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Rol save(@RequestBody Rol rol)
@@ -39,14 +39,14 @@ public class RolController {
     }
  
     //Read
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_ROLES')")
     @GetMapping("/{id}")
     public Rol findById(@PathVariable Long id)
     {
         return rolService.findById(id);
     }
     //Update
-    @PreAuthorize("hasAuthority('ACTUALIZAR')")
+    @PreAuthorize("hasAuthority('ACTUALIZAR_ROLES')")
     @PutMapping("/update")
     public Rol update(@RequestBody Rol rol)
     {
@@ -54,7 +54,7 @@ public class RolController {
     }
    
     //Delete
-    @PreAuthorize("hasAuthority('ELIMINAR')")
+    @PreAuthorize("hasAuthority('ELIMINAR_ROLES')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
@@ -62,7 +62,7 @@ public class RolController {
     }
  
 
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_ROLES')")
     @GetMapping("/findAll")
     public List<Rol> findAll()
     {

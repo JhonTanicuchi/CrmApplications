@@ -28,7 +28,7 @@ public class PermisoControler {
     PermisoService permisoService;
 
     // Create
-    @PreAuthorize("hasAuthority('CREAR')")
+    @PreAuthorize("hasAuthority('CREAR_PERMISOS')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Permiso save(@RequestBody Permiso permiso) {
@@ -36,33 +36,36 @@ public class PermisoControler {
     }
 
     // Read
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_PERMISOS')")
     @GetMapping("/{id}")
     public Permiso findById(@PathVariable Long id) {
         return permisoService.findById(id);
     }
 
     // Update
-    @PreAuthorize("hasAuthority('ACTUALIZAR')")
+    @PreAuthorize("hasAuthority('ACTUALIZAR_PERMISOS')")
     @PutMapping("/update")
     public Permiso update(@RequestBody Permiso permiso) {
         return permisoService.save(permiso);
     }
 
     // Delete
-    @PreAuthorize("hasAuthority('ELIMINAR')")
+    @PreAuthorize("hasAuthority('ELIMINAR_PERMISOS')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id) {
         permisoService.deleteById(id);
     }
 
 
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_PERMISOS')")
     @GetMapping("/findAll")
     public List<Permiso> findAll() {
         return permisoService.findAll();
     }
 
- 
-
+    @PreAuthorize("hasAuthority('LEER_PERMISOS')")
+    @GetMapping("/findByRolId/{id}")
+    public List<Permiso> findByRolId(@PathVariable Long id) {
+        return permisoService.findByRolId(id);
+    }
 }

@@ -24,7 +24,7 @@
                                         <span class="label-text ">Nombre del permiso:</span>
                                     </label>
                                     <input type="text" placeholder="Ingresa nombre" name="nombrePermiso" id=""
-                                        [(ngModel)]="permisoActual.nombrePermiso"
+                                        [(ngModel)]="permisoActual.nombre"
                                         class="input input-bordered input-primary w-full max-w-xs text-blue-600  ">
 
                                     <label class="label" for="fechaCreacion">
@@ -66,7 +66,7 @@
                 </div>
 
                 <div
-                    class="min-w-screen  bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+                    class="min-w-screen  bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
 
                     <div class="w-full lg:w-5/6">
                         <div class="container mx-auto">
@@ -102,7 +102,7 @@
                                                                 clip-rule="evenodd" />
                                                         </svg>
                                                     </div>
-                                                    <span class="font-medium">{{permiso.nombrePermiso}}</span>
+                                                    <span class="font-medium">{{permiso.nombre}}</span>
                                                 </div>
                                             </td>
                                             <td class="py-3 px-6 text-left">
