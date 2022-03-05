@@ -11,15 +11,14 @@ import { EtapaService } from './etapa.service';
 })
 export class EtapaComponent implements OnInit {
 
-  etapaActual: Etapa = new Etapa(0,"","",false); // datos vacios al ingresar x vista frondend
+  etapaActual: Etapa = new Etapa(0,"","",false);
   listadoEtapas: Etapa []= [];
 
   constructor(
-    private etapaService: EtapaService // trae la parte del etapa.service inyectando
+    private etapaService: EtapaService 
   ) { }
 
   ngOnInit(): void {
-    //controlamos todo el ciclo de angular todo lo q llamemos findAll linea 38 lo ejecute y cree el componente
     this.findAll();
 
   }
@@ -27,10 +26,9 @@ export class EtapaComponent implements OnInit {
   save(etapa: Etapa):void
   {
     console.log("ingresando al metodo save")
-    //mediante el metodo subscribe-relacion con observable nos va a retornar lo del save
     this.etapaService.save(etapa).subscribe(
       (respuesta) =>{
-        this.etapaActual = new Etapa(0,"","",false); //nos va a dejar limpiar la pantalla despues de ingresar datos
+        this.etapaActual = new Etapa(0,"","",false); 
         this.findAll();
       }
     );
@@ -48,12 +46,12 @@ export class EtapaComponent implements OnInit {
     this.etapaActual = etapa;
   }
 
-  deleteById(id: number):void //recibe un valor de tipo number que no recibe nada
+  deleteById(id: number):void 
   {
-    this.etapaService.deleteById(id).subscribe(  //llamamos al servicio
+    this.etapaService.deleteById(id).subscribe(  
       ()=>{
       this.listadoEtapas = this.listadoEtapas
-      .filter( item => item.etapasId != id);
+      .filter( (item) => item.etapasId != id);
       this.etapaActual = new Etapa(0,"","",false);
       }
       );

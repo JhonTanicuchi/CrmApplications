@@ -10,28 +10,28 @@ import edu.yavirac.etapasbackend.repository.EtapaRepository;
 @Service
 public class EtapaService {
 
-    @Autowired  //anotacion permite inyectar clases aqui => EtapaRepository y no instanciarlas
+    @Autowired  
     EtapaRepository etapaRepository;
 
     //Create y update
-    public Etapa save(Etapa etapa) //Metodo
+    public Etapa save(Etapa etapa) 
     {   
         return etapaRepository.save(etapa);
     } 
     //Read  
-    public Etapa findByid(Long id) //Metodo
+    public Etapa findByid(Long id) 
     {   
         return etapaRepository.findById(id).get();
     } 
     //Delete
-    public void deleteById(Long id) //Metodo
+    public void deleteById(Long id) 
     {   
          etapaRepository.deleteById(id);
     } 
     
-    public List<Etapa> findAll() //una lista sin parametros de entrada
+    public List<Etapa> findAll() 
     {
-        return etapaRepository.findAll();  //parametros de salida
+        return etapaRepository.findAll();  
     }
 
 }

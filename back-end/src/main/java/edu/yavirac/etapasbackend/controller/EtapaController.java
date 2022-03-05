@@ -20,7 +20,7 @@ import edu.yavirac.etapasbackend.entity.Etapa;
 import edu.yavirac.etapasbackend.service.EtapaService;
 
 @RestController
-@CrossOrigin({"http://localhost:4200"})  //permite decirle las rutas a ls que va a dar acceso
+@CrossOrigin({"http://localhost:4200"})  
 @RequestMapping("/api/etapa")
 public class EtapaController {
 
@@ -38,12 +38,12 @@ public class EtapaController {
     }
     //Read  
     @GetMapping("/{id}")
-    public Etapa findById(@PathVariable Long id)  //PathVariable ayuda al id q se solicite lo mapee de tipo long
+    public Etapa findById(@PathVariable Long id)  
     {
         return etapaService.findByid(id);   
     }
     //Update
-    @PutMapping("/update")  //actualizaciones retorna codigo 200
+    @PutMapping("/update")  
     public Etapa update(@RequestBody Etapa etapa)
     {
         return etapaService.save(etapa);
@@ -58,7 +58,7 @@ public class EtapaController {
     @GetMapping("/findAll")
     public List<Etapa> findAll()
     {
-        return etapaService.findAll();  //llama al etapa para servicio
+        return etapaService.findAll();  
     }
     
 }

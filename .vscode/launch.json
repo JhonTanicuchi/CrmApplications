@@ -9,6 +9,13 @@
             "name": "Launch EtapasBackendApplication",
             "request": "launch",
             "mainClass": "edu.yavirac.etapasbackend.EtapasBackendApplication",
+            "projectName": "back-end"
+        },
+        {
+            "type": "java",
+            "name": "Launch EtapasBackendApplication",
+            "request": "launch",
+            "mainClass": "edu.yavirac.etapasbackend.EtapasBackendApplication",
             "projectName": "etapas-backend"
         },
         {
