@@ -23,8 +23,10 @@ public class Usuario implements UserDetails {
     private String username;
     private String password;
     private boolean estado;
-    /* @Column("persona_id")
-    private long personaId; */
+
+   /*  @MappedCollection(idColumn = "persona_id")
+    private Set<Persona> persona = new HashSet<>(); */
+
     @MappedCollection(idColumn = "usuario_id")
     private Set<RolUsuario> roles = new HashSet<>();
 
