@@ -14,7 +14,7 @@ import { UsuarioService } from './usuario.service';
   templateUrl: './usuario.component.html',
 })
 export class UsuarioComponent implements OnInit {
-  usuarioActual: Usuario = new Usuario(0, '', '', '', 0, 0, false);
+  usuarioActual: Usuario = new Usuario(0, '', '', '', 0, 0, true);
 
   listadoUsuarios: Usuario[] = [];
 
@@ -146,7 +146,7 @@ export class UsuarioComponent implements OnInit {
   save(usuario: Usuario): void {
     console.log('ingresando al método save');
     this.usuarioService.save(usuario).subscribe((respuesta) => {
-      this.usuarioActual = new Usuario(0, '', '', '', 0, 0, false);
+      this.usuarioActual = new Usuario(0, '', '', '', 0, 0, true);
       this.findAll();
     });
   }
@@ -163,7 +163,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   limpiarForm() {
-    this.usuarioActual = new Usuario(0, '', '', '', 0, 0, false);
+    this.usuarioActual = new Usuario(0, '', '', '', 0, 0, true);
   }
 
   UsuariosActivos(): number {
@@ -181,7 +181,7 @@ export class UsuarioComponent implements OnInit {
       this.listadoUsuarios = this.listadoUsuarios.filter(
         (item) => item.usuarioId != id
       );
-      this.usuarioActual = new Usuario(0, '', '', '', 0, 0, false);
+      this.usuarioActual = new Usuario(0, '', '', '', 0, 0, true);
     });
   }
 

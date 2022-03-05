@@ -307,7 +307,7 @@
                     (click)="seleccionarUsuario(usuario)"
                     (click)="volverFlag()"
                     (click)="viewCreate()"
-                    (click)="buscarPersona(usuarioActual.personaId)"
+                   
                     class="text-primary hover:text-primary-focus cursor-pointer"
                     >Editar</a
                   >
@@ -535,7 +535,7 @@
         [ngClass]="{
           hidden: !registroCredenciales
         }"
-        [ngClass]="{ flex: view, hidden: !view }"
+        [ngClass]="{ block: view, hidden: !view }"
         class="col-span-2 rounded-lg shadow-md bg-white"
       >
         <div

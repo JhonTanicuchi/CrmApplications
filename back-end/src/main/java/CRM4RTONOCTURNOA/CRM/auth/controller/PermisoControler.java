@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ public class PermisoControler {
     PermisoService permisoService;
 
     // Create
+    @PreAuthorize("hasAuthority('CREAR')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Permiso save(@RequestBody Permiso permiso) {
@@ -34,23 +36,28 @@ public class PermisoControler {
     }
 
     // Read
+    @PreAuthorize("hasAuthority('LEER')")
     @GetMapping("/{id}")
     public Permiso findById(@PathVariable Long id) {
         return permisoService.findById(id);
     }
 
     // Update
+    @PreAuthorize("hasAuthority('ACTUALIZAR')")
     @PutMapping("/update")
     public Permiso update(@RequestBody Permiso permiso) {
         return permisoService.save(permiso);
     }
 
     // Delete
+    @PreAuthorize("hasAuthority('ELIMINAR')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id) {
         permisoService.deleteById(id);
     }
 
+
+    @PreAuthorize("hasAuthority('LEER')")
     @GetMapping("/findAll")
     public List<Permiso> findAll() {
         return permisoService.findAll();

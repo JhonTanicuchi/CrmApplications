@@ -5,6 +5,7 @@ import java.util.List;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class RolController {
     RolService rolService;
  
     //Create
+    @PreAuthorize("hasAuthority('CREAR')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Rol save(@RequestBody Rol rol)
@@ -37,12 +39,14 @@ public class RolController {
     }
  
     //Read
+    @PreAuthorize("hasAuthority('LEER')")
     @GetMapping("/{id}")
     public Rol findById(@PathVariable Long id)
     {
         return rolService.findById(id);
     }
     //Update
+    @PreAuthorize("hasAuthority('ACTUALIZAR')")
     @PutMapping("/update")
     public Rol update(@RequestBody Rol rol)
     {
@@ -50,12 +54,15 @@ public class RolController {
     }
    
     //Delete
+    @PreAuthorize("hasAuthority('ELIMINAR')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
         rolService.deleteById(id);
     }
  
+
+    @PreAuthorize("hasAuthority('LEER')")
     @GetMapping("/findAll")
     public List<Rol> findAll()
     {

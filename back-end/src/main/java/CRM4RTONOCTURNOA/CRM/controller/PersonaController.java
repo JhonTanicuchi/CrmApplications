@@ -4,6 +4,7 @@ import CRM4RTONOCTURNOA.CRM.entity.Persona;
 import CRM4RTONOCTURNOA.CRM.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class PersonaController {
     PersonaService personaService;
 
     // create
+    @PreAuthorize("hasAuthority('CREAR')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Persona createPersona(@RequestBody Persona persona) {
@@ -24,6 +26,7 @@ public class PersonaController {
     }
 
     // buscar todos
+    @PreAuthorize("hasAuthority('LEER')")
     @GetMapping("/allPersonas")
     @ResponseStatus(HttpStatus.OK)
     public List<Persona> findAll() {
@@ -31,6 +34,7 @@ public class PersonaController {
     }
 
     // id _persona
+    @PreAuthorize("hasAuthority('LEER')")
     @GetMapping("/findId/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Persona buscarId(@PathVariable Long id) {
@@ -38,6 +42,7 @@ public class PersonaController {
     }
 
     // update
+    @PreAuthorize("hasAuthority('ACTUALIZAR')")
     @PutMapping("/updatePersona")
     @ResponseStatus(HttpStatus.OK)
     public Persona updaPersona(@RequestBody Persona persona) {
@@ -45,6 +50,7 @@ public class PersonaController {
     }
 
     //delete
+    @PreAuthorize("hasAuthority('ELIMINAR')")
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deletePersona(@PathVariable Long id) {
