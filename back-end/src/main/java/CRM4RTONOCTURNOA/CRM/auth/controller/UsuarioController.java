@@ -20,14 +20,14 @@ import CRM4RTONOCTURNOA.CRM.auth.service.UsuarioService;
 @RestController
 @CrossOrigin({ "http://localhost:4200" })
 @RequestMapping("/api/usuario")
-@PreAuthorize("hasAuthority('CLIENTE_LEER')")
+
 public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
 
     // Create
-    @PreAuthorize("hasAuthority('CLIENTE_CREAR')")
+  
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Usuario save(@RequestBody Usuario usuario) {
@@ -35,21 +35,21 @@ public class UsuarioController {
     }
 
     // Read
-    @PreAuthorize("hasAuthority('CLIENTE_LEER')")
+ 
     @GetMapping("/{id}")
     public Usuario findById(@PathVariable Long id) {
         return usuarioService.findById(id);
     }
 
     // Update
-    @PreAuthorize("hasAuthority('CLIENTE_ACTUALIZAR')")
+   
     @PutMapping("/update")
     public Usuario update(@RequestBody Usuario usuario) {
         return usuarioService.save(usuario);
     }
 
     // Delete
-    @PreAuthorize("hasAuthority('CLIENTE_ELIMINAR')")
+
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id) {
         usuarioService.deleteById(id);

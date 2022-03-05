@@ -22,14 +22,13 @@ import CRM4RTONOCTURNOA.CRM.auth.service.PermisoService;
 @RestController
 @CrossOrigin({ "http://localhost:4200" })
 @RequestMapping("/api/permiso")
-@PreAuthorize("hasAuthority('CLIENTE_LEER')")
+@PreAuthorize("hasAuthority('PERMISO_LEER')")
 public class PermisoControler {
 
     @Autowired
     PermisoService permisoService;
 
-    // Create
-    @PreAuthorize("hasAuthority('CLIENTE_CREAR')")
+ 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Permiso save(@RequestBody Permiso permiso) {
@@ -37,14 +36,14 @@ public class PermisoControler {
     }
 
     // Read
-    @PreAuthorize("hasAuthority('CLIENTE_LEER')")
+  
     @GetMapping("/{id}")
     public Permiso findById(@PathVariable Long id) {
         return permisoService.findById(id);
     }
 
     // Update
-    @PreAuthorize("hasAuthority('CLIENTE_ACTUALIZAR')")
+
     @PutMapping("/update")
     public Permiso update(@RequestBody Permiso permiso) {
         return permisoService.save(permiso);
@@ -52,7 +51,7 @@ public class PermisoControler {
 
 
     // Delete
-    @PreAuthorize("hasAuthority('CLIENTE_ELIMINAR')")
+   
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id) {
         permisoService.deleteById(id);

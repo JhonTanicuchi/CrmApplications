@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { TokenInterceptor } from './login/token.interceptor';
 import { RespuestaBackendInterceptor } from './login/respuesta-backend.interceptor';
 import { AlertaComponent } from './login/alerta/alerta/alerta.component';
+import { PermisoComponent } from './permiso/permiso.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AlertaComponent } from './login/alerta/alerta/alerta.component';
     UsuarioComponent,
     LoginComponent,
     AlertaComponent,
+    PermisoComponent
   ],
   imports: [
     BrowserModule,
