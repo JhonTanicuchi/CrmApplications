@@ -58,4 +58,34 @@ export class EtapaComponent implements OnInit {
       }
       );
 }
+
+limpiarForm() {
+  this.etapaActual = new Etapa(0, '', '', false);
+}
+
+  EtapasActivos(): number {
+  var totalActivos = 0;
+  this.listadoEtapas.forEach((etapa) => {
+    if (etapa.estado == true) {
+      totalActivos++;
+    }
+  });
+  return totalActivos;
+}
+
+flag = false;
+
+  cambiarFlag() {
+    this.flag = !this.flag;
+  }
+
+  iconDelete = false;
+
+  iconDeletFalse() {
+    this.iconDelete = false;
+  }
+
+  iconDeletTrue() {
+    this.iconDelete = true;
+  }
 }
