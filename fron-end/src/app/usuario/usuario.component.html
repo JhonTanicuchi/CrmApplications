@@ -73,7 +73,8 @@
     <button
       (click)="cambiarFlag()"
       (click)="volverFlag()"
-      (click)="limpiarForm()"
+      (click)="limpiarUsuario()"
+      (click)="limpiarPersona()"
       (click)="viewEdit()"
       [ngClass]="{ hidden: flagPrincipal, flex: !flagPrincipal }"
       class="shadow btn bg-primary border-primary text-white absolute right-0 bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus"
@@ -191,12 +192,12 @@
                 />
               </svg>
             </div>
-            <div class="font-semibold stat-title">{{ rol.nombre }}</div>
             <div class="stat-desc">
               <span class="text-sm font-normal text-gray-500"
-                ><span class="font-semibold">Id: </span>{{ rol.rolId }}</span
+                ><span class="font-semibold">N°</span>{{ rol.rolId }}</span
               >
             </div>
+            <div class="font-semibold stat-title">{{ rol.nombre }}</div>
           </div>
         </div>
       </div>
@@ -793,6 +794,7 @@
         (click)="cambiarFlag()"
         (click)="cerrarFlag()"
         (click)="volverFlag()"
+        (click)="limpiarPersona()"
         class="btn bg-white text-neutral border-white btn-circle hover:bg-neutral hover:border-neutral hover:text-white shadow-xl"
       >
         <svg

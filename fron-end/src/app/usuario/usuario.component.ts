@@ -14,7 +14,7 @@ import { UsuarioService } from './usuario.service';
   templateUrl: './usuario.component.html',
 })
 export class UsuarioComponent implements OnInit {
-  personaDatos: Persona = new Persona(0,"","","","","");
+  personaDatos: Persona = new Persona(0, '', '', '', '', '');
 
   usuarioActual: Usuario = new Usuario(
     0,
@@ -182,7 +182,7 @@ export class UsuarioComponent implements OnInit {
     console.log(this.usuarioActual);
   }
 
-  limpiarForm() {
+  limpiarUsuario() {
     this.usuarioActual = new Usuario(0, '', '', '', 0, this.personaDatos, true);
   }
 
@@ -234,7 +234,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   limpiarPersona() {
-    this.usuarioActual.persona = null;
+    this.personaDatos = new Persona(0, '', '', '', '', '');
   }
 
   view = false;
