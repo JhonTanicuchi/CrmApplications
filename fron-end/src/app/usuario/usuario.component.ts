@@ -14,26 +14,23 @@ import { UsuarioService } from './usuario.service';
   templateUrl: './usuario.component.html',
 })
 export class UsuarioComponent implements OnInit {
-  personaDatos: Persona = new Persona(0, '', '', '', '', '');
+  listadoUsuarios: Usuario[] = [];
+  listadoPermisos: Permiso[] = [];
+  roles!: Observable<Rol[]>;
+  personas!: Observable<Persona[]>;
 
+  personaDatos: Persona = new Persona(0, '', '', '', '', '');
+  rolDatos: Rol = new Rol(0, '', this.listadoPermisos);
+  permisoDatos: Permiso = new Permiso(0, '', new Date(), new Date(), true);
   usuarioActual: Usuario = new Usuario(
     0,
     '',
     '',
     '',
-    0,
+    this.rolDatos,
     this.personaDatos,
     true
   );
-
-  listadoUsuarios: Usuario[] = [];
-
-  rolDatos!: Rol;
-  permisosDatos!: Observable<Permiso[]>;
-
-  permisos!: Observable<Permiso[]>;
-  roles!: Observable<Rol[]>;
-  personas!: Observable<Persona[]>;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -44,7 +41,6 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAll();
-    this.permisos = this.permisoService.findAll();
     this.roles = this.rolService.findAll();
     this.personas = this.personaService.findAll();
   }
@@ -163,7 +159,7 @@ export class UsuarioComponent implements OnInit {
         '',
         '',
         '',
-        0,
+        this.rolDatos,
         this.personaDatos,
         true
       );
@@ -183,7 +179,15 @@ export class UsuarioComponent implements OnInit {
   }
 
   limpiarUsuario() {
-    this.usuarioActual = new Usuario(0, '', '', '', 0, this.personaDatos, true);
+    this.usuarioActual = new Usuario(
+      0,
+      '',
+      '',
+      '',
+      this.rolDatos,
+      this.personaDatos,
+      true
+    );
   }
 
   UsuariosActivos(): number {
@@ -206,7 +210,7 @@ export class UsuarioComponent implements OnInit {
         '',
         '',
         '',
-        0,
+        this.rolDatos,
         this.personaDatos,
         true
       );
@@ -253,23 +257,25 @@ export class UsuarioComponent implements OnInit {
   }
 
   buscarPersona(person: Persona) {
-    console.log(person)
-    console.log(person[0].personaId);
+    console.log(person);
     this.personaService.buscarId(person[0].personaId).subscribe((respuesta) => {
       this.personaDatos = respuesta;
-      console.log(respuesta);
     });
   }
 
-  buscarPermisos(id: number) {
-    this.permisosDatos = this.permisoService.findByRolId(id);
-    //this.usuarioActual.rolId = this.rolDatos.rolId;
+  buscarRol(rol: Rol) {
+    console.log(rol);
+    this.rolService.findById(rol[0].rolId).subscribe((respuesta) => {
+      this.rolDatos = respuesta;
+    });
   }
 
-  buscarRol(id: number) {
-    this.rolService.findById(id).subscribe((respuesta) => {
-      this.rolDatos = respuesta;
+  buscarPermisos(rol: Rol) {
+    this.permisoService.findByRolId(rol[0].rolId).subscribe((respuesta) => {
       console.log(respuesta);
+      respuesta.forEach((permiso) => {
+        this.listadoPermisos.push(permiso);
+      });
     });
   }
 }
