@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class ActividadController{
     ActividadService actividadService; 
 
     //Create
+    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Actividad save(@RequestBody Actividad actividad)
@@ -35,6 +37,7 @@ public class ActividadController{
     }
 
     //Read
+    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
     @GetMapping("/{id}")
     public Actividad findById(@PathVariable Long id)
     {
@@ -42,6 +45,7 @@ public class ActividadController{
     }
 
     //Update
+    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public Actividad update(@RequestBody Actividad actividad)
@@ -49,6 +53,7 @@ public class ActividadController{
         return actividadService.save(actividad);
     }
     //Delete
+    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
@@ -56,7 +61,7 @@ public class ActividadController{
     }
 
     //Con el getMapping va a eschucar la ruta que necesitamos
-    
+    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
     @GetMapping("/findAll") //ruta
     public List<Actividad> findAll() 
     {

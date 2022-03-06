@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
@@ -29,6 +30,7 @@ public class EtapaController {
     EtapaService etapaService;
 
     //Create y update
+    @PreAuthorize("hasAuthority('CREAR_ETAPA')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Etapa save(@RequestBody Etapa etapa)
@@ -38,31 +40,35 @@ public class EtapaController {
 
     }
     //Read  
+    @PreAuthorize("hasAuthority('LEER_ETAPA')")
     @GetMapping("/{id}")
     public Etapa findById(@PathVariable Long id)  //PathVariable ayuda al id q se solicite lo mapee de tipo long
     {
         return etapaService.findByid(id);   
     }
     //Update
+    @PreAuthorize("hasAuthority('ACTUALIZAR_ETAPA')")
     @PutMapping("/update")  //actualizaciones retorna codigo 200
     public Etapa update(@RequestBody Etapa etapa)
     {
         return etapaService.save(etapa);
     }
     //Delete
+    @PreAuthorize("hasAuthority('ELIMINAR_ETAPA')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
         etapaService.deleteById(id);
     }
 
+    @PreAuthorize("hasAuthority('LEER_ETAPA')")
     @GetMapping("/findAll")
     public List<Etapa> findAll()
     {
         return etapaService.findAll();  //llama al etapa para servicio
     }
 
-
+    @PreAuthorize("hasAuthority('LEER_ETAPA')")
     @GetMapping("/etapaPorSeguimiento/{id}")
     public  List<Etapa> findBySeguimientoId(@PathVariable Long id) {
         return etapaService.findBySeguimientoId(id);

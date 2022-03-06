@@ -36,17 +36,14 @@ export class LoginService {
           data = data.replace('Bearer ', '');
           data = data.split('.')[1];
           data = atob(data);
-          console.log(data);
-
           interface MyObj {
             sub: string;
             exp: number;
             nombre: string;
             rol: string;
           }
-
           let obj: MyObj = JSON.parse(data);
-          console.log(obj.nombre);
+          console.log("Bienvenido "+obj.nombre);
           sessionStorage.setItem('nombre', obj.nombre);
           this.router.navigate(['/home']);
         }

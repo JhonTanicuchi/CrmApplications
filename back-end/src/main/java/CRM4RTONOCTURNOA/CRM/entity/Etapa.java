@@ -15,7 +15,7 @@ public class Etapa {
     private String  nombre;
     private String  descripcion;
     private Boolean  estado;
-    @Column("seguimiento_id")
+    @Column("id_seguimiento")
     private long  seguimientoId;
 
 }

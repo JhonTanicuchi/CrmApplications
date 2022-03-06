@@ -6,10 +6,9 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  nombreSession: string = "";
+  nombreSession: string = '';
 
   constructor(private router: Router) {}
-
 
   ngOnInit(): void {
     this.nombreSession = String(sessionStorage.getItem('nombre'));
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   enSesion(): boolean {
     if (sessionStorage.getItem('username') != null) return true;
-
     return false;
   }
 

@@ -1,3 +1,5 @@
+import { Persona } from "../persona/persona";
+
 export class Usuario {
   constructor(
     public usuarioId: number,
@@ -5,8 +7,7 @@ export class Usuario {
     public username: string,
     public password: string,
     public rolId: number,
-    public personaId: number,
+    public persona: Persona,
     public estado: boolean
-  )
-  {}
+  ) {}
 }

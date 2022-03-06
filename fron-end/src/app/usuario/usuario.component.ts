@@ -14,11 +14,20 @@ import { UsuarioService } from './usuario.service';
   templateUrl: './usuario.component.html',
 })
 export class UsuarioComponent implements OnInit {
-  usuarioActual: Usuario = new Usuario(0, '', '', '', 0, 0, true);
+  personaDatos: Persona = new Persona(0,"","","","","");
+
+  usuarioActual: Usuario = new Usuario(
+    0,
+    '',
+    '',
+    '',
+    0,
+    this.personaDatos,
+    true
+  );
 
   listadoUsuarios: Usuario[] = [];
 
-  personaDatos!: Persona;
   rolDatos!: Rol;
   permisosDatos!: Observable<Permiso[]>;
 
@@ -149,7 +158,15 @@ export class UsuarioComponent implements OnInit {
   save(usuario: Usuario): void {
     console.log('ingresando al método save');
     this.usuarioService.save(usuario).subscribe((respuesta) => {
-      this.usuarioActual = new Usuario(0, '', '', '', 0, 0, true);
+      this.usuarioActual = new Usuario(
+        0,
+        '',
+        '',
+        '',
+        0,
+        this.personaDatos,
+        true
+      );
       this.findAll();
     });
   }
@@ -166,7 +183,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   limpiarForm() {
-    this.usuarioActual = new Usuario(0, '', '', '', 0, 0, true);
+    this.usuarioActual = new Usuario(0, '', '', '', 0, this.personaDatos, true);
   }
 
   UsuariosActivos(): number {
@@ -184,7 +201,15 @@ export class UsuarioComponent implements OnInit {
       this.listadoUsuarios = this.listadoUsuarios.filter(
         (item) => item.usuarioId != id
       );
-      this.usuarioActual = new Usuario(0, '', '', '', 0, 0, true);
+      this.usuarioActual = new Usuario(
+        0,
+        '',
+        '',
+        '',
+        0,
+        this.personaDatos,
+        true
+      );
     });
   }
 
@@ -206,11 +231,10 @@ export class UsuarioComponent implements OnInit {
 
   volverFlag() {
     this.flagPrincipal = !this.flagPrincipal;
-    console.log(this.flagPrincipal);
   }
 
   limpiarPersona() {
-    this.usuarioActual.personaId = 0;
+    this.usuarioActual.persona = null;
   }
 
   view = false;
@@ -228,13 +252,11 @@ export class UsuarioComponent implements OnInit {
     return new Array(i);
   }
 
-  buscarPersona(id: number) {
-    this.personaService.buscarId(id).subscribe((respuesta) => {
+  buscarPersona(person: Persona) {
+    this.personaService.buscarId(person[0].personaId).subscribe((respuesta) => {
       this.personaDatos = respuesta;
       console.log(respuesta);
     });
-    //this.usuarioActual.personaId = this.personaDatos.personaId;
-    //this.usuarioActual.nombre = this.personaDatos.nombre + ' ' + this.personaDatos.apellido;
   }
 
   buscarPermisos(id: number) {

@@ -16,7 +16,6 @@ export class MenuComponent implements OnInit {
 
   enSesion(): boolean {
     if (sessionStorage.getItem('username') != null) return true;
-    console.log(this.router.url);
     return false;
   }
 
@@ -27,7 +26,6 @@ export class MenuComponent implements OnInit {
 
   inLogin(): boolean {
     if ('/login' != this.router.url) return true;
-
     return false;
   }
 }

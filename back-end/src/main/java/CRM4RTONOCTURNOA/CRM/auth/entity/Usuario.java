@@ -27,7 +27,7 @@ public class Usuario implements UserDetails {
     private String password;
     private boolean estado;
 
-    @MappedCollection(idColumn = "persona_id")
+   @MappedCollection(idColumn = "persona_id")
     private Set<Persona> persona = new HashSet<>();
 
     @MappedCollection(idColumn = "usuario_id")

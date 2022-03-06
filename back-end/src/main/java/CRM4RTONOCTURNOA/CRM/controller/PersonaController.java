@@ -18,7 +18,7 @@ public class PersonaController {
     PersonaService personaService;
 
     // create
-    @PreAuthorize("hasAuthority('CREAR')")
+    @PreAuthorize("hasAuthority('CREAR_PERSONA')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Persona createPersona(@RequestBody Persona persona) {
@@ -26,7 +26,7 @@ public class PersonaController {
     }
 
     // buscar todos
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_PERSONA')")
     @GetMapping("/allPersonas")
     @ResponseStatus(HttpStatus.OK)
     public List<Persona> findAll() {
@@ -34,7 +34,7 @@ public class PersonaController {
     }
 
     // id _persona
-    @PreAuthorize("hasAuthority('LEER')")
+    @PreAuthorize("hasAuthority('LEER_PERSONA')")
     @GetMapping("/findId/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Persona buscarId(@PathVariable Long id) {
@@ -42,7 +42,7 @@ public class PersonaController {
     }
 
     // update
-    @PreAuthorize("hasAuthority('ACTUALIZAR')")
+    @PreAuthorize("hasAuthority('ACTUALIZAR_PERSONA')")
     @PutMapping("/updatePersona")
     @ResponseStatus(HttpStatus.OK)
     public Persona updaPersona(@RequestBody Persona persona) {
@@ -50,7 +50,7 @@ public class PersonaController {
     }
 
     //delete
-    @PreAuthorize("hasAuthority('ELIMINAR')")
+    @PreAuthorize("hasAuthority('ELIMINAR_PERSONA')")
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deletePersona(@PathVariable Long id) {
