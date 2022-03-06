@@ -1,17 +1,18 @@
 package CRM4RTONOCTURNOA.CRM.entity;
 
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import lombok.Data;
 
 @Data
-@Table("clientes")
-public class Cliente{
-
+@Table("productos")
+public class Producto {
+    
     @Id
-    @Column("cliente_id")
-    private long clienteId;
+    @Column("producto_id")
+    private long productoId;
     private String nombre;
-    private String identificacion;
+    private Double precio;
 }

@@ -60,4 +60,10 @@ public class ClienteController {
     {
         return clienteService.findAll();
     }
+
+    @GetMapping("/findByName/{termino}")
+    public List<Cliente> findByName(@PathVariable String termino)
+    {
+        return clienteService.findByName("%"+termino+"%");
+    }
 }

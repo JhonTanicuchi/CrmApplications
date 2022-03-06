@@ -44,4 +44,9 @@ export class ClienteService {
   {
     return this.http.get<Cliente[]>(this.url+"/findAll", this.httpOptions);
   }
+
+  public findAllByName(termino: string): Observable<Cliente[]>
+  {
+    return this.http.get<Cliente[]>(this.url+"/findByName/"+termino, this.httpOptions)
+  }
 }

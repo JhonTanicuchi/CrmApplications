@@ -8,6 +8,9 @@ import { HttpClientModule} from '@angular/common/http';
 import { ActividadComponent } from './actividad/actividad.component';
 import { MenuComponent } from './compartidos/menu/menu.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { PedidoComponent } from './pedidos/pedido/pedido.component';
+import { ClienteBusquedaComponent } from './cliente/cliente-busqueda/cliente-busqueda.component';
+import { ProductoBusquedaComponent } from './producto/producto-busqueda/producto-busqueda.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { ClienteComponent } from './cliente/cliente.component';
     AppComponent,
     ActividadComponent,
     MenuComponent,
-    ClienteComponent
+    ClienteComponent,
+    PedidoComponent,
+    ClienteBusquedaComponent,
+    ProductoBusquedaComponent
   ],
   imports: [
     BrowserModule,
