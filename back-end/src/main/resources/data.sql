@@ -10,6 +10,7 @@ CREATE SEQUENCE IF NOT EXISTS administracion.roles_usuarios_rol_usuario_id_seq
     MINVALUE 1
     MAXVALUE 2147483647
     CACHE 1;
+
 CREATE SEQUENCE IF NOT EXISTS administracion.rol_rol_id_seq
     INCREMENT 1
     START 1
@@ -38,12 +39,7 @@ CREATE TABLE IF NOT EXISTS administracion.usuarios
     username character varying UNIQUE COLLATE pg_catalog."default",
     password character varying COLLATE pg_catalog."default",
     estado boolean NOT NULL DEFAULT true,
-    persona_id integer,
     CONSTRAINT usuario_pkey PRIMARY KEY (usuario_id),
-    CONSTRAINT persona_fk FOREIGN KEY (persona_id)
-        REFERENCES persona.persona (persona_id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS administracion.roles
@@ -194,7 +190,7 @@ INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT r
 INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_PEDIDO'));
 
 
-INSERT INTO administracion.usuarios (nombre, username, password, estado, persona_id) VALUES ('Administrador', 'admin', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', true, 1);
+INSERT INTO administracion.usuarios (nombre, username, password, estado) VALUES ('Administrador', 'admin', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', true);
 
 
 INSERT INTO administracion.roles_usuarios (usuario_id, rol_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where username = 'admin'), (SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'));
@@ -242,3 +238,29 @@ INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto)
 
 -------------------------------------------------------------------------------------------------------------------
 
+CREATE SEQUENCE IF NOT EXISTS dministracion.usuarios_personas_usuario_persona_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+CREATE TABLE IF NOT EXISTS administracion.usuarios_personas
+(
+    usuario_persona_id integer NOT NULL DEFAULT nextval('administracion.usuarios_personas_usuario_persona_id_seq'::regclass),
+    usuario_id integer NOT NULL,
+    persona_id integer NOT NULL,
+    CONSTRAINT usuarios_personas_pkey PRIMARY KEY (usuario_persona_id),
+    CONSTRAINT persona_fk FOREIGN KEY (persona_id)
+        REFERENCES persona.persona (persona_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID,
+    CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+        REFERENCES administracion.usuarios (usuario_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID
+)
+
+INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 5), (SELECT persona_id FROM persona.persona where persona_id = 1));

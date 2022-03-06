@@ -11,10 +11,10 @@ public class UsuarioPersona {
 
     @Id
     @Column("usuario_persona_id")
-    private long rolUsuarioId;
+    private long usuarioPersonaId;
     @Column("usuario_id")
-    private long rolId;
-    @Column("persona_id")
     private long usuarioId;
+    @Column("persona_id")
+    private long personaId;
 
 }
