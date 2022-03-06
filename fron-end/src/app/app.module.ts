@@ -7,13 +7,15 @@ import { FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { ActividadComponent } from './actividad/actividad.component';
 import { MenuComponent } from './compartidos/menu/menu.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ActividadComponent,
-    MenuComponent
+    MenuComponent,
+    ClienteComponent
   ],
   imports: [
     BrowserModule,

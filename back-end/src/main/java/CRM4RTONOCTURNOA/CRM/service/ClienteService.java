@@ -1,5 +1,7 @@
 package CRM4RTONOCTURNOA.CRM.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,4 +30,8 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
     
+    public List<Cliente>findAll()
+    {
+        return clienteRepository.findAll();
+    }
 }
