@@ -198,3 +198,47 @@ INSERT INTO administracion.usuarios (nombre, username, password, estado, persona
 
 
 INSERT INTO administracion.roles_usuarios (usuario_id, rol_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where username = 'admin'), (SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'));
+
+-------------------------------------------------------------------------------------------------------------------
+
+CREATE SEQUENCE IF NOT EXISTS persona.persona_persona_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+
+CREATE TABLE IF NOT EXISTS persona.persona
+(
+    persona_id integer NOT NULL DEFAULT nextval('persona.persona_persona_id_seq'::regclass),
+    nombre character varying COLLATE pg_catalog."default" NOT NULL,
+    apellido character varying COLLATE pg_catalog."default" NOT NULL,
+    identificacion character varying COLLATE pg_catalog."default" NOT NULL,
+    correo character varying COLLATE pg_catalog."default" NOT NULL,
+    contacto character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT persona_pkey PRIMARY KEY (persona_id)
+)
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('admin', 'admin', 'admin', 'admin', 'admin');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Jeysson ', 'Molina', '0000000000', 'jac.molina@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Jennifer', 'Herrera', '0000000000', 'jmm.herrera@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Angie', 'Pacas', '0000000000', 'aer.pacas@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Sebastian', 'Naranjo', '0000000000', 'wsm.naranjo@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Kevin', 'Pillajo', '0000000000', 'khm.pillajo@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Ricardo', 'Yaguachi', '0000000000', 'rmj.yaguachi@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Jhon', 'Tanicuchi', '0000000000', 'jav.tanicuhi@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Daniela', 'Torres', '0000000000', 'diq.torres@yavirac.edu.ec', '0000000000');
+
+INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Jonathan', 'Zambrano', '0000000000', 'jrr.zambrano@yavirac.edu.ec', '0000000000');
+
+-------------------------------------------------------------------------------------------------------------------
+

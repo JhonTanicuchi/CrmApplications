@@ -253,6 +253,8 @@ export class UsuarioComponent implements OnInit {
   }
 
   buscarPersona(person: Persona) {
+    console.log(person)
+    console.log(person[0].personaId);
     this.personaService.buscarId(person[0].personaId).subscribe((respuesta) => {
       this.personaDatos = respuesta;
       console.log(respuesta);

@@ -9,9 +9,6 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import CRM4RTONOCTURNOA.CRM.entity.Persona;
-
 import org.springframework.data.annotation.Transient;
 import lombok.Data;
 
@@ -27,8 +24,8 @@ public class Usuario implements UserDetails {
     private String password;
     private boolean estado;
 
-   @MappedCollection(idColumn = "persona_id")
-    private Set<Persona> persona = new HashSet<>();
+    @MappedCollection(idColumn = "usuario_id")
+    private Set<UsuarioPersona> persona = new HashSet<>();
 
     @MappedCollection(idColumn = "usuario_id")
     private Set<RolUsuario> roles = new HashSet<>();
