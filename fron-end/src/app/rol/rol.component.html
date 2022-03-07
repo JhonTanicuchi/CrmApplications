@@ -1,4 +1,83 @@
-<div class="grid grid-cols-5 divide-x divide-black-100">
+<div class="contenedor-roles bg-neutral">
+  <h1 class="text-center my-2 shadow-lg">
+    <span class="text-primary font-bold">Administración de roles</span>
+  </h1>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-6 gap-4 text-xs text-center">
+
+  <div class="col-span-4 shadow-lg">
+    <div class="card" id="card-form">
+      <div class="card card-title text-primary">Rol</div>
+      <div class="grid grid-cols-2 card-body form-control gap-2">
+        <label class="label" for="nombreRol">Nombre Rol:</label>
+        <input class="input input-primary" type="text" name="nombreRol" id="" [(ngModel)]="rolActual.nombre">
+
+        <label class="label" for="nombre">Tipo Rol:</label>
+        <!-- <input class="input input-primary" type="text" name="nombre" id="" [(ngModel)]="rolActual.tipoRol">
+        <label class="label" for="nombre">Estado:</label>
+        <select class="select w-full max-w-xs select-primary" [(ngModel)]="rolActual.estado">
+          <option disabled selected>Estado</option>
+          <option value="true">Activo</option>
+          <option value="false">Inactivo</option>
+        </select> -->
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary" id="btn-Guardar" (click)="save(rolActual)">Guardar</button>
+        <button class="btn btn-danger" id="btn-Eliminar" (click)="deleteById(rolActual.rolId)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2">
+    <div class="card card-title text-neutral">Lista de roles</div>
+    <table class="mx-auto table-auto">
+      <thead>
+        <tr class="bg-gradient-to-r from-indigo-600 to-purple-600">
+          <th class="px-16 py-2">
+            <span class="text-gray-100 font-semibold">Nombre Rol</span>
+          </th>
+          <th class="px-16 py-2">
+            <span class="text-gray-100 font-semibold">Tipo rol</span>
+          </th>
+
+          <th class="px-16 py-2">
+            <span class="text-gray-100 font-semibold">Estado</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-gray-200 hover:bg-accent active" >
+        <tr class="bg-white border-b-2 border-gray-200" *ngFor="let rol of listadoRoles"
+        (click)="seleccionarRol(rol)"
+          [class.active]="rol==rolActual">
+          <td>
+            <a>{{rol.nombre}}</a>
+          </td>
+
+          <td class="px-16 py-2">
+            <span>...</span>
+          </td>
+
+          <td class="px-16 py-2">
+            <select name="" id="">
+              <option>...</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="grid grid-cols-5 divide-x divide-black-100">
   <div
   [ngClass]="{ hidden: flag, flex: !flag }"
     class="p-2 relative bg-whit shadow-2xl z-10"
@@ -6,6 +85,9 @@
   >
     <div>
       <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
+
+
+
         <div class="stat">
           <div class="stat-figure text-secondary">
             <svg
@@ -200,7 +282,7 @@
                   <div class="text-sm text-gray-500">Retenciones</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <!--{{ usuario.username }}-->
+                {{ usuario.username }}
                 </td>
                 <td
                 *ngIf="rol.estado == true"
@@ -582,4 +664,4 @@
       </button>
     </div>
   </div>
-</div>
+</div>-->
