@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS administracion.usuarios
     username character varying UNIQUE COLLATE pg_catalog."default",
     password character varying COLLATE pg_catalog."default",
     estado boolean NOT NULL DEFAULT true,
-    CONSTRAINT usuario_pkey PRIMARY KEY (usuario_id),
+    CONSTRAINT usuario_pkey PRIMARY KEY (usuario_id)
 );
 
 CREATE TABLE IF NOT EXISTS administracion.roles
@@ -54,6 +54,9 @@ CREATE TABLE IF NOT EXISTS administracion.permisos
 (
     permiso_id integer NOT NULL DEFAULT nextval('administracion.permisos_permiso_id_seq'::regclass),
     nombre character varying COLLATE pg_catalog."default",
+    fecha_creacion timestamp,
+    fecha_modificacion timestamp,
+    estado boolean NOT NULL DEFAULT true,
     CONSTRAINT permisos_pkey PRIMARY KEY (permiso_id)
 );
 
@@ -144,6 +147,7 @@ INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_PEDIDO');
 INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_PEDIDO');
 
 INSERT INTO administracion.roles (nombre) VALUES ('ADMINISTRADOR');
+INSERT INTO administracion.roles (nombre) VALUES ('ADMINISTRADOR_PERMISOS');
 INSERT INTO administracion.roles (nombre) VALUES ('SUPERVISOR');
 INSERT INTO administracion.roles (nombre) VALUES ('ASESOR');
 INSERT INTO administracion.roles (nombre) VALUES ('GERENTE');
@@ -189,11 +193,20 @@ INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT r
 INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_PEDIDO'));
 INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_PEDIDO'));
 
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_PERMISO'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_PERMISO'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_PERMISO'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_PERMISO'));
+
 
 INSERT INTO administracion.usuarios (nombre, username, password, estado) VALUES ('Administrador', 'admin', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', true);
 
-
 INSERT INTO administracion.roles_usuarios (usuario_id, rol_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where username = 'admin'), (SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'));
+
+
+INSERT INTO administracion.usuarios (nombre, username, password, estado) VALUES ('Jonathan Zambrano', 'jonathan', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', true);
+
+INSERT INTO administracion.roles_usuarios (usuario_id, rol_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where username = 'admin'), (SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'));
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -261,6 +274,8 @@ CREATE TABLE IF NOT EXISTS administracion.usuarios_personas
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
-)
+);
 
-INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 5), (SELECT persona_id FROM persona.persona where persona_id = 1));
+INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 1), (SELECT persona_id FROM persona.persona where persona_id = 1));
+
+INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 2), (SELECT persona_id FROM persona.persona where persona_id = 10));

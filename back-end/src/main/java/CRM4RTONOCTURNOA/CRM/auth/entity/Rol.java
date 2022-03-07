@@ -20,3 +20,4 @@ public class Rol {
     private Set<PermisoRol> permisos = new HashSet<>();
 
 }
+
