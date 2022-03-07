@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS administracion.usuarios
     username character varying UNIQUE COLLATE pg_catalog."default",
     password character varying COLLATE pg_catalog."default",
     estado boolean NOT NULL DEFAULT true,
-    CONSTRAINT usuario_pkey PRIMARY KEY (usuario_id),
+    CONSTRAINT usuario_pkey PRIMARY KEY (usuario_id)
 );
 
 CREATE TABLE IF NOT EXISTS administracion.roles
@@ -54,6 +54,9 @@ CREATE TABLE IF NOT EXISTS administracion.permisos
 (
     permiso_id integer NOT NULL DEFAULT nextval('administracion.permisos_permiso_id_seq'::regclass),
     nombre character varying COLLATE pg_catalog."default",
+    fecha_creacion timestamp,
+    fecha_modificacion timestamp,
+    estado boolean NOT NULL DEFAULT true,
     CONSTRAINT permisos_pkey PRIMARY KEY (permiso_id)
 );
 
@@ -261,6 +264,6 @@ CREATE TABLE IF NOT EXISTS administracion.usuarios_personas
         ON UPDATE CASCADE
         ON DELETE CASCADE
         NOT VALID
-)
+);
 
 INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 5), (SELECT persona_id FROM persona.persona where persona_id = 1));
