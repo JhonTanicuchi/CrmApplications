@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class CampaniaController {
     @Autowired
     CampaniaService campaniaService;
 
+    @PreAuthorize("hasAuthority('CREAR_CAMPAÑA')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Campania save(@RequestBody Campania cliente) {
@@ -33,22 +35,26 @@ public class CampaniaController {
         
     }
     //Read
+    @PreAuthorize("hasAuthority('LEER_CAMPAÑA')")
     @GetMapping("/{id}")
     public Campania findById(@PathVariable Long id){
         return campaniaService.findById(id);
     }
     //UpDate
+    @PreAuthorize("hasAuthority('ACTUALIZAR_CAMPAÑA')")
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public Campania update(@RequestBody Campania cliente) {
        return campaniaService.save(cliente);
     }
-    //Delete    
+    //Delete   
+    @PreAuthorize("hasAuthority('ELIMINAR_CAMPAÑA')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id) {
         campaniaService.deleteById(id);
     }
 
+    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
     @GetMapping("/findAll")
     public List<Campania> findAll(){
         return campaniaService.findAll();

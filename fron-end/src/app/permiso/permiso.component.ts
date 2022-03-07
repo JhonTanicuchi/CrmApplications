@@ -12,6 +12,7 @@ import { PermisoService } from './permiso.service';
 export class PermisoComponent implements OnInit {
 
 
+  
   permisoActual: Permiso = new Permiso(0, "", new Date, new Date, false );
 
   listadoPermisos: Permiso[] = [];
