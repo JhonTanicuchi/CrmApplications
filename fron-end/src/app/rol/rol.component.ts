@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Permiso } from '../permiso/permiso';
+import { PermisoService } from '../permiso/permiso.service';
 import { Rol } from './rol';
 import { RolService } from './rol.service';
 
@@ -11,8 +13,16 @@ export class RolComponent implements OnInit {
   rolActual: Rol = new Rol(0, '',[]);
 
   listadoRoles: Rol[] = [];
+  listadoPermisos: Permiso[] = [];
 
-  constructor(private rolService: RolService) {}
+  rolDatos: Rol = new Rol(0, '', this.listadoPermisos);
+  permisoDatos: Permiso = new Permiso(0, '', new Date(), new Date(), true);
+
+  constructor(
+    private rolService: RolService,
+    private permisoService: PermisoService
+
+    ) {}
 
   ngOnInit(): void {
     this.findAll();
@@ -46,4 +56,5 @@ export class RolComponent implements OnInit {
       this.rolActual = new Rol(0, '', []);
     });
   }
+
 }

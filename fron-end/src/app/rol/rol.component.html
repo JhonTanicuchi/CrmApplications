@@ -52,17 +52,7 @@
           <div class="card" id="card-form">
             <div class="card card-title text-primary">Nombre del Rol</div>
             <div class="grid grid-cols-2 card-body form-control gap-2">
-              <label class="label" for="nombreRol">Nombre Rol:</label>
               <input class="input input-primary" type="text" name="nombreRol" id="" [(ngModel)]="rolActual.nombre">
-
-              <label class="label" for="nombre">Tipo Rol:</label>
-              <!-- <input class="input input-primary" type="text" name="nombre" id="" [(ngModel)]="rolActual.tipoRol">
-            <label class="label" for="nombre">Estado:</label>
-            <select class="select w-full max-w-xs select-primary" [(ngModel)]="rolActual.estado">
-              <option disabled selected>Estado</option>
-              <option value="true">Activo</option>
-              <option value="false">Inactivo</option>
-            </select> -->
             </div>
             <div class="card-actions">
               <button class="btn btn-primary" id="btn-Guardar" (click)="save(rolActual)">Guardar</button>
@@ -73,3 +63,5 @@
       </div>
     </div>
   </div>
+
+ 
