@@ -63,44 +63,6 @@
       </div>
     </div>
   </div>
-  <div class="mt-2">
-    <div class="card card-title text-neutral">Lista de roles</div>
-    <table class="mx-auto table-auto">
-      <thead>
-        <tr class="bg-gradient-to-r from-indigo-600 to-purple-600">
-          <th class="px-16 py-2">
-            <span class="text-gray-100 font-semibold">Nombre Rol</span>
-          </th>
-          <th class="px-16 py-2">
-            <span class="text-gray-100 font-semibold">Permisos</span>
-          </th>
-          <th class="px-16 py-2">
-            <span class="text-gray-100 font-semibold">Estado</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="bg-gray-200 hover:bg-accent active" >
-        <tr class="bg-white border-b-2 border-gray-200" *ngFor="let rol of listadoRoles"
-        (click)="seleccionarRol(rol)"
-          [class.active]="rol==rolActual">
-          <td>
-            <a>{{rol.nombre}}</a>
-          </td>
-
-          <td class="px-16 py-2">
-            <span>...</span>
-          </td>
-
-          <td class="px-16 py-2">
-            <select name="" id="">
-              <option>Activo</option>
-              <option>Inactivo</option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
 
 
