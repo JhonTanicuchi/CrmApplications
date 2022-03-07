@@ -1,6 +1,7 @@
 package CRM4RTONOCTURNOA.CRM.entity;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +26,6 @@ public class Pedido {
     private String observacion;
     
     //Raiz
-    @MappedCollection(idColumn = "pedido_id")
+   @MappedCollection(idColumn = "pedido_id")
     Set<DetallePedido> detallePedido = new HashSet<>();
 }

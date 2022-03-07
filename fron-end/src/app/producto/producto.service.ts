@@ -12,6 +12,7 @@ export class ProductoService {
 
   private url: string = environment.API_URL + "/producto";
 
+  //ENCABEZADO
   private httpOptions = {
     headers : new HttpHeaders({"Content-Type":"application/json"})
   }

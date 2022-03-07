@@ -11,21 +11,20 @@
         <p class="p-3">{{cliente.identificacion}}</p>
       </div>
     </div>
-   
     <div class="rounded-lg shadow-2xl border-2 m-3">
       <div class="grid md:grid-cols-3 ">
         <p class="p-3">Nro de pedido:</p>
         <input class="col-span-2  input input-primary input-sm mt-2"
-        type="text" name="" id="" placeholder="001001000000001"
+        type="text" name="" id="" placeholder="numero pedido"
         [(ngModel)]="pedido.nro">
-        <div class="divider col-span-3"></div>
         <p class="p-3">Fecha:</p>
         <input class="col-span-2  input input-primary input-sm mt-2"
-        type="date" name="" id="" [(ngModel)]="pedido.fecha">
+        type="date" name="" id=""
+        [(ngModel)]="pedido.fecha">
       </div>
     </div>
   </div>
-  
+
   <div class="rounded-lg shadow-2xl border-2 m-3">
     <table class="table table-compact w-full">
       <thead>
@@ -58,10 +57,8 @@
   </div>
 
   <div class="rounded-lg shadow-2xl border-2 m-3">
-    <button class="btn btn-primary m-3">Guardar</button>
+    <button class="btn btn-primary m-3" (click)="guardar()" >Guardar</button>
     <button class="btn btn-secondary m-3">Limpiar</button>
   </div>
-
 </div>
 
- 

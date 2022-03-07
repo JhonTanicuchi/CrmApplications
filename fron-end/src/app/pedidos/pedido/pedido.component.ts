@@ -29,6 +29,12 @@ export class PedidoComponent implements OnInit {
     this.detallesPedido.push(new DetallePedido(producto.productoId, 1, producto.precio, producto.nombre));
   }
 
+  guardar() : void
+  {
+    this.pedido.clienteId = this.cliente.clienteId;
+    this.pedidoService.save(this.pedido).subscribe();
+    this.limpiar();
+  }
 
   limpiar():void{
 

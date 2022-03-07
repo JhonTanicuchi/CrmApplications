@@ -1,8 +1,7 @@
 <div class="dropdown dropdown-hover">
   <input #inputBuscar class="input input-secondary input-sm"
   type="text" name="" id="" placeholder="Agrege un producto"
-  (input)="buscar(inputBuscar.value)"
-  >
+  (input)="buscar(inputBuscar.value)">
     <ul class="menu dropdown-content bg-base-100" >
       <li
       *ngFor="let item of productos | async as list">
