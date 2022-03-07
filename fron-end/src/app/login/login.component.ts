@@ -6,7 +6,7 @@ import { LoginService } from './login.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  credenciales = {
+  credenciales = {  //es un objeto vacio sin username ni password
     username: '',
     password: '',
   };
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  iniciarSesion(): void {
-    this.loginService.iniciarSesion(this.credenciales);
+  iniciarSesion(): void { //va a llamar un servicio
+    this.loginService.iniciarSesion(this.credenciales); //llama credenciales
   }
 }

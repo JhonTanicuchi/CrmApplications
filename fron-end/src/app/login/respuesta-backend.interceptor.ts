@@ -16,8 +16,8 @@ export class RespuestaBackendInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    return next.handle(request).pipe(
-      catchError((error) => {
+    return next.handle(request).pipe( //pipe indicamos q va hacer cuando reciba la respuesta
+      catchError((error) => { //captura el error de respuesta
         sessionStorage.setItem('ultimoError', error.status);
         this.router.navigate(['/alerta']);
         return throwError(() => error);
