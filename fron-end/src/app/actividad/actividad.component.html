@@ -1,0 +1,76 @@
+<div>
+  <h1 class="text-center my-2 shadow-lg">
+    <span class="text-primary font-bold">CRUD</span>
+    ACTIVIDADES
+  </h1>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs text-center">
+  <div class="col-span-6 shadow-lg flex justify-center">
+    <div class=" w-full " id="row">
+      <div class="w-full" >
+        <div class="bg-neutral text-neutral-content rounded-none card card-title">Registro Actividades</div>
+        <div class="grid grid-cols-2 card-body form-control gap-2">
+
+          <label class="label text-right font-bold text-base" for="nombre">Nombre:</label>
+          <input autocomplete="off" placeholder='Nombre de la actividad' class="input  input-primary" type="text" name="nombre" id="" [(ngModel)]="actividadActual.nombre">
+
+
+          <label class="label font-bold text-base" for="descripcion">Descripcion:</label>
+          <input autocomplete="off" placeholder='Descripcion de la actividad'class="input input-primary" type="text" name="descripcion"
+            [(ngModel)]="actividadActual.descripcion" required>
+
+          <label class="label font-bold text-base" for="estado">Estado</label>
+          <select name="estado" class="select select-bordered select-primary w-full "
+            [(ngModel)]="actividadActual.estado" >
+            <option disabled="" selected="">Seleccionar Estado</option>
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+          </select>
+        </div>
+        <div class="card-actions text-center dropdown dropdown-end">
+          <button class="btn btn-primary mr-6 m-3" (click)="save(actividadActual)">Guardar</button>
+          <button class="btn btn-danger ml-5" (click)="deleteById(actividadActual.actividadId)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-6 border rounded-sm shadow-lg ">
+    <p class="bg-neutral text-neutral-content rounded-sm card card-title">Listado Actividades</p>
+    <div class="row mt-5">
+      <div class="m-5 mt-0" *ngFor="let actividad of listadoActividades">
+        <div class=" shadow-lg flex justify-center">
+          <div class=" w-full flex card ">
+            <div class="card-title pl-5"> Actividad {{actividad.nombre}}</div>
+
+          <div class="flex items-center">
+            <div class="card-body grid grid-cols-2 text-left text-base">
+              <div class="">
+                <div class="font-bold ">
+                  Nombre:
+                </div>
+                <div class="font-bold">
+                  Descripcion:
+                </div>
+                <div class="font-bold">
+                  Estado:
+                 </div>
+              </div>
+              <div> <div>
+                {{actividad.nombre}}
+              </div>
+              <div>
+                {{actividad.descripcion}}
+              </div>
+              <div>
+                {{actividad.estado}}
+              </div>
+            </div>
+            </div>
+            <div class="card-actions text-center dropdown dropdown-end">
+              <button class="btn btn-primary m-3" (click)="seleccionarActividad(actividad)">Editar</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

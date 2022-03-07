@@ -1,0 +1,136 @@
+<div class="container bg-[url('https://th.bing.com/th/id/OIP.qhjZvOjErvm-pOSQXQRlbgHaE8?pid=ImgDet&rs=1')]">
+  <h1 class="text-3xl font-bold  text-center my-3 text-red-600">GESTIONAR PERSONAS </h1>
+  <div class="grid grid-cols-3 gap-4 p-3 m-auto border-t-2 text-center">
+    <div class="col-span-1 text-center">
+      <h4 class="my-2">
+        Perfil Personal
+      </h4>
+      <hr class="my-2">
+      <div class="card w-96 bg-base-100 shadow-xl mx-auto " *ngIf="displayPersonaSelect">
+        <div class="card-body">
+          <img src="https://api.lorem.space/image/face?w=400&h=225" alt="Shoes" class="rounded-xl">
+          <h2 class="titulo">Datos personales</h2>
+          <h5 id="camposPropiedades">Cedula:{{personaSelect.cedula}} </h5>
+          <h5 id="camposPropiedades">Nombre:{{personaSelect.nombre}} </h5>
+          <h5 id="camposPropiedades">Apellido:{{personaSelect.apellido}} </h5>
+          <h5 id="camposPropiedades">Celular:{{personaSelect.celular}} </h5>
+          <h5 id="camposPropiedades">Correo:{{personaSelect.correo}} </h5>
+
+
+          <div class="justify-end card-actions">
+            <button class="btn btn-primary" (click)="displayPersonaSelect = !displayPersonaSelect">Salir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-2 border-r-2 p-1 text-center">
+      <h4 class="text-3xl  text-gray-400 my-3">Personas Registradas Actualmente</h4>
+
+      <div class="grid grid-cols-1 gap-4 text-left">
+        <div class="col-span-1">
+          <button class="bg-green-500 hover:bg-green-700 text-white font-bold p-3  rounded-full"
+            (click)="displayNuevaPersona=!displayNuevaPersona">Agregar
+            Personas</button>
+          <div class="overflow-x-auto text-center pt-2">
+            <table class="table w-full">
+              <!-- head -->
+              <thead class="text-center text-blue-900">
+                <tr>
+                  <th>ID</th>
+                  <th>CEDULA</th>
+                  <th>NOMBRE</th>
+                  <th>CORREO</th>
+                  <th>ACCIÓN</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-gray-300 border border-grey-500 md:border-none block md:table-row "
+                  *ngFor="let persona of personas">
+                  <th class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{persona.personaId}}</th>
+                  <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{persona.cedula}}</td>
+                  <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{persona.nombre + " " +
+                    persona.apellido}}</td>
+                  <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{persona.correo}}</td>
+                  <td>
+                    <!-- <button class="btn btn-outline btn-info rounded-sm">Añadir</button> -->
+                    <div class="grid grid-cols-3 gap-4">
+                      <div class="col-span-1">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full "
+                          (click)="buscarPersona(persona.personaId)">Ver
+                          Perfil</button>
+
+                      </div>
+                      <div class="col-span-1">
+                        <button
+                          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 btn-error border-red-500 px-4 rounded-full"
+                          (click)="eliminarPersona(persona.personaId)">Eliminar</button>
+                      </div>
+                      <div class="col-span-1">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                          (click)="selectPersonaEdit(persona)">Modificar</button>
+                      </div>
+                    </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p-dialog header="Editar Persona" [modal]="true" [(visible)]="displayPersonaEdit" (onHide)="this.formPersona.reset();"
+      [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+      <form [formGroup]="formPersona" (ngSubmit)="actualizarPersona()">
+        <input type="text" placeholder="Nombre" class="input input-bordered input-info w-full my-2"
+          formControlName="nombre">
+        <input type="text" placeholder="Apellido" class="input input-bordered input-info w-full my-2"
+          formControlName="apellido">
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-1">
+            <input type="text" placeholder="Cédula" class="input input-bordered input-info w-full my-2"
+              formControlName="cedula">
+
+          </div>
+          <div class="col-span-1">
+            <input type="text" placeholder="Celular" class="input input-bordered input-info w-full my-2"
+              formControlName="celular">
+          </div>
+        </div>
+
+        <input type="email" placeholder="Correo" class="input input-bordered input-info w-full my-2"
+          formControlName="correo">
+        <button [disabled]="!formPersona.valid" type="submit" name="save" id="save"
+          class="btn btn-block">Guardar</button>
+      </form>
+    </p-dialog>
+
+
+    <p-dialog header="Nueva Persona" [modal]="true" [(visible)]="displayNuevaPersona" (onHide)="this.formPersona.reset();"
+      [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '40vw'}">
+      <form [formGroup]="formPersona" (ngSubmit)="guardarPersona()">
+
+        <input type="text" placeholder="Nombre" class="input input-bordered input-info w-full my-2"
+          formControlName="nombre">
+        <input type="text" placeholder="Apellido" class="input input-bordered input-info w-full my-2"
+          formControlName="apellido">
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-1">
+            <input type="text" placeholder="Cédula" class="input input-bordered input-info w-full my-2"
+              formControlName="cedula">
+
+          </div>
+          <div class="col-span-1">
+            <input type="text" placeholder="Celular" class="input input-bordered input-info w-full my-2"
+              formControlName="celular">
+          </div>
+        </div>
+
+        <input type="email" placeholder="Correo" class="input input-bordered input-info w-full my-2"
+          formControlName="correo">
+        <button [disabled]="!formPersona.valid" type="submit" name="save" id="save"
+          class="btn btn-block">Guardar</button>
+      </form>
+    </p-dialog>

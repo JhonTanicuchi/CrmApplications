@@ -1,0 +1,77 @@
+<div class="w-full" id="container-grande">
+  <div class="flex" style="height: calc(100vh - 64px - 40px)">
+    <div
+      class="flex items-center justify-center text-center lg:text-left lg:w-1/2"
+    >
+      <div>
+        <div class="mt-5 px-16">
+          <h2 class="mx-10 text-3xl font-semibold text-gray-800 md:text-4xl">
+            CRM <span class="text-primary">Applications</span>
+          </h2>
+          <div class="mt-12">
+            <div>
+              <label
+                for="username"
+                class="block text-sm font-medium text-gray-700"
+                >Username</label
+              >
+              <div class="mt-1 relative rounded-md shadow-sm">
+                <input
+                  [(ngModel)]="credenciales.username"
+                  type="text"
+                  name="username"
+                  id="username"
+                  class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
+                  placeholder="Ingresar username"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700"
+                >Contraseña</label
+              >
+              <div class="mt-1 relative rounded-md shadow-sm">
+                <input
+                  [(ngModel)]="credenciales.password"
+                  type="text"
+                  name="password"
+                  id="password"
+                  type="password"
+                  class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
+                  placeholder="Ingresar contraseña"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <div class="mt-10 px-20">
+              <button
+                (click)="iniciarSesion()"
+                class="btn btn-primary hover:btn-primary-focus w-full capitalize"
+              >
+                Iniciar Sesion
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="hidden rounded-xl overflow-hidden lg:block lg:w-1/2"
+      style="clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
+    >
+      <div
+        class="h-full object-cover"
+        style="
+          background-image: url(https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+        "
+      >
+        <div class="h-full bg-black opacity-25"></div>
+      </div>
+    </div>
+  </div>
+</div>
