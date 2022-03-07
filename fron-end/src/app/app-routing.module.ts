@@ -16,22 +16,22 @@ import { LoginComponent } from './login/login.component';
 import { AlertaComponent } from './login/alerta/alerta/alerta.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'alerta', component: AlertaComponent },
-  {path:'campania',component: CampaniaComponent},
-  {path: 'permiso',component: PermisoComponent},
-  {path: 'rol', component: RolComponent},
-  {path: 'usuario', component: UsuarioComponent},
-  {path: 'etapa', component: EtapaComponent},
-  {path: 'actividad', component:ActividadComponent},
-  {path: 'cotizacion', component:CotizacionComponent},
-  { path: 'seguimiento', component: SeguimientoComponent},
-  { path: 'seguimiento/:id', component: SeguimientoEtapasComponent},
-  { path: 'persona', component: PersonaComponent},
-  { path: 'conocenos', component: ConocenosComponent},
-]
+  { path: 'campania', component: CampaniaComponent },
+  { path: 'permiso', component: PermisoComponent },
+  { path: 'rol', component: RolComponent },
+  { path: 'usuario', component: UsuarioComponent },
+  { path: 'etapa', component: EtapaComponent },
+  { path: 'actividad', component: ActividadComponent },
+  { path: 'cotizacion', component: CotizacionComponent },
+  { path: 'seguimiento', component: SeguimientoComponent },
+  { path: 'seguimiento/:id', component: SeguimientoEtapasComponent },
+  { path: 'persona', component: PersonaComponent },
+  { path: 'conocenos', component: ConocenosComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
