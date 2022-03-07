@@ -1,0 +1,20 @@
+
+h4{
+    color: blue;
+    font-size: 30px;
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+.titulo{
+    color: rgb(219, 91, 91);
+    font-size: 20px;
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#camposPropiedades{
+    color: rgb(70, 36, 194);
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+}

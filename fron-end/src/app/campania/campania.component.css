@@ -1,0 +1,9 @@
+#card-fixed{
+    position: fixed;
+    z-index: 1000px;
+    top: 30%;
+    left: 8%;
+}
+#row{
+    height: 600px;
+}

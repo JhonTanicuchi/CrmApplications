@@ -1,0 +1,54 @@
+<div class="container p-2">
+  <h3 class="mx-auto my-2 text-2xl">{{seguimiento.nombre}}</h3>
+  <div class="grid grid-cols-2 gap-3 py-2">
+    <div class="col-span-1">
+      <p class="text-gray-500 text-left mx-2 text-base">Descripción: {{seguimiento.descripcion}}</p>
+      <p class="text-gray-500 text-left mx-2 text-base">Creado por: {{seguimiento.creadoPor}}</p>
+      <p class="text-gray-500 text-left mx-2 text-base">Fecha: {{seguimiento.fechaCreacion | date}}</p>
+    </div>
+    <div class="col-span-1">
+      <button class="btn btn-outline btn-info rounded-sm right m-2" (click)="abrirModal()">Añadir</button>
+    </div>
+  </div>
+  <!-- Kanba AQUI -->
+  <div class="border-2 w-full rounded-lg mx-auto grid grid-flow-col">
+
+    <div *ngFor="let etapaSeguimiento of etapasSeguimiento">
+      <div class="shadow-md m-3 rounded-lg">
+        <p class="bg-info text-info-content text-center rounded-tl-lg rounded-tr-lg py-3">{{etapaSeguimiento.nombreEtapa
+          | uppercase}}</p>
+        <div [sortablejs]="etapaSeguimiento.etapaPersonaDTO" [sortablejsOptions]="options"
+          data-id="{{etapaSeguimiento.etapaId}}">
+          <div class="my-2 py-2 border-b-2" *ngFor="let etapaPersona of etapaSeguimiento.etapaPersonaDTO"
+            data-id="{{etapaPersona.etapaPersonaId}}">
+            {{etapaPersona.nombreCompleto | uppercase}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<p-dialog header="Nuevo" [modal]="true" [(visible)]="displayNuevo" [breakpoints]="breakpointsModal"
+  (onHide)="this.formEtapaPersona.reset();" [style]="tamanioModal" (onHide)="limpiar()">
+  <form [formGroup]="formEtapaPersona" (ngSubmit)="guardarEtapaPersona()">
+    <span>Seleccione a la persona: </span>
+    <select class="select w-full max-w-xs select-success my-2" formControlName="personaId">
+      <option [value]="null" selected>Seleccionar</option>
+      <option *ngFor="let persona of listPersona" [value]="persona.personaId">{{persona.nombre + ' ' +
+        persona.apellido}}</option>
+    </select>
+    <span>Seleccione una Etapa: </span>
+    <select class="select w-full max-w-xs select-success my-2" formControlName="etapaId">
+      <option [value]="null" selected>Seleccionar</option>
+      <option *ngFor="let etapa of listEtapas" [value]="etapa.etapasId">{{etapa.nombre}}</option>
+    </select>
+    <textarea class="textarea textarea-success my-2 w-full" placeholder="ingresar observaciòn"
+      formControlName="observacion"></textarea>
+    <button [disabled]="!formEtapaPersona.valid" type="submit" name="save" id="save"
+      class="btn btn-active btn-primary w-full">Guardar</button>
+  </form>
+</p-dialog>
