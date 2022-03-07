@@ -266,4 +266,4 @@ CREATE TABLE IF NOT EXISTS administracion.usuarios_personas
         NOT VALID
 );
 
-INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 5), (SELECT persona_id FROM persona.persona where persona_id = 1));
+INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 1), (SELECT persona_id FROM persona.persona where persona_id = 1));
