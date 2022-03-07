@@ -9,14 +9,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', 
 })
 export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
 
   iniciarSesion(credenciales: any): void {
     let httpOptions = {
-      headers: new HttpHeaders({
+      headers: new HttpHeaders({ //encabezado le indicamos el envio de autorizacion
         Authorization:
           'Basic ' + btoa(credenciales.username + ':' + credenciales.password),
       }),

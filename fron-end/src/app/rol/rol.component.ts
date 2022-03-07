@@ -18,10 +18,14 @@ export class RolComponent implements OnInit {
 
   rolActual: Rol = new Rol(0, '', this.listadoPermisos);
 
+  rolDatos: Rol = new Rol(0, '', this.listadoPermisos);
+  permisoDatos: Permiso = new Permiso(0, '', new Date(), new Date(), true);
+
   constructor(
     private rolService: RolService,
     private permisoService: PermisoService
-  ) {}
+
+    ) {}
 
   ngOnInit(): void {
     this.findAll();

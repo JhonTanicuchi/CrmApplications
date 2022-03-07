@@ -9,6 +9,6 @@ export class AlertaComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.ultimoError = String(sessionStorage.getItem('ultimoError'));
+    this.ultimoError = String(sessionStorage.getItem('ultimoError')); //mapea
   }
 }
