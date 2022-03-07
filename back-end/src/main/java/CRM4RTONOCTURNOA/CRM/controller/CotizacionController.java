@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class CotizacionController {
     CotizacionService cotizacionService;
 
     //Create
+    @PreAuthorize("hasAuthority('CREAR_COTIZACION)")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Cotizacion save(@RequestBody Cotizacion cotizacion)
@@ -37,6 +39,7 @@ public class CotizacionController {
     }
 
     //Read 
+    @PreAuthorize("hasAuthority('LEER_COTIZACION')")
     @GetMapping("/{id}")
     public Cotizacion findById(@PathVariable Long id )
     {
@@ -44,6 +47,7 @@ public class CotizacionController {
     }
 
     //update
+    @PreAuthorize("hasAuthority('ACTUALIZAR_COTIZACION')")
     @PutMapping("/update")
     public Cotizacion update(@RequestBody Cotizacion cotizacion)
     {
@@ -51,12 +55,14 @@ public class CotizacionController {
     }
 
     //delete
+    @PreAuthorize("hasAuthority('ELIMINAR_COTIZACION')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
         cotizacionService.deleteById(id);
-    }  
+    }
  
+    @PreAuthorize("hasAuthority('LEER_COTIZACION')")
     @GetMapping("/findAll")
     public List<Cotizacion> findAll()
     {
