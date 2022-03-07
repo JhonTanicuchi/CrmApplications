@@ -171,8 +171,6 @@
         <div
           *ngFor="let rol of roles | async"
           (click)="seleccionarFlagRol()"
-          (click)="buscarPermisos(rol.rolId)"
-
           class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
@@ -302,16 +300,18 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{usuario.rolId}}
+                  Rol
                 </td>
                 <td
                   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                 >
                   <a
                     (click)="seleccionarUsuario(usuario)"
+                    (click)="buscarPersona(usuarioActual.persona)"
+                    (click)="buscarRol(usuarioActual.roles)"
+                    (click)="buscarPermisos(usuarioActual.roles)"
                     (click)="volverFlag()"
                     (click)="viewCreate()"
-                    (click)="buscarPersona(usuarioActual.persona)"
                     class="text-primary hover:text-primary-focus cursor-pointer"
                     >Editar</a
                   >
@@ -444,9 +444,9 @@
             <h2
               class="text-3xl ml-7 mb-5 font-extrabold tracking-tight text-gray-900 sm:text-4xl flex items-center"
             >
-              <span
-                class="block text-xl uppercase font-bold text-gray-900"
-              >{{personaDatos.nombre}}</span>
+              <span class="block text-xl uppercase font-bold text-gray-900">{{
+                personaDatos.nombre
+              }}</span>
               <input
                 *ngIf="view == true"
                 [(ngModel)]="usuarioActual.estado"
@@ -455,14 +455,19 @@
                 class="form-checkbox checkbox checkbox-xs checkbox-primary ml-2"
               />
             </h2>
-            <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Identificación: {{personaDatos.cedula}}</span>
+            <span class="ml-7 mb-2 block text-sm font-semibold text-gray-500"
+              >Identificación: <span class=" font-normal"
+                >{{ personaDatos.cedula }}</span
+              >
             </span>
-            <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Celular: {{personaDatos.celular}}</span>
-            </span>
-            <span class="ml-7 mb-2 block text-sm font-normal text-gray-500"
-              ><span class="font-semibold">Correo: {{personaDatos.correo}}</span>
+            <span class="ml-7 mb-2 block text-sm font-semibold text-gray-500"
+              >Celular: <span class="font-normal"
+                > {{ personaDatos.celular }}</span
+              ></span>
+            <span class="ml-7 mb-2 block text-sm font-semibold text-gray-500"
+              >Correo: <span class="font-normal"
+                > {{ personaDatos.correo }}</span
+              >
             </span>
           </div>
         </div>
@@ -681,6 +686,7 @@
           hidden: !seleccionarRol
         }"
         [ngClass]="{ block: view, hidden: !view }"
+        style="height: calc(100% - 56px)"
         class="hidden rounded-lg shadow-md bg-white"
       >
         <div
@@ -690,7 +696,7 @@
         </div>
         <div class="p-4 grid grid-rows-2 gap-2">
           <div
-            class="py-5 px-5 shadow rounded-lg bg-gray-100 flex justify-between items-center"
+            class="py-5 px-5 shadow rounded-lg bg-gray-100 flex justify-between items-center " 
           >
             <div class="flex justify-center items-center">
               <svg
@@ -707,7 +713,7 @@
                   d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
                 />
               </svg>
-              <h1 class="font-bold uppercase">rol</h1>
+              <h1 class="font-bold uppercase">{{ rolDatos.nombre }}</h1>
             </div>
             <button
               (click)="seleccionarFlagRol()"
@@ -746,9 +752,9 @@
                 />
               </svg>
             </div>
-            <div class="stat-value">5</div>
+            <div class="stat-value">{{listadoPermisos.length}}</div>
             <div class="stat-title">Permisos</div>
-            <div class="stat-desc">Encontrados en rol</div>
+            <div class="stat-desc">En {{ rolDatos.nombre.toLowerCase() }}</div>
           </div>
         </div>
       </div>
@@ -759,7 +765,7 @@
           hidden: !seleccionarRol
         }"
         [ngClass]="{ block: view, hidden: !view }"
-        class="hidden col-span-3 w-full rounded-lg shadow-md bg-white"
+        class="hidden col-span-3 w-full rounded-lg shadow-md bg-white" style="height: calc(100% - 48px)"
       >
         <div
           class="shadow w-full rounded-lg bg-gray-100 font-medium text-center"
@@ -767,21 +773,21 @@
           Permisos
         </div>
         <div
-          class="h-48 grid grid-rows-4 grid-cols-4 gap-2 w-full p-4 overflow-auto scrollbar-hide rounded-lg"
+          class="grid grid-cols-4 gap-2 w-full p-4 overflow-auto scrollbar-hide rounded-lg" style="height: calc(100% - 2rem)"
         >
           <button
-            *ngFor="let permiso of permisosDatos | async; let i = index"
+            *ngFor="let permiso of listadoPermisos; let i = index"
             class="bg-gray-100 rounded-lg shadow"
           >
-            <span>{{permiso.nombre}}</span>
+            <span>{{ permiso.nombre }}</span>
           </button>
 
-          <!-- <div
-            *ngIf="usuarioActual.rolId<=0"
+          <div
+            *ngIf="listadoPermisos.length <= 0"
             class="flex justify-center items-center w-full h-full"
           >
             <p class="text-gray-400">No hay permisos</p>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>

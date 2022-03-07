@@ -29,7 +29,7 @@ export class RolService {
   //Read
   public findById(id: number): Observable<Rol>
   {
-    return this.http.get<Rol>(this.url+"/id", this.httpOptions);
+    return this.http.get<Rol>(this.url + '/' + id, this.httpOptions);
   }
 
   //Update

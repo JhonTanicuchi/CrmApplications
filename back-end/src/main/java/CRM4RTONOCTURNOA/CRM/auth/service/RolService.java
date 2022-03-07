@@ -37,12 +37,6 @@ public class RolService {
         return nombrePermisos;
     }
 
-
-    // Read
-    public Rol findById(Long id) {
-        return rolRepository.findById(id).get();
-    }
-
     // Delete
     public void deleteById(Long id) {
         rolRepository.deleteById(id);
