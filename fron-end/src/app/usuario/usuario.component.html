@@ -116,7 +116,7 @@
         <div
           *ngFor="let persona of personas | async"
           (click)="seleccionarFlagPersona()"
-          (click)="buscarPersona(persona)"
+          (click)="seleccionarPersonaDatos(persona)"
           class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
@@ -171,6 +171,8 @@
         <div
           *ngFor="let rol of roles | async"
           (click)="seleccionarFlagRol()"
+          (click)="seleccionarRolDatos(rol)"
+          (click)="seleccionarPermisosDatos(rol)"
           class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
@@ -456,18 +458,16 @@
               />
             </h2>
             <span class="ml-7 mb-2 block text-sm font-semibold text-gray-500"
-              >Identificación: <span class=" font-normal"
-                >{{ personaDatos.cedula }}</span
-              >
+              >Identificación:
+              <span class="font-normal">{{ personaDatos.cedula }}</span>
             </span>
             <span class="ml-7 mb-2 block text-sm font-semibold text-gray-500"
-              >Celular: <span class="font-normal"
-                > {{ personaDatos.celular }}</span
-              ></span>
+              >Celular:
+              <span class="font-normal"> {{ personaDatos.celular }}</span></span
+            >
             <span class="ml-7 mb-2 block text-sm font-semibold text-gray-500"
-              >Correo: <span class="font-normal"
-                > {{ personaDatos.correo }}</span
-              >
+              >Correo:
+              <span class="font-normal"> {{ personaDatos.correo }}</span>
             </span>
           </div>
         </div>
@@ -696,7 +696,7 @@
         </div>
         <div class="p-4 grid grid-rows-2 gap-2">
           <div
-            class="py-5 px-5 shadow rounded-lg bg-gray-100 flex justify-between items-center " 
+            class="py-5 px-5 shadow rounded-lg bg-gray-100 flex justify-between items-center"
           >
             <div class="flex justify-center items-center">
               <svg
@@ -717,6 +717,8 @@
             </div>
             <button
               (click)="seleccionarFlagRol()"
+              (click)="limpiarRol()"
+              (click)="limpiarPermiso()"
               class="shadow btn btn-sm bg-primary border-primary text-white bottom-0 btn-circle hover:bg-primary-focus hover:border-primary-focus"
             >
               <svg
@@ -752,7 +754,7 @@
                 />
               </svg>
             </div>
-            <div class="stat-value">{{listadoPermisos.length}}</div>
+            <div class="stat-value">{{ listadoPermisos.length }}</div>
             <div class="stat-title">Permisos</div>
             <div class="stat-desc">En {{ rolDatos.nombre.toLowerCase() }}</div>
           </div>
@@ -765,7 +767,8 @@
           hidden: !seleccionarRol
         }"
         [ngClass]="{ block: view, hidden: !view }"
-        class="hidden col-span-3 w-full rounded-lg shadow-md bg-white" style="height: calc(100% - 48px)"
+        class="hidden col-span-3 w-full rounded-lg shadow-md bg-white"
+        style="height: calc(100% - 48px)"
       >
         <div
           class="shadow w-full rounded-lg bg-gray-100 font-medium text-center"
@@ -773,7 +776,8 @@
           Permisos
         </div>
         <div
-          class="grid grid-cols-4 gap-2 w-full p-4 overflow-auto scrollbar-hide rounded-lg" style="height: calc(100% - 2rem)"
+          class="grid grid-cols-4 gap-2 w-full p-4 overflow-auto scrollbar-hide rounded-lg"
+          style="height: calc(100% - 2rem)"
         >
           <button
             *ngFor="let permiso of listadoPermisos; let i = index"
@@ -800,7 +804,10 @@
         (click)="cambiarFlag()"
         (click)="cerrarFlag()"
         (click)="volverFlag()"
+        (click)="limpiarUsuario()"
         (click)="limpiarPersona()"
+        (click)="limpiarRol()"
+        (click)="limpiarPermiso()"
         class="btn bg-white text-neutral border-white btn-circle hover:bg-neutral hover:border-neutral hover:text-white shadow-xl"
       >
         <svg
@@ -822,6 +829,10 @@
       <button
         (click)="save(usuarioActual)"
         (click)="volverFlag()"
+        (click)="limpiarUsuario()"
+        (click)="limpiarPersona()"
+        (click)="limpiarRol()"
+        (click)="limpiarPermiso()"
         class="btn bg-primary border-primary text-white hover:bg-primary-focus hover:border-primary-focus"
       >
         <span class="mr-2">Guardar</span>

@@ -140,6 +140,7 @@ export class UsuarioComponent implements OnInit {
   seleccionarFlagRol() {
     this.seleccionarRol = !this.seleccionarRol;
     this.registroRol = !this.registroRol;
+    this.view = !this.view;
   }
 
   registroFlagPersona() {
@@ -149,14 +150,16 @@ export class UsuarioComponent implements OnInit {
   seleccionarFlagPersona() {
     this.seleccionarPersona = !this.seleccionarPersona;
     this.registroPersona = !this.registroPersona;
+    this.view = !this.view;
   }
 
   save(usuario: Usuario): void {
     console.log('ingresando al método save');
+    console.log(this.usuarioActual);
     this.usuarioService.save(usuario).subscribe((respuesta) => {
       this.usuarioActual = new Usuario(
         0,
-        '',
+        this.personaDatos.nombre + ' ' + this.personaDatos.apellido,
         '',
         '',
         this.rolDatos,
@@ -176,18 +179,6 @@ export class UsuarioComponent implements OnInit {
   seleccionarUsuario(usuario: Usuario): void {
     this.usuarioActual = usuario;
     console.log(this.usuarioActual);
-  }
-
-  limpiarUsuario() {
-    this.usuarioActual = new Usuario(
-      0,
-      '',
-      '',
-      '',
-      this.rolDatos,
-      this.personaDatos,
-      true
-    );
   }
 
   UsuariosActivos(): number {
@@ -237,8 +228,31 @@ export class UsuarioComponent implements OnInit {
     this.flagPrincipal = !this.flagPrincipal;
   }
 
+  limpiarUsuario() {
+    this.usuarioActual = new Usuario(
+      0,
+      '',
+      '',
+      '',
+      new Rol(0, '', []),
+      new Persona(0, '', '', '', '', ''),
+      true
+    );
+  }
+
   limpiarPersona() {
     this.personaDatos = new Persona(0, '', '', '', '', '');
+  }
+  limpiarRol() {
+    this.rolDatos = new Rol(0, '', []);
+  }
+  limpiarPermiso() {
+    this.permisoDatos = new Permiso(0, '', new Date(), new Date(), true);
+
+    for (let i = this.listadoPermisos.length; i > 0; i--) {
+      this.listadoPermisos.pop();
+    }
+    console.log(this.listadoPermisos);
   }
 
   view = false;
@@ -261,6 +275,15 @@ export class UsuarioComponent implements OnInit {
     this.personaService.buscarId(person[0].personaId).subscribe((respuesta) => {
       this.personaDatos = respuesta;
     });
+    console.log(this.personaDatos);
+  }
+
+  seleccionarPersonaDatos(person: Persona) {
+    console.log(person);
+    this.personaService.buscarId(person.personaId).subscribe((respuesta) => {
+      this.personaDatos = respuesta;
+    });
+    console.log(this.personaDatos);
   }
 
   buscarRol(rol: Rol) {
@@ -268,10 +291,28 @@ export class UsuarioComponent implements OnInit {
     this.rolService.findById(rol[0].rolId).subscribe((respuesta) => {
       this.rolDatos = respuesta;
     });
+    console.log(this.rolDatos);
+  }
+
+  seleccionarRolDatos(rol: Rol) {
+    console.log(rol);
+    this.rolService.findById(rol.rolId).subscribe((respuesta) => {
+      this.rolDatos = respuesta;
+    });
+    console.log(this.rolDatos);
   }
 
   buscarPermisos(rol: Rol) {
     this.permisoService.findByRolId(rol[0].rolId).subscribe((respuesta) => {
+      console.log(respuesta);
+      respuesta.forEach((permiso) => {
+        this.listadoPermisos.push(permiso);
+      });
+    });
+  }
+
+  seleccionarPermisosDatos(rol: Rol) {
+    this.permisoService.findByRolId(rol.rolId).subscribe((respuesta) => {
       console.log(respuesta);
       respuesta.forEach((permiso) => {
         this.listadoPermisos.push(permiso);
