@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Permiso } from '../permiso/permiso';
+import { PermisoService } from '../permiso/permiso.service';
 import { Rol } from './rol';
 import { RolService } from './rol.service';
 
@@ -8,14 +11,21 @@ import { RolService } from './rol.service';
   styleUrls: ['./rol.component.css'],
 })
 export class RolComponent implements OnInit {
-  rolActual: Rol = new Rol(0, '',[]);
-
   listadoRoles: Rol[] = [];
+  listadoPermisos: Permiso[] = [];
 
-  constructor(private rolService: RolService) {}
+  permisos!: Observable<Permiso[]>;
+
+  rolActual: Rol = new Rol(0, '', this.listadoPermisos);
+
+  constructor(
+    private rolService: RolService,
+    private permisoService: PermisoService
+  ) {}
 
   ngOnInit(): void {
     this.findAll();
+    this.permisos = this.permisoService.findAll();
   }
 
   save(rol: Rol): void {
@@ -44,6 +54,24 @@ export class RolComponent implements OnInit {
     this.rolService.deleteById(id).subscribe(() => {
       this.listadoRoles = this.listadoRoles.filter((item) => item.rolId != id);
       this.rolActual = new Rol(0, '', []);
+    });
+  }
+
+  buscarPermisos(rol: Rol) {
+    this.permisoService.findByRolId(rol[0].rolId).subscribe((respuesta) => {
+      console.log(respuesta);
+      respuesta.forEach((permiso) => {
+        this.listadoPermisos.push(permiso);
+      });
+    });
+  }
+
+  seleccionarPermisosDatos(rol: Rol) {
+    this.permisoService.findByRolId(rol.rolId).subscribe((respuesta) => {
+      console.log(respuesta);
+      respuesta.forEach((permiso) => {
+        this.listadoPermisos.push(permiso);
+      });
     });
   }
 }

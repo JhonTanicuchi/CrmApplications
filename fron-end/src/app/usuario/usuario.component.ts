@@ -155,7 +155,7 @@ export class UsuarioComponent implements OnInit {
 
   save(usuario: Usuario): void {
     console.log('ingresando al método save');
-    console.log(this.usuarioActual);
+    console.log(usuario);
     this.usuarioService.save(usuario).subscribe((respuesta) => {
       this.usuarioActual = new Usuario(
         0,
