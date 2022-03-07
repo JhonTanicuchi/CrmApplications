@@ -1,0 +1,55 @@
+<div>
+  <h1 class="text-center my-5 shadow-lg">
+    <span class="text-primary font-bold">ADMINISTRACION</span> DE PRODUCTOS
+  </h1>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-6 gap-4 text-xs text-center">
+  <div class="border rounded-box shadow-lg">
+    <p class="bg-neutral text-neutral-content rounded-sm">LISTADO</p>
+    <div class="menu bg-base-100 rounded-box">
+      <ul class="menu">
+        <li
+         class="hover:bg-info active"
+         *ngFor="let producto of listadoProductos"
+         (click)="seleccionarProducto(producto)"
+         [class.active]="producto == productoActual"
+         >
+          <a>{{producto.nombre}}</a>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-span-4 shadow-lg">
+    <div class="card">
+      <div class="card card-title">PRODUCTO</div>
+      <div class="grid grid-cols-2 card-body form-control">
+
+
+        <label class="label" for="categoria">Categoria:</label>
+        <input class="input input-primary" type="text" name="categoria" id=""  [(ngModel)]="productoActual.categoria"/>
+
+
+        <label class="label" for="nombre">Nombre:</label>
+        <input class="input input-primary" type="text" name="nombre" id=""   [(ngModel)]="productoActual.nombre"/>
+
+
+        <label class="label" for="codigo">Codigo:</label>
+        <input class="input input-primary" type="text" name="codigo" id=""   [(ngModel)]="productoActual.codigo"  />
+
+        <label class="label" for="precio">Precio:</label>
+        <input class="input input-primary" type="text" name="precio" id=""   [(ngModel)]="productoActual.precio"  />
+
+
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-primary" (click)="save(productoActual)" >GUARDAR</button>
+      <button class="btn btn-danger" (click)="deleteById(productoActual.productoId)" >ELIMINAR</button>
+    </div>
+  </div>
+
+  <div class="shadow-lg">informacion</div>
+</div>

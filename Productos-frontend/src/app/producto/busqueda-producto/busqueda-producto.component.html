@@ -1,0 +1,16 @@
+<div class="dropdown dropdown-hover">
+  <input
+    #inputbuscar
+    class="input input-primary input-sm"
+    type="text"
+    placeholder="Ingrese codigo"
+    (input)="buscar(inputbuscar.value)"
+  />
+
+  <ul class="menu dropdown-content bg-base-100"
+   *ngFor="let item of productos | async">
+    <li>
+      <a (click)="seleccionar(item)" >{{ item.nombre }}</a>
+    </li>
+  </ul>
+</div>

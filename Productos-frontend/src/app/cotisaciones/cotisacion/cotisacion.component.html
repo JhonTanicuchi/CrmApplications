@@ -1,0 +1,83 @@
+<div class="m-3 md:max-w-2xl mx-auto rounded-lg shadow-2xl border-4">
+  <p class="text-center uppercase font-bold mb-4 my-4">
+    REGISTRO de <span class="text-primary"> COTISACIONES</span>
+  </p>
+  <div class="grid grid-cols-2 gap-2">
+    <div class="rounded-lg shadow-2xl border-2">
+      <div class="grid md:grid-cols-3">
+        <p class="p-3">Cliente</p>
+        <app-busqueda-cliente
+          class="col-span-2"
+          (emisorEvento)="cliente = $event"
+        ></app-busqueda-cliente>
+
+        <div class="divider col-span-3">
+          <p class="p-3">Identificasion</p>
+          <p class="p-3">{{ cliente.identificasion }}</p>
+        </div>
+
+        <div class="divider col-span-3">
+          <p class="p-3">Nombre</p>
+          <p class="p-3">{{ cliente.nombre }}</p>
+        </div>
+
+        <div class="divider col-span-3">
+          <p class="p-3">Identificasion</p>
+          <p class="p-4">{{ cliente.direccion }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="rounded-lg shadow-2xl border-2">
+      <p class="p-3">N° Cotisacion</p>
+      <input
+        class="input input-primary input-sm col-span-2"
+        type="text"
+        placeholder="001001000000001"
+        [(ngModel)]="cotisacion.nro"
+      />
+
+      <div class="divider col-span-3"></div>
+    </div>
+  </div>
+
+  <div>
+    <br />
+    <table class="table table-compact w-full">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Codigo</th>
+          <th>Categoria</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let linea of detallesCotisacion">
+          <td >
+            {{linea}}
+          </td>
+
+          <td >
+
+          </td>
+
+          <td >
+
+          </td>
+
+          <td >
+
+          </td>
+        </tr>
+        <tr>
+          <td><app-busqueda-producto (emisor)="agregarDetalle($event)" ></app-busqueda-producto></td>
+          <td>asdasd</td>
+          <td>asdsad</td>
+          <td>sadasd</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+</div>
