@@ -20,3 +20,4 @@ public class Permiso {
     private Timestamp fechaModicicacion;
     private Boolean estado;
 }
+
