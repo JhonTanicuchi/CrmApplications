@@ -24,8 +24,7 @@ export class RolComponent implements OnInit {
   constructor(
     private rolService: RolService,
     private permisoService: PermisoService
-
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.findAll();
@@ -61,15 +60,6 @@ export class RolComponent implements OnInit {
     });
   }
 
-  buscarPermisos(rol: Rol) {
-    this.permisoService.findByRolId(rol[0].rolId).subscribe((respuesta) => {
-      console.log(respuesta);
-      respuesta.forEach((permiso) => {
-        this.listadoPermisos.push(permiso);
-      });
-    });
-  }
-
   seleccionarPermisosDatos(rol: Rol) {
     this.permisoService.findByRolId(rol.rolId).subscribe((respuesta) => {
       console.log(respuesta);
@@ -77,5 +67,14 @@ export class RolComponent implements OnInit {
         this.listadoPermisos.push(permiso);
       });
     });
+  }
+
+  limpiarPermiso() {
+    this.permisoDatos = new Permiso(0, '', new Date(), new Date(), true);
+
+    for (let i = this.listadoPermisos.length; i > 0; i--) {
+      this.listadoPermisos.pop();
+    }
+    console.log(this.listadoPermisos);
   }
 }

@@ -18,7 +18,9 @@
             </div>
           </div>
         </li>
-        <li *ngFor="let rol of listadoRoles" (click)="seleccionarRol(rol)" [class.active]="rol==rolActual">
+        <li *ngFor="let rol of listadoRoles" (click)="seleccionarRol(rol)" [class.active]="rol==rolActual"
+        (click)="limpiarPermiso()"
+        (click)="seleccionarPermisosDatos(rol)">
           <a
             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
             <svg
@@ -61,8 +63,28 @@
           </div>
         </div>
       </div>
+      <div
+          class="grid grid-cols-2 gap-2 w-full h-60 p-4 overflow-auto scrollbar-hide rounded-lg"
+
+        >
+          <button
+            *ngFor="let permiso of listadoPermisos; let i = index"
+            class="bg-gray-100 rounded-lg shadow"
+          >
+            <span>{{ permiso.nombre }}</span>
+          </button>
+
+          <div
+            *ngIf="listadoPermisos.length <= 0"
+            class="flex justify-center items-center w-full h-full"
+          >
+            <p class="text-gray-400">No hay permisos</p>
+          </div>
+        </div>
     </div>
+
   </div>
+</div>
 
 
 
