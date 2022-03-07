@@ -11,6 +11,7 @@ import { CotisacionComponent } from './cotisaciones/cotisacion/cotisacion.compon
 import { BusquedaClienteComponent } from './cliente/busqueda-cliente/busqueda-cliente.component';
 import { BusquedaProductoComponent } from './producto/busqueda-producto/busqueda-producto.component';
 import { MenuComponent } from './menu/menu.component';
+import { InicioComponent } from './inicio/inicio.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { MenuComponent } from './menu/menu.component';
     CotisacionComponent,
     BusquedaClienteComponent,
     BusquedaProductoComponent,
-    MenuComponent
+    MenuComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

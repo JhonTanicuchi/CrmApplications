@@ -1,1 +1,19 @@
-<p>menu works!</p>
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <a  routerLink="inicio"  class="btn btn-ghost normal-case text-xl">Productos</a>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal p-0">
+      <li tabindex="0">
+        <a>
+          Cotisacion
+        </a>
+        <ul class="p-2 bg-base-100">
+          <li><a routerLink="cotisacion">Nueva cotisacion</a></li>
+        </ul>
+      </li>
+      <li><a>Clientes</a></li>
+      <li><a routerLink="producto" >Productos</a></li>
+    </ul>
+  </div>
+</div>
