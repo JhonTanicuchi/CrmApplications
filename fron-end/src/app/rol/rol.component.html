@@ -1,0 +1,509 @@
+<!-- <div class="grid grid-cols-5 divide-x divide-black-100">
+  <div class="p-2 relative bg-whit shadow-2xl z-10" style="height: calc(100vh - 64px - 40px)">
+    <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800">
+      <ul class="space-y-2">
+        <li>
+          <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg
+                  class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                  <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                </svg>
+              </div>
+              <div class="stat-value"></div>
+              <div class="stat-title normal-case text-xl">Lista de Roles</div>
+            </div>
+          </div>
+        </li>
+        <li *ngFor="let rol of listadoRoles" (click)="seleccionarRol(rol)" [class.active]="rol==rolActual"
+        (click)="limpiarPermiso()"
+        (click)="seleccionarRolDatos(rol)">
+          <a
+            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg
+              class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+              </path>
+            </svg>
+            <span class="flex-1 ml-3 whitespace-nowrap">{{rol.nombre}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+  </div>
+
+  <div class="col-span-4 shadow-lg ">
+    <div class="navbar bg-base-300">
+      <a class="btn btn-ghost normal-case text-xl">Administración de Roles</a>
+    </div>
+
+    <div class=" grid grid-rows-3 grid-flow-col gap-4 justify-items-center">
+      <div class="col-span-2 ...">
+        <div class="card card-compact w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://api.lorem.space/image/shoes?w=400&h=225" alt="Shoes"></figure>
+        </div>
+      </div>
+      <div class="row-span-2 col-span-2 ...">
+        <div class="col-span-4 shadow-lg">
+          <div class="card" id="card-form">
+            <div class="card card-title text-primary">Nombre del Rol</div>
+            <div class="grid grid-cols-2 card-body form-control gap-2">
+              <input class="input input-primary" type="text" name="nombreRol" id="" [(ngModel)]="rolActual.nombre">
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary" id="btn-Guardar" (click)="save(rolActual)">Guardar</button>
+              <button class="btn btn-danger" id="btn-Eliminar" (click)="deleteById(rolActual.rolId)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+          class="grid grid-cols-2 gap-2 w-full h-60 p-4 overflow-auto scrollbar-hide rounded-lg"
+
+        >
+          <button
+            *ngFor="let permiso of listadoPermisos; let i = index"
+            class="bg-gray-100 rounded-lg shadow"
+          >
+            <span>{{ permiso.nombre }}</span>
+          </button>
+
+          <div
+            *ngIf="listadoPermisos.length <= 0"
+            class="flex justify-center items-center w-full h-full"
+          >
+            <p class="text-gray-400">No hay permisos</p>
+          </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+ -->
+
+<div class="grid grid-cols-5 divide-x divide-black-100">
+  <div class="p-2 relative bg-white" style="height: calc(100vh - 64px - 40px)">
+    <div [ngClass]="{ hidden: flag, block: !flag }">
+      <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
+        <div class="stat">
+          <div class="stat-figure text-secondary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <div class="stat-value">{{ rolesActivos() }}</div>
+          <div class="stat-title">Activos</div>
+          <div class="stat-desc text-secondary">
+            {{ listadoRoles.length - rolesActivos() }} Inactivos
+          </div>
+        </div>
+      </div>
+
+      <div class="shadow stats w-full mb-2 rounded-lg bg-gray-100">
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+              />
+            </svg>
+          </div>
+          <div class="stat-title">Roles Totales</div>
+          <div class="stat-value">{{ listadoRoles.length }}</div>
+          <div class="stat-desc">Roles registrados</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      [ngClass]="{ block: flag, hidden: !flag }"
+      class="hidden relative bg-white"
+      style="height: calc(100vh - 64px - 40px - 1rem)"
+    >
+      <div
+        class="bg-gray-100 rounded-lg flex items-center justify-center text-center mb-2"
+      >
+        <h2 class="p-4 text-lg font-semibold text-gray-500">Permisos</h2>
+      </div>
+
+      <div
+        class="overflow-auto scrollbar-hide rounded-lg"
+        style="height: calc(100vh - 64px - 40px - 60px - 1rem)"
+      >
+        <div
+          *ngFor="let permiso of permisos | async"
+          id="{{ 'permiso' + permiso.permisoId }}"
+          (click)="agregarPermiso(permiso)"
+          (click)="ocultarPermiso('permiso' + permiso.permisoId)"
+          class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
+        >
+          <div class="stat">
+            <div class="stat-figure text-primary">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <div class="stat-desc">
+              <span class="text-sm font-normal text-gray-500"
+                ><span class="font-semibold">N°</span
+                >{{ permiso.permisoId }}</span
+              >
+            </div>
+            <div class="font-semibold text-sm text-gray-500">
+              {{ permiso.nombre.toUpperCase() }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      [ngClass]="{ hidden: flag, fixed: !flag }"
+      (click)="cambiarFlag()"
+      (click)="limpiarForm()"
+      (click)="viewEdit()"
+                    (click)="filtrarPermisosInactivos()"
+
+      class="shadow btn bg-primary border-primary text-white absolute right-0 bottom-0 m-2 btn-circle hover:bg-primary-focus hover:border-primary-focus"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    [ngClass]="{ hidden: flag, block: !flag }"
+    class="col-start-2 col-end-6 overflow-auto scrollbar-hide p-2 relative"
+    style="height: calc(100vh - 64px - 40px)"
+  >
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div
+          class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+        >
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-100">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Id
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Rol
+                </th>
+
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  N° Permisos
+                </th>
+
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Fecha de cración
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Fecha de modificación
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Estado
+                </th>
+                <th scope="col" class="relative px-6 py-3">
+                  <span class="sr-only">Editar</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr *ngFor="let rol of listadoRoles">
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ rol.rolId }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ rol.nombre.toUpperCase() }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ rol.permisos.length }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ rol.fechaCreacion }}
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ rol.fechaModificacion }}
+                </td>
+                <td
+                  *ngIf="rol.estado == true"
+                  class="px-6 py-4 whitespace-nowrap"
+                >
+                  <span
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                  >
+                    Activo
+                  </span>
+                </td>
+                <td
+                  *ngIf="rol.estado == false"
+                  class="px-6 py-4 whitespace-nowrap"
+                >
+                  <span
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+                  >
+                    Inactivo
+                  </span>
+                </td>
+
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                >
+                  <a
+                    (click)="filtarPermisos()"
+                    (click)="seleccionarRol(rol)"
+                    (click)="seleccionarRolDatos(rol)"
+                    (click)="cambiarFlag()"
+                    (click)="viewCreate()"
+                    class="text-primary hover:text-primary-focus cursor-pointer"
+                    >Editar</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    >
+      <p *ngIf="listadoRoles.length == 0" class="text-gray-400">No hay roles</p>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="{ block: flag, hidden: !flag }"
+    class="col-start-2 col-end-6 p-2 relative"
+  >
+    <div
+      *ngIf="view == false"
+      class="bg-gray-100 rounded-lg flex items-center justify-center text-center"
+    >
+      <h2 class="p-4 text-xl uppercase font-bold text-gray-500">Nuevo Rol</h2>
+    </div>
+
+    <div
+      *ngIf="view == true"
+      class="bg-gray-100 rounded-lg flex items-center justify-center text-center"
+    >
+      <h2 class="p-4 text-xl uppercase font-bold text-gray-500">
+        Rol N°{{ rolActual.rolId }}
+      </h2>
+    </div>
+
+    <div class="p-5 pt-10 grid grid-cols-3 gap-4 gap-x-5 gap-y-5">
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700"
+          >Nombre</label
+        >
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
+            [(ngModel)]="rolActual.nombre"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="estado" class="block text-sm font-medium text-gray-700"
+          >Estado</label
+        >
+        <div class="mt-1 relative shadow-sm">
+          <select
+            [(ngModel)]="rolActual.estado"
+            id="estado"
+            class="w-full focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md"
+          >
+            <option disabled selected>Rol</option>
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full p-5 pt-5">
+      <div class="flex justify-between items-center">
+        <label class="block text-sm font-medium text-gray-700">Permisos</label>
+      </div>
+      <div
+        *ngIf="listadoPermisos.length > 0"
+        class="mt-1 grid grid-cols-4 gap-2 w-full h-64 p-2 overflow-auto scrollbar-hide rounded-lg border border-primary"
+      >
+        <button
+          *ngFor="let permiso of listadoPermisos"
+          class="bg-gray-100 rounded-lg shadow h-10 px-4 flex items-center justify-between"
+        >
+          <span class="mr-2 lowercase">{{ permiso.nombre }}</span>
+
+          <svg
+            (click)="eliminarPermiso(permiso)"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 hover:text-error-content"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        *ngIf="listadoPermisos.length <= 0"
+        class="mt-1 flex justify-center items-center w-full h-64 p-2 rounded-lg border border-primary"
+      >
+        <p class="text-gray-400">No hay permisos</p>
+      </div>
+    </div>
+
+    <div
+      class="card-actions mb-5 mx-3 absolute bottom-0 flex justify-between"
+      style="width: calc(100% - 1rem - 0.75rem - 0.75rem)"
+    >
+      <button
+        (click)="cambiarFlag()"
+        (click)="limpiarPermiso()"
+        (click)="restaurarPermisos()"
+        class="btn bg-white text-neutral border-white btn-circle hover:bg-neutral hover:border-neutral hover:text-white"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
+          />
+        </svg>
+      </button>
+
+      <button
+        (click)="cambiarFlag()"
+        (click)="save(rolActual)"
+        class="btn bg-primary border-primary text-white hover:bg-primary-focus hover:border-primary-focus"
+      >
+        <span class="mr-2">Guardar</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+          />
+        </svg>
+      </button>
+
+      <button
+        *ngIf="view == true"
+        (click)="cambiarFlag()"
+        (click)="deleteById(rolActual.rolId)"
+        class="btn bg-white border-white text-error-content btn-circle hover:bg-error-content hover:border-error-content hover:text-white"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

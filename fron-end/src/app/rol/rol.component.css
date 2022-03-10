@@ -1,0 +1,28 @@
+.contenedor-roles{
+
+    margin-top: 19px;
+    margin-left: -10px;
+}
+
+
+#btn-Guardar{
+    margin-left: 250px;
+    margin-right: auto;
+    background-color: rgb(53, 74, 192);
+}
+
+#btn-Eliminar{
+    margin-left: auto;
+    margin-right: 350px;
+    background-color:rgb(82, 65, 77)
+
+}
+
+#listado{
+    height: 30px;
+}
+
+
+.contenedor-infRol{
+    background-color: rgb(212, 212, 212);
+}
