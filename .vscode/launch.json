@@ -8,21 +8,7 @@
             "type": "java",
             "name": "Launch CrmApplication",
             "request": "launch",
-            "mainClass": "CRM4RTONOCTURNOA.CRM.CrmApplication",
-            "projectName": "etapas-backend"
-        },
-        {
-            "type": "java",
-            "name": "Launch CrmApplication",
-            "request": "launch",
-            "mainClass": "CRM4RTONOCTURNOA.CRM.CrmApplication",
-            "projectName": "back-end"
-        },
-        {
-            "type": "java",
-            "name": "Launch CrmApplication",
-            "request": "launch",
-            "mainClass": "CRM4RTONOCTURNOA.CRM.CrmApplication",
+            "mainClass": "CRM.CRM.CrmApplication",
             "projectName": "CRM"
         }
     ]
