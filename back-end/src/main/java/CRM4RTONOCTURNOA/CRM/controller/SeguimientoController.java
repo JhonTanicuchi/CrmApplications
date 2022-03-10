@@ -18,14 +18,14 @@ public class SeguimientoController {
     SeguimientoService seguimientoService;
 
     //allFind
-    @PreAuthorize("hasAuthority('LEER_SEGUIMIENTO')")
+    @PreAuthorize("hasAuthority('leer_seguimiento')")
     @GetMapping("/allSeguimiento")
     public List<Seguimiento> findAll(){
         return  seguimientoService.findAllSeguimientos();
     }
 
     //findById
-    @PreAuthorize("hasAuthority('LEER_SEGUIMIENTO')")
+    @PreAuthorize("hasAuthority('leer_seguimiento')")
     @GetMapping("/findById/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Seguimiento findById(@PathVariable Long id){
@@ -33,7 +33,7 @@ public class SeguimientoController {
     }
 
     //create
-    @PreAuthorize("hasAuthority('CREAR_SEGUIMIENTO')")
+    @PreAuthorize("hasAuthority('crear_seguimeinto')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Seguimiento createSeguimiento(@RequestBody Seguimiento seguimiento){
@@ -41,7 +41,7 @@ public class SeguimientoController {
     }
 
     //Update
-    @PreAuthorize("hasAuthority('ACTUALIZAR_SEGUIMIENTO')")
+    @PreAuthorize("hasAuthority('actualizar_seguimeinto')")
     @PutMapping("/put")
     @ResponseStatus(HttpStatus.OK)
     public Seguimiento updateSeguimiento(@RequestBody Seguimiento seguimiento){
@@ -49,7 +49,7 @@ public class SeguimientoController {
     }
 
     //deleteLogic
-    @PreAuthorize("hasAuthority('ELIMINAR_SEGUIMIENTO')")
+    @PreAuthorize("hasAuthority('eliminar_seguimeinto')")
     @PutMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Seguimiento deleteSeguimiento(@PathVariable Long id){
@@ -59,7 +59,7 @@ public class SeguimientoController {
     }
 
     //deleteFisic
-    @PreAuthorize("hasAuthority('ELIMINAR_SEGUIMIENTO')")
+    @PreAuthorize("hasAuthority('eliminar_seguimeinto')")
     @DeleteMapping("/deleteById/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteById(@PathVariable Long id){

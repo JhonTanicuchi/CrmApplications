@@ -27,7 +27,7 @@ public class CampaniaController {
     @Autowired
     CampaniaService campaniaService;
 
-    @PreAuthorize("hasAuthority('CREAR_CAMPAÑA')")
+    @PreAuthorize("hasAuthority('crear_campaña')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Campania save(@RequestBody Campania cliente) {
@@ -35,26 +35,26 @@ public class CampaniaController {
         
     }
     //Read
-    @PreAuthorize("hasAuthority('LEER_CAMPAÑA')")
+    @PreAuthorize("hasAuthority('leer_campaña')")
     @GetMapping("/{id}")
     public Campania findById(@PathVariable Long id){
         return campaniaService.findById(id);
     }
     //UpDate
-    @PreAuthorize("hasAuthority('ACTUALIZAR_CAMPAÑA')")
+    @PreAuthorize("hasAuthority('actualizar_campaña')")
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public Campania update(@RequestBody Campania cliente) {
        return campaniaService.save(cliente);
     }
     //Delete   
-    @PreAuthorize("hasAuthority('ELIMINAR_CAMPAÑA')")
+    @PreAuthorize("hasAuthority('eliminar_campaña')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id) {
         campaniaService.deleteById(id);
     }
 
-    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
+    @PreAuthorize("hasAuthority('leer_campaña')")
     @GetMapping("/findAll")
     public List<Campania> findAll(){
         return campaniaService.findAll();

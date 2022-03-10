@@ -15,9 +15,9 @@ public class Permiso {
     private long permisoId;
     private String nombre;
     @Column("fecha_creacion")
-    private Timestamp fechaCreacion;
+    private String fechaCreacion;
     @Column("fecha_modificacion")
-    private Timestamp fechaModicicacion;
+    private String fechaModificacion;
     private Boolean estado;
 }
 

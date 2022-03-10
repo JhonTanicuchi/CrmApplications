@@ -29,6 +29,7 @@ public class CotizacionController {
     CotizacionService cotizacionService;
 
     //Create
+    @PreAuthorize("hasAuthority('crear_cotizacion')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Cotizacion save(@RequestBody Cotizacion cotizacion)
@@ -38,6 +39,7 @@ public class CotizacionController {
     }
 
     //Read 
+    @PreAuthorize("hasAuthority('leer_cotizacion')")
     @GetMapping("/{id}")
     public Cotizacion findById(@PathVariable Long id )
     {
@@ -45,6 +47,7 @@ public class CotizacionController {
     }
 
     //update
+    @PreAuthorize("hasAuthority('actualizar_cotizacion')")
     @PutMapping("/update")
     public Cotizacion update(@RequestBody Cotizacion cotizacion)
     {
@@ -52,12 +55,14 @@ public class CotizacionController {
     }
 
     //delete
+    @PreAuthorize("hasAuthority('eliminar_cotizacion')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
         cotizacionService.deleteById(id);
     }
 
+    @PreAuthorize("hasAuthority('leer_cotizacion')")
     @GetMapping("/findAll")
     public List<Cotizacion> findAll()
     {

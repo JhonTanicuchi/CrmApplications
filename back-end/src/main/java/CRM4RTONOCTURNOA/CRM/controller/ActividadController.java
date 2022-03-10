@@ -27,7 +27,7 @@ public class ActividadController{
     ActividadService actividadService; 
 
     //Create
-    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
+    @PreAuthorize("hasAuthority('crear_actividad')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Actividad save(@RequestBody Actividad actividad)
@@ -37,7 +37,7 @@ public class ActividadController{
     }
 
     //Read
-    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
+    @PreAuthorize("hasAuthority('leer_actividades')")
     @GetMapping("/{id}")
     public Actividad findById(@PathVariable Long id)
     {
@@ -45,7 +45,7 @@ public class ActividadController{
     }
 
     //Update
-    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
+    @PreAuthorize("hasAuthority('actualizar_actividades')")
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public Actividad update(@RequestBody Actividad actividad)
@@ -53,7 +53,7 @@ public class ActividadController{
         return actividadService.save(actividad);
     }
     //Delete
-    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
+    @PreAuthorize("hasAuthority('eliminar_actividades')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
@@ -61,7 +61,7 @@ public class ActividadController{
     }
 
     //Con el getMapping va a eschucar la ruta que necesitamos
-    @PreAuthorize("hasAuthority('LEER_ACTIVIDAD')")
+    @PreAuthorize("hasAuthority('leer_actividades')")
     @GetMapping("/findAll") //ruta
     public List<Actividad> findAll() 
     {

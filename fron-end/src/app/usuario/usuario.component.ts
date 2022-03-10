@@ -16,22 +16,16 @@ import { UsuarioService } from './usuario.service';
 export class UsuarioComponent implements OnInit {
   listadoUsuarios: Usuario[] = [];
   listadoPermisos: Permiso[] = [];
+
   roles!: Observable<Rol[]>;
   personas!: Observable<Persona[]>;
 
   personaDatos: Persona = new Persona(0, '', '', '', '', '');
-  rolDatos: Rol = new Rol(0, '', this.listadoPermisos);
-  permisoDatos: Permiso = new Permiso(0, '', new Date(), new Date(), true);
-  usuarioActual: Usuario = new Usuario(
-    0,
-    '',
-    '',
-    '',
-    this.rolDatos,
-    this.personaDatos,
-    true
-  );
+  rolDatos: Rol = new Rol(0, '', this.listadoPermisos, '', '', true);
+  usuarioActual: Usuario = new Usuario(0, '', '', '', [], [], true, null, '');
 
+  fechan = new Date();
+  result = this.fechan.toLocaleTimeString();
   constructor(
     private usuarioService: UsuarioService,
     private permisoService: PermisoService,
@@ -43,6 +37,22 @@ export class UsuarioComponent implements OnInit {
     this.findAll();
     this.roles = this.rolService.findAll();
     this.personas = this.personaService.findAll();
+  }
+
+  formatDate(current_datetime: Date) {
+    let formatted_date =
+      current_datetime.getFullYear() +
+      '-' +
+      (current_datetime.getMonth() + 1) +
+      '-' +
+      current_datetime.getDate() +
+      ' ' +
+      current_datetime.getHours() +
+      ':' +
+      current_datetime.getMinutes() +
+      ':' +
+      current_datetime.getSeconds();
+    return formatted_date;
   }
 
   restrictionCredenciales = false;
@@ -140,7 +150,6 @@ export class UsuarioComponent implements OnInit {
   seleccionarFlagRol() {
     this.seleccionarRol = !this.seleccionarRol;
     this.registroRol = !this.registroRol;
-    this.view = !this.view;
   }
 
   registroFlagPersona() {
@@ -150,22 +159,18 @@ export class UsuarioComponent implements OnInit {
   seleccionarFlagPersona() {
     this.seleccionarPersona = !this.seleccionarPersona;
     this.registroPersona = !this.registroPersona;
-    this.view = !this.view;
   }
 
   save(usuario: Usuario): void {
+    if (usuario.fechaCreacion == null) {
+      usuario.fechaCreacion = this.formatDate(new Date());
+    }
+    usuario.fechaModificacion = this.formatDate(new Date());
+
     console.log('ingresando al método save');
     console.log(usuario);
     this.usuarioService.save(usuario).subscribe((respuesta) => {
-      this.usuarioActual = new Usuario(
-        0,
-        this.personaDatos.nombre + ' ' + this.personaDatos.apellido,
-        '',
-        '',
-        this.rolDatos,
-        this.personaDatos,
-        true
-      );
+      this.usuarioActual = new Usuario(0, '', '', '', [], [], true, null, '');
       this.findAll();
     });
   }
@@ -196,15 +201,7 @@ export class UsuarioComponent implements OnInit {
       this.listadoUsuarios = this.listadoUsuarios.filter(
         (item) => item.usuarioId != id
       );
-      this.usuarioActual = new Usuario(
-        0,
-        '',
-        '',
-        '',
-        this.rolDatos,
-        this.personaDatos,
-        true
-      );
+      this.usuarioActual = new Usuario(0, '', '', '', [], [], true, null, '');
     });
   }
 
@@ -229,26 +226,16 @@ export class UsuarioComponent implements OnInit {
   }
 
   limpiarUsuario() {
-    this.usuarioActual = new Usuario(
-      0,
-      '',
-      '',
-      '',
-      new Rol(0, '', []),
-      new Persona(0, '', '', '', '', ''),
-      true
-    );
+    this.usuarioActual = new Usuario(0, '', '', '', [], [], true, null, '');
   }
 
   limpiarPersona() {
     this.personaDatos = new Persona(0, '', '', '', '', '');
   }
   limpiarRol() {
-    this.rolDatos = new Rol(0, '', []);
+    this.rolDatos = new Rol(0, '', [], '', '', true);
   }
   limpiarPermiso() {
-    this.permisoDatos = new Permiso(0, '', new Date(), new Date(), true);
-
     for (let i = this.listadoPermisos.length; i > 0; i--) {
       this.listadoPermisos.pop();
     }
@@ -272,29 +259,22 @@ export class UsuarioComponent implements OnInit {
 
   buscarPersona(person: Persona) {
     console.log(person);
-    this.personaService.buscarId(person[0].personaId).subscribe((respuesta) => {
-      this.personaDatos = respuesta;
-    });
-    console.log(this.personaDatos);
-  }
-
-  seleccionarPersonaDatos(person: Persona) {
-    console.log(person);
     this.personaService.buscarId(person.personaId).subscribe((respuesta) => {
       this.personaDatos = respuesta;
     });
     console.log(this.personaDatos);
   }
 
-  buscarRol(rol: Rol) {
-    console.log(rol);
-    this.rolService.findById(rol[0].rolId).subscribe((respuesta) => {
-      this.rolDatos = respuesta;
+  seleccionarPersonaDatos(person: Persona) {
+    this.personaService.buscarId(person.personaId).subscribe((respuesta) => {
+      this.personaDatos = respuesta;
     });
-    console.log(this.rolDatos);
+    this.usuarioActual.persona.push(person);
+    this.usuarioActual.nombre = person.nombre + ' ' + person.apellido;
+    console.log(this.usuarioActual);
   }
 
-  seleccionarRolDatos(rol: Rol) {
+  buscarRol(rol: Rol) {
     console.log(rol);
     this.rolService.findById(rol.rolId).subscribe((respuesta) => {
       this.rolDatos = respuesta;
@@ -302,8 +282,17 @@ export class UsuarioComponent implements OnInit {
     console.log(this.rolDatos);
   }
 
+  seleccionarRolDatos(rol: Rol) {
+    this.rolService.findById(rol.rolId).subscribe((respuesta) => {
+      this.rolDatos = respuesta;
+    });
+    this.usuarioActual.roles.push(rol);
+
+    console.log(this.usuarioActual);
+  }
+
   buscarPermisos(rol: Rol) {
-    this.permisoService.findByRolId(rol[0].rolId).subscribe((respuesta) => {
+    this.permisoService.findByRolId(rol.rolId).subscribe((respuesta) => {
       console.log(respuesta);
       respuesta.forEach((permiso) => {
         this.listadoPermisos.push(permiso);
@@ -311,11 +300,13 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  seleccionarPermisosDatos(rol: Rol) {
-    this.permisoService.findByRolId(rol.rolId).subscribe((respuesta) => {
-      console.log(respuesta);
-      respuesta.forEach((permiso) => {
-        this.listadoPermisos.push(permiso);
+  filtrarRolesInactivos() {
+    this.roles.subscribe((respuesta) => {
+      respuesta.forEach((rol) => {
+        if (rol.estado == false) {
+          var elementPermiso = document.getElementById('rol' + rol.rolId);
+          elementPermiso.classList.add('hidden');
+        }
       });
     });
   }

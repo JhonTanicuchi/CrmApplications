@@ -30,7 +30,7 @@ public class EtapaController {
     EtapaService etapaService;
 
     //Create y update
-    @PreAuthorize("hasAuthority('CREAR_ETAPA')")
+    @PreAuthorize("hasAuthority('crear_etapa')")
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Etapa save(@RequestBody Etapa etapa)
@@ -40,35 +40,35 @@ public class EtapaController {
 
     }
     //Read  
-    @PreAuthorize("hasAuthority('LEER_ETAPA')")
+    @PreAuthorize("hasAuthority('leer_etapa')")
     @GetMapping("/{id}")
     public Etapa findById(@PathVariable Long id)  //PathVariable ayuda al id q se solicite lo mapee de tipo long
     {
         return etapaService.findByid(id);   
     }
     //Update
-    @PreAuthorize("hasAuthority('ACTUALIZAR_ETAPA')")
+    @PreAuthorize("hasAuthority('actualizar_etapa')")
     @PutMapping("/update")  //actualizaciones retorna codigo 200
     public Etapa update(@RequestBody Etapa etapa)
     {
         return etapaService.save(etapa);
     }
     //Delete
-    @PreAuthorize("hasAuthority('ELIMINAR_ETAPA')")
+    @PreAuthorize("hasAuthority('eliminar_etapa')")
     @DeleteMapping("/deleteById/{id}")
     public void deleteById(@PathVariable Long id)
     {
         etapaService.deleteById(id);
     }
 
-    @PreAuthorize("hasAuthority('LEER_ETAPA')")
+    @PreAuthorize("hasAuthority('leer_etapa')")
     @GetMapping("/findAll")
     public List<Etapa> findAll()
     {
         return etapaService.findAll();  //llama al etapa para servicio
     }
 
-    @PreAuthorize("hasAuthority('LEER_ETAPA')")
+    @PreAuthorize("hasAuthority('leer_etapa')")
     @GetMapping("/etapaPorSeguimiento/{id}")
     public  List<Etapa> findBySeguimientoId(@PathVariable Long id) {
         return etapaService.findBySeguimientoId(id);

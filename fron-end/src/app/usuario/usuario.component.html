@@ -38,9 +38,9 @@
             </svg>
           </div>
           <div class="stat-value">{{ UsuariosActivos() }}</div>
-          <div class="stat-title">Conectados</div>
+          <div class="stat-title">Activos</div>
           <div class="stat-desc text-secondary">
-            {{ listadoUsuarios.length - UsuariosActivos() }} Desconectados
+            {{ listadoUsuarios.length - UsuariosActivos() }} Inactivos
           </div>
         </div>
       </div>
@@ -169,10 +169,11 @@
         style="height: calc(100vh - 64px - 40px - 60px - 1rem)"
       >
         <div
-          *ngFor="let rol of roles | async"
+          *ngFor="let rol of roles | async;let i = index"
+          id="{{'rol'+ rol.rolId}}"
           (click)="seleccionarFlagRol()"
           (click)="seleccionarRolDatos(rol)"
-          (click)="seleccionarPermisosDatos(rol)"
+          (click)="buscarPermisos(rol)"
           class="shadow stats w-full mb-2 rounded-lg bg-gray-100 cursor-pointer"
         >
           <div class="stat">
@@ -197,7 +198,7 @@
                 ><span class="font-semibold">N°</span>{{ rol.rolId }}</span
               >
             </div>
-            <div class="font-semibold stat-title">{{ rol.nombre }}</div>
+            <div class="font-semibold stat-title">{{ rol.nombre.toUpperCase() }}</div>
           </div>
         </div>
       </div>
@@ -219,31 +220,39 @@
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Empleado
+                  N°
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Identificación
+                  Nombre
                 </th>
+
                 <th
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Usuario
                 </th>
+
                 <th
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Estado
+                  Fecha de Creación
                 </th>
                 <th
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Rol
+                  Fecha de Modificación
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Estado
                 </th>
                 <th scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Editar</span>
@@ -253,8 +262,11 @@
             <tbody class="bg-white divide-y divide-gray-200">
               <tr
                 *ngFor="let usuario of listadoUsuarios"
-                [class.active]="usuario == usuarioActual"
+                class="hover:bg-slate-100"
               >
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{ usuario.usuarioId }}
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="avatar">
@@ -266,19 +278,21 @@
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {{usuarioActual.nombre}} {{personaDatos.apellido}}
+                        {{ usuario.nombre }}
                       </div>
-                      <div class="text-sm text-gray-500">
-                        {{usuario.persona[0].correo}}
-                      </div>
+                      <div class="text-sm text-gray-500">1700000000</div>
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{{usuario.persona[0].cedula}}</div>
-                </td>
+
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {{ usuario.username }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{usuario.fechaCreacion}}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {{usuario.fechaModificacion}}
                 </td>
                 <td
                   *ngIf="usuario.estado == true"
@@ -300,17 +314,15 @@
                     Inactivo
                   </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  Rol
-                </td>
+
                 <td
                   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                 >
                   <a
                     (click)="seleccionarUsuario(usuario)"
-                    (click)="buscarPersona(usuarioActual.persona)"
-                    (click)="buscarRol(usuarioActual.roles)"
-                    (click)="buscarPermisos(usuarioActual.roles)"
+                    (click)="buscarPersona(usuarioActual.persona[0])"
+                    (click)="buscarRol(usuarioActual.roles[0])"
+                    (click)="buscarPermisos(usuarioActual.roles[0])"
                     (click)="volverFlag()"
                     (click)="viewCreate()"
                     class="text-primary hover:text-primary-focus cursor-pointer"
@@ -574,7 +586,7 @@
             >
             <div class="mt-1 relative rounded-md shadow-sm">
               <input
-                type="password"
+                type="text"
                 name="password"
                 id="password"
                 class="focus:ring-secondary focus:border-secondary block w-full sm:text-sm border-primary rounded-md"
@@ -584,6 +596,27 @@
               />
             </div>
           </div>
+
+          <!--  <div>
+            <label for="persona" class="block text-sm font-medium text-gray-700">Persona</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <select [(ngModel)]="usuarioActual.persona"  class=" w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md" name="persona">
+                <option disabled selected>Empleado</option>
+                <option *ngFor="let persona of personas | async" [value]="persona.personaId" value="{{persona.personaId}}" >{{persona.nombre}} {{persona.apellido}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="rol" class="block text-sm font-medium text-gray-700">Empleado</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <select [(ngModel)]="usuarioActual.roles"  class=" w-full max-w-xs focus:ring-secondary focus:border-secondary block sm:text-sm border-primary rounded-md" name="rol">
+                <option disabled selected>Empleado</option>
+                <option *ngFor="let rol of roles | async" [value]="rol.rolId" value="{{rol.rolId}}" >{{rol.nombre}}</option>
+              </select>
+            </div>
+          </div>
+ -->
 
           <div *ngIf="view == true">
             <label
@@ -641,6 +674,7 @@
             block: !registroRol
           }"
           (click)="registroFlagRol()"
+          (click)="filtrarRolesInactivos()"
           class="btn btn-sm btn-outline btn-secondary capitalize shadow-xl"
         >
           <span>Agregar</span>
@@ -685,7 +719,7 @@
           hidden: !seleccionarRol
         }"
         [ngClass]="{ block: view, hidden: !view }"
-        style="height: calc(100% - 56px)"
+        style="height: 300px"
         class="hidden rounded-lg shadow-md bg-white"
       >
         <div
@@ -693,9 +727,12 @@
         >
           Roles
         </div>
-        <div class="p-4 grid grid-rows-2 gap-2">
+        <div
+          class="p-4 grid grid-rows-2 gap-2"
+          style="height: calc(100% - 24px)"
+        >
           <div
-            class="py-5 px-5 shadow rounded-lg bg-gray-100 flex justify-between items-center"
+            class="px-5 shadow rounded-lg bg-gray-100 flex justify-between items-center"
           >
             <div class="flex justify-center items-center">
               <svg
@@ -736,7 +773,7 @@
               </svg>
             </button>
           </div>
-          <div class="py-5 shadow rounded-lg bg-gray-100 stat">
+          <div class="shadow rounded-lg bg-gray-100 stat">
             <div class="stat-figure text-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -767,7 +804,7 @@
         }"
         [ngClass]="{ block: view, hidden: !view }"
         class="hidden col-span-3 w-full rounded-lg shadow-md bg-white"
-        style="height: calc(100% - 48px)"
+        style="height: 300px"
       >
         <div
           class="shadow w-full rounded-lg bg-gray-100 font-medium text-center"
@@ -775,22 +812,26 @@
           Permisos
         </div>
         <div
-          class="grid grid-cols-4 gap-2 w-full p-4 overflow-auto scrollbar-hide rounded-lg"
-          style="height: calc(100% - 2rem)"
+          *ngIf="listadoPermisos.length > 0"
+          class="grid grid-cols-4 gap-2 m-4 overflow-auto scrollbar-hide rounded-lg"
+          style="width: calc(100% - 32px); height: calc(100% - 32px - 24px)"
         >
           <button
             *ngFor="let permiso of listadoPermisos; let i = index"
-            class="bg-gray-100 rounded-lg shadow"
+            class="bg-gray-100 rounded-lg shadow h-10 px-4 flex items-center justify-between"
           >
-            <span>{{ permiso.nombre }}</span>
+            <span>{{ permiso.nombre.toLowerCase() }} </span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+</svg>
           </button>
-
-          <div
-            *ngIf="listadoPermisos.length <= 0"
-            class="flex justify-center items-center w-full h-full"
-          >
-            <p class="text-gray-400">No hay permisos</p>
-          </div>
+        </div>
+        <div
+          *ngIf="listadoPermisos.length <= 0"
+          class="flex justify-center items-center w-full"
+          style="height: calc(100% - 24px)"
+        >
+          <p class="text-gray-400">No hay permisos</p>
         </div>
       </div>
     </div>

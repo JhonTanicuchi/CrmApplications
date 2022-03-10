@@ -1,3 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS administracion
+    AUTHORIZATION postgres;
+
+
 CREATE SEQUENCE IF NOT EXISTS administracion.usuario_usuario_id_seq
     INCREMENT 1
     START 1
@@ -32,6 +36,13 @@ CREATE SEQUENCE IF NOT EXISTS administracion.permisos_permiso_id_seq
     MAXVALUE 2147483647
     CACHE 1;
 
+CREATE SEQUENCE IF NOT EXISTS administracion.usuarios_personas_usuario_persona_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
 CREATE TABLE IF NOT EXISTS administracion.usuarios
 (
     usuario_id integer NOT NULL DEFAULT nextval('administracion.usuario_usuario_id_seq'::regclass),
@@ -39,6 +50,8 @@ CREATE TABLE IF NOT EXISTS administracion.usuarios
     username character varying UNIQUE COLLATE pg_catalog."default",
     password character varying COLLATE pg_catalog."default",
     estado boolean NOT NULL DEFAULT true,
+    fecha_creacion character varying COLLATE pg_catalog."default",
+    fecha_modificacion character varying COLLATE pg_catalog."default",
     CONSTRAINT usuario_pkey PRIMARY KEY (usuario_id)
 );
 
@@ -46,6 +59,9 @@ CREATE TABLE IF NOT EXISTS administracion.roles
 (
     rol_id integer NOT NULL DEFAULT nextval('administracion.rol_rol_id_seq'::regclass),
     nombre character varying COLLATE pg_catalog."default",
+    fecha_creacion character varying COLLATE pg_catalog."default",
+    fecha_modificacion character varying COLLATE pg_catalog."default",
+    estado boolean NOT NULL DEFAULT true,
     CONSTRAINT rol_pkey PRIMARY KEY (rol_id),
     CONSTRAINT u_nombre UNIQUE (nombre)
 );
@@ -54,12 +70,11 @@ CREATE TABLE IF NOT EXISTS administracion.permisos
 (
     permiso_id integer NOT NULL DEFAULT nextval('administracion.permisos_permiso_id_seq'::regclass),
     nombre character varying COLLATE pg_catalog."default",
-    fecha_creacion timestamp,
-    fecha_modificacion timestamp,
+    fecha_creacion character varying COLLATE pg_catalog."default",
+    fecha_modificacion character varying COLLATE pg_catalog."default",
     estado boolean NOT NULL DEFAULT true,
     CONSTRAINT permisos_pkey PRIMARY KEY (permiso_id)
 );
-
 
 CREATE TABLE IF NOT EXISTS administracion.permisos_roles
 (
@@ -76,7 +91,6 @@ CREATE TABLE IF NOT EXISTS administracion.permisos_roles
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
-
 
 CREATE TABLE IF NOT EXISTS administracion.roles_usuarios
 (
@@ -96,119 +110,139 @@ CREATE TABLE IF NOT EXISTS administracion.roles_usuarios
         NOT VALID
 );
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_USUARIO');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_USUARIO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_USUARIO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_USUARIO');
+CREATE TABLE IF NOT EXISTS administracion.usuarios_personas
+(
+    usuario_persona_id integer NOT NULL DEFAULT nextval('administracion.usuarios_personas_usuario_persona_id_seq'::regclass),
+    usuario_id integer NOT NULL,
+    persona_id integer NOT NULL,
+    CONSTRAINT usuarios_personas_pkey PRIMARY KEY (usuario_persona_id),
+    CONSTRAINT persona_fk FOREIGN KEY (persona_id)
+        REFERENCES persona.persona (persona_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID,
+    CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
+        REFERENCES administracion.usuarios (usuario_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID
+);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_ROL');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_ROL');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_ROL');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_ROL');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_usuario','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_usuario','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_usuario','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_usuario','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_PERMISO');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_PERMISO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_PERMISO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_PERMISO');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_rol','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_rol','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_rol','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_rol','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_PERSONA');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_PERSONA');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_PERSONA');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_PERSONA');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_permiso','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_permiso','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_permiso','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_permiso','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_CAMPAÑA');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_CAMPAÑA');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_CAMPAÑA');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_CAMPAÑA');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_persona','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_persona','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_persona','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_persona','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_SEGUIMIENTO');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_SEGUIMIENTO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_SEGUIMIENTO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_SEGUIMIENTO');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_campaña','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_campaña','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_campaña','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_campaña','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_ETAPA');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_ETAPA');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_ETAPA');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_ETAPA');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_seguimiento','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_seguimiento','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_seguimiento','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_seguimiento','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_ACTIVIDADES');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_ACTIVIDADES');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_ACTIVIDADES');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_ACTIVIDADES');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_etapa','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_etapa','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_etapa','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_etapa','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_COTIZACION');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_COTIZACION');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_COTIZACION');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_COTIZACION');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_actividades','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_actividades','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_actividades','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_actividades','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos (nombre) VALUES ('CREAR_PEDIDO');
-INSERT INTO administracion.permisos (nombre) VALUES ('LEER_PEDIDO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ACTUALIZAR_PEDIDO');
-INSERT INTO administracion.permisos (nombre) VALUES ('ELIMINAR_PEDIDO');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_cotizacion','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_cotizacion','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_cotizacion','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_cotizacion','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.roles (nombre) VALUES ('ADMINISTRADOR');
-INSERT INTO administracion.roles (nombre) VALUES ('ADMINISTRADOR_PERMISOS');
-INSERT INTO administracion.roles (nombre) VALUES ('SUPERVISOR');
-INSERT INTO administracion.roles (nombre) VALUES ('ASESOR');
-INSERT INTO administracion.roles (nombre) VALUES ('GERENTE');
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('crear_pedido','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('leer_pedido','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('actualizar_pedido','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.permisos (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('eliminar_pedido','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_USUARIO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_USUARIO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_USUARIO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_USUARIO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_ROL'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_ROL'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_ROL'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_ROL'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_PERMISO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_PERMISO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_PERMISO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_PERMISO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_PERSONA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_PERSONA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_PERSONA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_PERSONA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_CAMPAÑA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_CAMPAÑA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_CAMPAÑA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_CAMPAÑA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_SEGUIMIENTO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_SEGUIMIENTO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_SEGUIMIENTO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_SEGUIMIENTO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_ETAPA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_ETAPA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_ETAPA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_ETAPA'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_ACTIVIDADES'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_ACTIVIDADES'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_ACTIVIDADES'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_ACTIVIDADES'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_COTIZACION'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_COTIZACION'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_COTIZACION'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_COTIZACION'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_PEDIDO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_PEDIDO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_PEDIDO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_PEDIDO'));
+INSERT INTO administracion.roles (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('administrador','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.roles (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('supervisor','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
+INSERT INTO administracion.roles (nombre,fecha_creacion,fecha_modificacion,estado) VALUES ('empleado','2021-3-18 20:21:2','2021-3-18 20:21:2',true);
 
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'CREAR_PERMISO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'LEER_PERMISO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ACTUALIZAR_PERMISO'));
-INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'ELIMINAR_PERMISO'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_usuario'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_usuario'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_usuario'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_usuario'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_rol'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_rol'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_rol'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_rol'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_permiso'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_permiso'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_permiso'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_permiso'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_persona'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_persona'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_persona'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_persona'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_campaña'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_campaña'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_campaña'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_campaña'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_seguimiento'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_seguimiento'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_seguimiento'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_seguimiento'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_etapa'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_etapa'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_etapa'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_etapa'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_actividades'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_actividades'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_actividades'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_actividades'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_cotizacion'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_cotizacion'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_cotizacion'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_cotizacion'));
+
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'crear_pedido'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'leer_pedido'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'actualizar_pedido'));
+INSERT INTO administracion.permisos_roles (rol_id, permiso_id) VALUES ((SELECT rol_id FROM administracion.roles where nombre = 'administrador'), (SELECT permiso_id FROM administracion.permisos WHERE nombre = 'eliminar_pedido'));
 
 
-INSERT INTO administracion.usuarios (nombre, username, password, estado) VALUES ('Administrador', 'admin', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', true);
+INSERT INTO administracion.usuarios (nombre, username, password, estado,fecha_creacion,fecha_modificacion) VALUES ('Administrador', 'admin', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', true,'2021-3-18 20:21:2','2021-3-18 20:21:2');
 
-INSERT INTO administracion.roles_usuarios (usuario_id, rol_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where username = 'admin'), (SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR'));
+INSERT INTO administracion.roles_usuarios (usuario_id, rol_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where username = 'admin'), (SELECT rol_id FROM administracion.roles where nombre = 'administrador'));
 
 
-INSERT INTO administracion.usuarios (nombre, username, password, estado) VALUES ('Jonathan Zambrano', 'jonathan', '$2a$10$TwROhi2MZsOTt8igkE7Yyec0WfjK7NlgdX9apOu0b6cY4SxzHLvCq', true);
+INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 1), (SELECT persona_id FROM persona.persona where persona_id = 1));
 
-INSERT INTO administracion.roles_usuarios (usuario_id, rol_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where username = 'admin'), (SELECT rol_id FROM administracion.roles where nombre = 'ADMINISTRADOR_PERMISOS'));
 
--------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------
 
 CREATE SEQUENCE IF NOT EXISTS persona.persona_persona_id_seq
     INCREMENT 1
@@ -249,33 +283,8 @@ INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto)
 
 INSERT INTO persona.persona (nombre, apellido, identificacion, correo, contacto) VALUES ('Jonathan', 'Zambrano', '0000000000', 'jrr.zambrano@yavirac.edu.ec', '0000000000');
 
--------------------------------------------------------------------------------------------------------------------
-
-CREATE SEQUENCE IF NOT EXISTS dministracion.usuarios_personas_usuario_persona_id_seq
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    CACHE 1;
-
-CREATE TABLE IF NOT EXISTS administracion.usuarios_personas
-(
-    usuario_persona_id integer NOT NULL DEFAULT nextval('administracion.usuarios_personas_usuario_persona_id_seq'::regclass),
-    usuario_id integer NOT NULL,
-    persona_id integer NOT NULL,
-    CONSTRAINT usuarios_personas_pkey PRIMARY KEY (usuario_persona_id),
-    CONSTRAINT persona_fk FOREIGN KEY (persona_id)
-        REFERENCES persona.persona (persona_id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-        NOT VALID,
-    CONSTRAINT usuario_fk FOREIGN KEY (usuario_id)
-        REFERENCES administracion.usuarios (usuario_id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-        NOT VALID
-);
 
 INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 1), (SELECT persona_id FROM persona.persona where persona_id = 1));
 
-INSERT INTO administracion.usuarios_personas (usuario_id, persona_id) VALUES ((SELECT usuario_id FROM administracion.usuarios where usuario_id = 2), (SELECT persona_id FROM persona.persona where persona_id = 10));
+
+

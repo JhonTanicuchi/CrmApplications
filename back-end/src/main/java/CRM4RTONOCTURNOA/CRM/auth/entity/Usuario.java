@@ -23,6 +23,10 @@ public class Usuario implements UserDetails {
     private String username;
     private String password;
     private boolean estado;
+    @Column("fecha_creacion")
+    private String fechaCreacion;
+    @Column("fecha_modificacion")
+    private String fechaModificacion;
 
     @MappedCollection(idColumn = "usuario_id")
     private Set<UsuarioPersona> persona = new HashSet<>();
