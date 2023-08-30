@@ -2,13 +2,11 @@ import { ConocenosComponent } from './conocenos/conocenos.component';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 import { PersonaComponent } from 'src/app/persona/persona.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
-import { ActividadComponent } from './actividad/actividad.component';
 import { EtapaComponent } from './etapa/etapa.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { HomeComponent } from './home/home.component';
 import { SeguimientoEtapasComponent } from './seguimiento/seguimiento-etapas/seguimiento-etapas.component';
 import { RolComponent } from './rol/rol.component';
-import { CampaniaComponent } from './campania/campania.component';
 import { PermisoComponent } from './permiso/permiso.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,13 +34,11 @@ import { SortablejsModule } from 'ngx-sortablejs';
   declarations: [
     AppComponent,
     PermisoComponent,
-    CampaniaComponent,
     MenuComponent,
     RolComponent,
     HomeComponent,
     UsuarioComponent,
     EtapaComponent,
-    ActividadComponent,
     CotizacionComponent,
     PersonaComponent,
     SeguimientoComponent,

@@ -108,5 +108,8 @@
       }
     }
   },
-  "defaultProject": "etapas-frontend"
+  "defaultProject": "etapas-frontend",
+  "cli": {
+    "analytics": "77798a62-2786-430f-af68-d4f03f7a6d82"
+  }
 }
